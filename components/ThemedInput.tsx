@@ -1,5 +1,5 @@
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { useState } from "react";
+// import { useThemeColor } from "@/hooks/useThemeColor";
+import { useMemo, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   TextInputProps,
   useColorScheme,
 } from "react-native";
+import { ThemedView, ThemedText } from "./";
 
 export type ThemedInputProps = TextInputProps & {
   label: string;
@@ -22,35 +23,56 @@ export function ThemedInput({
   defaultValue,
   lightColor,
   darkColor,
+  keyboardType,
   ...rest
 }: ThemedInputProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  // const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const theme = useColorScheme() ?? "light";
-
+  const [isPasswordField] = useState(keyboardType === "visible-password");
   const [text, setText] = useState(defaultValue);
   const [hasError, setHasError] = useState<boolean>(false);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const showPlainValue = useMemo(() => {
+    if (isPasswordField) {
+      return !passwordVisible;
+    }
+    return false;
+  }, [isPasswordField, passwordVisible]);
 
   const dynamicStyle = {
-    // backgroundColor: theme == "dark" ? "dark" : "gray",
     label: {
       color: theme == "dark" ? "#fff" : theme,
     },
     input: {
       color: "#fff",
       borderColor: hasError ? "red" : "gray",
+      paddingRight: isPasswordField ? 50 : 8,
     },
   };
 
   return (
     <>
       <Text style={[styles.label, { ...dynamicStyle.label }]}>{label}</Text>
-      <TextInput
-        value={text}
-        showSoftInputOnFocus={true}
-        onChangeText={(t: string) => setText(t)}
-        style={[styles.input, { ...dynamicStyle.input }, style]}
-        {...rest}
-      />
+      <ThemedView>
+        <TextInput
+          value={text}
+          showSoftInputOnFocus={true}
+          secureTextEntry={showPlainValue}
+          onChangeText={(t: string) => setText(t)}
+          style={[styles.input, { ...dynamicStyle.input }, style]}
+          {...rest}
+        />
+
+        {isPasswordField && (
+          <ThemedText
+            onPress={() => setPasswordVisible(!passwordVisible)}
+            style={styles.passwordEye}
+          >
+            EYE
+          </ThemedText>
+        )}
+      </ThemedView>
     </>
   );
 }
@@ -58,7 +80,7 @@ export function ThemedInput({
 const styles = StyleSheet.create({
   label: {
     padding: 1,
-    paddingBottom: 6
+    paddingBottom: 6,
   },
   input: {
     height: 35,
@@ -66,6 +88,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 8,
-    marginBottom: 15
+    marginBottom: 15,
+  },
+  passwordEye: {
+    position: "absolute",
+    right: 15,
+    top: 6,
   },
 });
