@@ -1,5 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedText, ThemedView } from "@/components";
 import { StorageKeys } from "@/constants/Storage";
 import { storage } from "@/utils/expo-storage";
 import { useCallback, useState } from "react";
@@ -46,8 +45,8 @@ export default function OnBoardingScreen({
     if (currentIndex != SLIDES.length - 1) return;
 
     const rs = await storage.setItem(StorageKeys.ON_BOARDING_PASS, "1");
-    if(rs) {
-      handleOnBoarding()
+    if (rs) {
+      handleOnBoarding();
     }
   }, [currentIndex]);
 

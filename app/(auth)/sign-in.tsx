@@ -1,8 +1,11 @@
-import { ThemedButton } from "@/components/ThemedButton";
-import { ThemedInput } from "@/components/ThemedInput";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import {
+  ThemedButton,
+  ThemedView,
+  ThemedFormView,
+  ThemedInput,
+  ThemedText,
+} from "@/components";
+import { StyleSheet } from "react-native";
 
 export default function SignInScreen({
   handleSession,
@@ -12,34 +15,32 @@ export default function SignInScreen({
   return (
     <>
       <ThemedView style={styles.container}>
-        <SafeAreaView style={styles.wrapper}>
-          <ScrollView contentContainerStyle={{ ...styles.scrollViewContainer }}>
-            <ThemedText style={styles.title} type="title">
-              Sign In
-            </ThemedText>
+        <ThemedFormView>
+          <ThemedText style={styles.title} type="title">
+            Sign In
+          </ThemedText>
 
-            <ThemedInput
-              label="Email"
-              name="email"
-              placeholder="Enter email address"
-              keyboardType="email-address"
-            />
+          <ThemedInput
+            label="Email"
+            name="email"
+            placeholder="Enter email address"
+            keyboardType="email-address"
+          />
 
-            <ThemedInput
-              label="Password"
-              name="password"
-              placeholder="Enter your password"
-              keyboardType="visible-password"
-            />
+          <ThemedInput
+            label="Password"
+            name="password"
+            placeholder="Enter your password"
+            keyboardType="visible-password"
+          />
 
-            <ThemedButton title="Proceed" />
+          <ThemedButton title="Proceed" />
 
-            <ThemedText style={styles.forgotPassword}>
-              Forgot your password?
-              <ThemedText type="link"> Reset Here</ThemedText>
-            </ThemedText>
-          </ScrollView>
-        </SafeAreaView>
+          <ThemedText style={styles.forgotPassword}>
+            Forgot your password?
+            <ThemedText type="link"> Reset Here</ThemedText>
+          </ThemedText>
+        </ThemedFormView>
       </ThemedView>
     </>
   );
@@ -50,22 +51,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: "5%",
   },
-  wrapper: {
-    flex: 1,
-  },
-  scrollViewContainer: {
-    justifyContent: "center",
-    flexGrow: 1, // Optional to fill available space
-  },
   title: {
     width: "100%",
     textAlign: "center",
     marginBottom: 50,
   },
-  submitBtn: {
-    backgroundColor: "#999",
-  },
   forgotPassword: {
-    marginTop: 5
-  }
+    marginTop: 5,
+  },
 });
