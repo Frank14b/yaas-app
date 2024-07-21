@@ -50,7 +50,7 @@ export default function RootLayout() {
   }, [setIsSessionActive]);
 
   useEffect(() => {
-    // storage.deleteItem(storageKeys.ON_BOARDING_PASS);
+    // storage.deleteItem(StorageKeys.ON_BOARDING_PASS);
     checkOnBoardingState();
     checkSessionState();
 
