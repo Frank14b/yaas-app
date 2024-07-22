@@ -4,6 +4,7 @@ import {
   StyleSheet
 } from "react-native";
 import { ThemedView } from "./ThemedView";
+import { Colors } from "@/constants";
 
 export type ThemedButtonProps = ButtonProps & {
   title: string;
@@ -28,7 +29,7 @@ export function ThemedButton({
 const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
-    backgroundColor: "#FFA600",
+    backgroundColor: Colors.primaryColor,
     borderRadius: 5,
     marginVertical: 15
   },

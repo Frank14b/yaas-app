@@ -7,7 +7,8 @@ import {
   TextInputProps,
   useColorScheme,
 } from "react-native";
-import { ThemedView, ThemedText } from "./";
+import { ThemedView } from "./ThemedView";
+import { ThemedText } from "./ThemedText";
 
 export type ThemedInputProps = TextInputProps & {
   label: string;
@@ -54,7 +55,7 @@ export function ThemedInput({
   return (
     <>
       <Text style={[styles.label, { ...dynamicStyle.label }]}>{label}</Text>
-      <ThemedView>
+      <ThemedView style={styles.viewWrapper}>
         <TextInput
           value={text}
           showSoftInputOnFocus={true}
@@ -81,6 +82,9 @@ const styles = StyleSheet.create({
   label: {
     padding: 1,
     paddingBottom: 6,
+  },
+  viewWrapper: {
+    backgroundColor: "transparent",
   },
   input: {
     height: 35,
