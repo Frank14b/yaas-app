@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
+import { Ionicons } from "@expo/vector-icons";
 
 export type ThemedInputProps = TextInputProps & {
   label: string;
@@ -70,7 +71,11 @@ export function ThemedInput({
             onPress={() => setPasswordVisible(!passwordVisible)}
             style={styles.passwordEye}
           >
-            EYE
+            {passwordVisible ? (
+              <Ionicons size={22} name="eye-off" />
+            ) : (
+              <Ionicons size={22} name="eye" />
+            )}
           </ThemedText>
         )}
       </ThemedView>
@@ -97,6 +102,6 @@ const styles = StyleSheet.create({
   passwordEye: {
     position: "absolute",
     right: 15,
-    top: 6,
+    top: 5,
   },
 });

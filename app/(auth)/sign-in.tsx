@@ -6,6 +6,7 @@ import {
   ThemedText,
 } from "@/components";
 import { ImageBackground, StyleSheet } from "react-native";
+import { BlurView } from "expo-blur";
 
 export default function SignInScreen({
   handleSession,
@@ -18,38 +19,38 @@ export default function SignInScreen({
         <ImageBackground
           resizeMode="cover"
           style={styles.bgImage}
-          source={{
-            uri: "https://relationshipsproject.org/content/uploads/2021/11/Screen-Shot-2021-11-19-at-15.50.37.png",
-          }}
+          source={require("@/assets/images/hand-solidarity.png")}
         >
-          <ThemedView style={styles.wrapperView}>
-            <ThemedFormView>
-              <ThemedText style={styles.title} type="title">
-                Sign In
-              </ThemedText>
+          <BlurView intensity={40} style={styles.blurContainer}>
+            <ThemedView style={styles.wrapperView}>
+              <ThemedFormView>
+                <ThemedText style={styles.title} type="title">
+                  Sign In
+                </ThemedText>
 
-              <ThemedInput
-                label="Email"
-                name="email"
-                placeholder="Enter email address"
-                keyboardType="email-address"
-              />
+                <ThemedInput
+                  label="Email"
+                  name="email"
+                  placeholder="Enter email address"
+                  keyboardType="email-address"
+                />
 
-              <ThemedInput
-                label="Password"
-                name="password"
-                placeholder="Enter your password"
-                keyboardType="visible-password"
-              />
+                <ThemedInput
+                  label="Password"
+                  name="password"
+                  placeholder="Enter your password"
+                  keyboardType="visible-password"
+                />
 
-              <ThemedButton title="Proceed" />
+                <ThemedButton title="Proceed" />
 
-              <ThemedText style={styles.forgotPassword}>
-                Forgot your password?
-                <ThemedText type="link"> Reset Here</ThemedText>
-              </ThemedText>
-            </ThemedFormView>
-          </ThemedView>
+                <ThemedText style={styles.forgotPassword}>
+                  Forgot your password?
+                  <ThemedText type="link"> Reset Here</ThemedText>
+                </ThemedText>
+              </ThemedFormView>
+            </ThemedView>
+          </BlurView>
         </ImageBackground>
       </ThemedView>
     </>
@@ -75,6 +76,10 @@ const styles = StyleSheet.create({
   wrapperView: {
     flex: 1,
     padding: "5%",
-    backgroundColor: 'rgba(0, 0, 0, 0.8)'
-  }
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+  },
+  blurContainer: {
+    flex: 1,
+    overflow: "hidden",
+  },
 });

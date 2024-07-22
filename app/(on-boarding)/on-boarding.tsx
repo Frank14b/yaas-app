@@ -18,8 +18,8 @@ const SLIDES = [
   },
   {
     key: 3,
-    image: require(`@/assets/images/on-boarding/solidarity-one.jpeg`),
-    title: "Get the biggest support",
+    image: require(`@/assets/images/on-boarding/support.avif`),
+    title: "Give the biggest support",
   },
 ];
 
