@@ -4,7 +4,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
 import "react-native-reanimated";
@@ -14,6 +13,7 @@ import { storage } from "@/utils/expo-storage";
 import OnBoardingLayout from "./(on-boarding)/_layout";
 import { StorageKeys } from "@/constants/Storage";
 import AuthLayout from "./(auth)/_layout";
+import { Stack } from "expo-router";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -71,10 +71,12 @@ export default function RootLayout() {
       ) : !isSessionActive ? (
         <AuthLayout handleSession={checkSessionState} />
       ) : (
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <>
+          <Stack>
+            <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </>
       )}
     </ThemeProvider>
   );
