@@ -16,7 +16,7 @@ type Props = PropsWithChildren<{
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
-export default function ParallaxScrollView({
+export function ParallaxScrollView({
   children,
   headerImage,
   headerBackgroundColor,
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 32,
     gap: 16,
     overflow: 'hidden',
   },

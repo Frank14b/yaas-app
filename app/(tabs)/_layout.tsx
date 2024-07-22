@@ -24,6 +24,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="violences"
+        options={{
+          title: 'Violences',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'warning' : 'warning-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',

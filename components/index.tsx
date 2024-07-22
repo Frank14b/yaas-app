@@ -1,6 +1,7 @@
 export * from "./ThemedView";
 export * from "./ThemedText";
 export * from "./ThemedFormView";
+export * from "./ThemedCardBox";
 export * from "./ThemedInput";
 export * from "./Collapsible";
 export * from "./ExternalLink";

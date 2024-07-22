@@ -1,50 +1,53 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import {
+  HelloWave,
+  ParallaxScrollView,
+  ThemedCardBox,
+  ThemedText,
+  ThemedView,
+} from "@/components";
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require("@/assets/images/on-boarding/Team-spirit-bro.png")}
           style={styles.reactLogo}
         />
-      }>
+      }
+    >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+      <ThemedView style={styles.boxContainer}>
+        <ThemedCardBox
+          name="warning-sharp"
+          title="Reports"
+          value={30}
+          style={styles.boxCard}
+        ></ThemedCardBox>
+        <ThemedCardBox
+          name="people"
+          title="Users"
+          value={20}
+          style={styles.boxCard}
+        ></ThemedCardBox>
+        <ThemedCardBox
+          name="globe"
+          title="Countries"
+          value={5}
+          style={styles.boxCard}
+        ></ThemedCardBox>
+        <ThemedCardBox
+          name="settings"
+          title="Services"
+          value={15}
+          style={styles.boxCard}
+        ></ThemedCardBox>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -52,19 +55,27 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
+    padding: 10,
+    paddingTop: 30,
   },
-  stepContainer: {
-    gap: 8,
+  boxContainer: {
+    gap: 10,
     marginBottom: 8,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+    height: 250,
+    width: 350,
+    bottom: -50,
+    left: -80,
+    position: "absolute",
+  },
+  boxCard: {
+    width: "48.5%",
   },
 });
