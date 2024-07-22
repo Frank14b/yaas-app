@@ -21,7 +21,7 @@ export function ThemedButton({
 
   return (
     <ThemedView style={[styles.wrapper]}>
-      <Button title={title} color={"#fff"}/>
+      <Button title={title} color={"#fff"} {...rest}/>
     </ThemedView>
   );
 }

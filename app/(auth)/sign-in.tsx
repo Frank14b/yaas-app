@@ -7,12 +7,20 @@ import {
 } from "@/components";
 import { ImageBackground, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
+import { useCallback } from "react";
+import { storage } from "@/utils/expo-storage";
+import { StorageKeys } from "@/constants";
 
 export default function SignInScreen({
   handleSession,
 }: {
   handleSession: () => void;
 }) {
+  const proceedSignIn = useCallback(async () => {
+    await storage.setItem(StorageKeys.USER_SESSION_ACTIVE, "1");
+    handleSession();
+  }, []);
+
   return (
     <>
       <ThemedView style={styles.container}>
@@ -42,7 +50,7 @@ export default function SignInScreen({
                   keyboardType="visible-password"
                 />
 
-                <ThemedButton title="Proceed" />
+                <ThemedButton title="Proceed" onPress={() => proceedSignIn()} />
 
                 <ThemedText style={styles.forgotPassword}>
                   Forgot your password?
