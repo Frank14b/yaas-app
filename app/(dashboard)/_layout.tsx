@@ -1,3 +1,4 @@
+import ThemedDrawer from "@/components/ThemedDrawer";
 import { Ionicons } from "@expo/vector-icons";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -6,7 +7,7 @@ export default function DashBoardLayout() {
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer>
+        <Drawer drawerContent={(props) => <ThemedDrawer {...props} />}>
           <Drawer.Screen
             name="(tabs)"
             options={{
