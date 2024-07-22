@@ -28,7 +28,6 @@ export function ThemedInput({
   keyboardType,
   ...rest
 }: ThemedInputProps) {
-  // const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const theme = useColorScheme() ?? "light";
   const [isPasswordField] = useState(keyboardType === "visible-password");
   const [text, setText] = useState(defaultValue);
@@ -43,9 +42,6 @@ export function ThemedInput({
   }, [isPasswordField, passwordVisible]);
 
   const dynamicStyle = {
-    label: {
-      color: theme == "dark" ? "#fff" : theme,
-    },
     input: {
       color: "#fff",
       borderColor: hasError ? "red" : "gray",
@@ -55,7 +51,9 @@ export function ThemedInput({
 
   return (
     <>
-      <Text style={[styles.label, { ...dynamicStyle.label }]}>{label}</Text>
+      <ThemedText lightColor="#222" darkColor="#fff">
+        {label}
+      </ThemedText>
       <ThemedView style={styles.viewWrapper}>
         <TextInput
           value={text}
@@ -70,6 +68,8 @@ export function ThemedInput({
           <ThemedText
             onPress={() => setPasswordVisible(!passwordVisible)}
             style={styles.passwordEye}
+            lightColor="#222"
+            darkColor="#fff"
           >
             {passwordVisible ? (
               <Ionicons size={22} name="eye-off" />

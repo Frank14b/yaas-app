@@ -4,7 +4,7 @@
  */
 
 const primaryColor = '#FFA600';
-const primaryDark = '#999';
+const primaryDark = '#151718';
 const secondaryDark = '#3A3B3C';
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';

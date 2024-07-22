@@ -8,3 +8,5 @@ export * from "./ExternalLink";
 export * from "./HelloWave";
 export * from "./ParallaxScrollView";
 export * from "./ThemedButton";
+export * from "./NavigationMenuItem";
+export * from "./ThemedSwitch";

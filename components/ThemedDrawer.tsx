@@ -1,22 +1,18 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Switch,
-} from "react-native";
+import { Image, StyleSheet } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 
-import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants";
+import { ThemedView } from "./ThemedView";
+import ThemedSwitch from "./ThemedSwitch";
+import { ThemedText } from "./ThemedText";
+import { NavigationMenuItem } from "./NavigationMenuItem";
 
 export default function ThemedDrawer({ ...props }: any) {
   return (
-    <View style={{ flex: 1 }}>
+    <ThemedView style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={{
@@ -30,7 +26,7 @@ export default function ThemedDrawer({ ...props }: any) {
           source={require("@/assets/images/on-boarding/support.avif")}
           style={styles.userAvatar}
         />
-        <Text
+        <ThemedText
           style={{
             color: "#fff",
             fontSize: 22,
@@ -40,65 +36,38 @@ export default function ThemedDrawer({ ...props }: any) {
           }}
         >
           YAAS
-        </Text>
-        <View style={{ flex: 1, backgroundColor: Colors.secondaryDark, paddingTop: 10 }}>
+        </ThemedText>
+        <ThemedView
+          style={{
+            flex: 1,
+            backgroundColor: Colors.primaryDark,
+            paddingTop: 10,
+          }}
+        >
           <DrawerItemList {...props} />
-        </View>
+        </ThemedView>
       </DrawerContentScrollView>
-      <View
+      <ThemedView
         style={{
           borderTopWidth: 1,
           borderTopColor: "#333",
+          padding: 20,
         }}
       >
-        <Text style={styles.preferences}>Preferences</Text>
-        <View style={styles.switchTextContainer}>
-          <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor="#f4f3f4"
-            style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
-          />
-          <Text
-            style={{
-              fontSize: 15,
-              color: "#fff",
-            }}
-          >
-            Dark Theme
-          </Text>
-        </View>
-      </View>
-      <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#333" }}>
-        <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="share-social-outline" size={22} style={{color: "#fff"}} />
-            <Text
-              style={{
-                fontSize: 15,
-                color: "#fff",
-                marginLeft: 5,
-              }}
-            >
-              Tell a Friend
-            </Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ paddingVertical: 15 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="exit-outline" size={22} style={{color: "#fff"}} />
-            <Text
-              style={{
-                fontSize: 15,
-                color: "#fff",
-                marginLeft: 5,
-              }}
-            >
-              Sign Out
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+        <ThemedText lightColor="#222" style={styles.preferences}>
+          Preferences
+        </ThemedText>
+        <ThemedView style={styles.switchTextContainer}>
+          <ThemedSwitch title="Dark Theme" />
+        </ThemedView>
+      </ThemedView>
+      <ThemedView
+        style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#333" }}
+      >
+        <NavigationMenuItem name="share-social-outline" title="Tell a friend" />
+        <NavigationMenuItem name="exit-outline" title="Sign out" />
+      </ThemedView>
+    </ThemedView>
   );
 }
 
@@ -114,20 +83,12 @@ const styles = StyleSheet.create({
   switchTextContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginLeft: 7,
-    paddingVertical: 5,
+    paddingTop: 15,
+    marginLeft: -5,
   },
   preferences: {
     fontSize: 16,
-    color: "#fff",
     paddingTop: 10,
     fontWeight: "500",
-    paddingLeft: 20,
-  },
-  switchText: {
-    fontSize: 17,
-    color: "",
-    paddingTop: 10,
-    fontWeight: "bold",
   },
 });
