@@ -37,7 +37,7 @@ export function ThemedCardBox({
         <Ionicons size={30} name={name} />
       </ThemedText>
       <ThemedText style={[styles.text, styles.boxValue]}>{value}</ThemedText>
-      <ThemedText style={styles.text}>{title}</ThemedText>
+      <ThemedText {...rest} style={styles.text}>{title}</ThemedText>
     </ThemedView>
   );
 }

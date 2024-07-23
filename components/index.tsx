@@ -10,3 +10,5 @@ export * from "./ParallaxScrollView";
 export * from "./ThemedButton";
 export * from "./NavigationMenuItem";
 export * from "./ThemedSwitch";
+export * from "./ThemeFAB";
+export * from "./ThemedDialog";

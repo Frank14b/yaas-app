@@ -58,7 +58,7 @@ export default function ThemedDrawer({ ...props }: any) {
           Preferences
         </ThemedText>
         <ThemedView style={styles.switchTextContainer}>
-          <ThemedSwitch title="Dark Theme" />
+          <ThemedSwitch value={true} onChange={() => {}} title="Dark Theme" />
         </ThemedView>
       </ThemedView>
       <ThemedView

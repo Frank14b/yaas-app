@@ -6,6 +6,7 @@ import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
+  //
   const colorScheme = useColorScheme();
 
   return (
@@ -41,7 +42,19 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="explore"
+          name="services"
+          options={{
+            title: "Services",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "settings" : "settings-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
           options={{
             title: "Profile",
             tabBarIcon: ({ color, focused }) => (
