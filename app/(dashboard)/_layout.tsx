@@ -1,51 +1,76 @@
 import ThemedDrawer from "@/components/ThemedDrawer";
 import { Ionicons } from "@expo/vector-icons";
 import { Drawer } from "expo-router/drawer";
+import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+const SCREENS = [
+  {
+    name: "(tabs)",
+    options: {
+      label: "Home",
+      showHeader: false,
+      icon: "home",
+    },
+  },
+  {
+    name: "countries",
+    options: {
+      label: "Countries",
+      showHeader: true,
+      icon: "globe",
+    },
+  },
+  {
+    name: "users",
+    options: {
+      label: "Users",
+      showHeader: true,
+      icon: "people",
+    },
+  },
+  {
+    name: "access",
+    options: {
+      label: "Role Access",
+      showHeader: true,
+      icon: "lock-open",
+    },
+  },
+];
 
 export default function DashBoardLayout() {
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer drawerContent={(props) => <ThemedDrawer {...props} />}>
-          <Drawer.Screen
-            name="(tabs)"
-            options={{
-              drawerLabel: "Home",
-              title: `Home`,
-              headerShown: false,
-              drawerIcon: ({ focused, size }) => <Ionicons name="home" size={17} color="#007bff" />,
-            }}
-          />
-          <Drawer.Screen
-            name="countries"
-            options={{
-              drawerLabel: "Countries",
-              title: `Countries`,
-              headerShown: true,
-              drawerIcon: ({ focused, size }) => <Ionicons name="globe" size={17} color="#007bff" />,
-            }}
-          />
-          <Drawer.Screen
-            name="users"
-            options={{
-              drawerLabel: "Users",
-              title: `Users`,
-              headerShown: true,
-              drawerIcon: ({ focused, size }) => <Ionicons name="people" size={17} color="#007bff" />,
-            }}
-          />
-          <Drawer.Screen
-            name="access"
-            options={{
-              drawerLabel: "Role Access",
-              title: `Role Access`,
-              headerShown: true,
-              drawerIcon: ({ focused, size }) => <Ionicons name="lock-open" size={17} color="#007bff" />,
-            }}
-          />
+          {SCREENS.map((item, index) => (
+            <Drawer.Screen
+              key={index}
+              name={item.name}
+              options={{
+                drawerLabel: item.options.label,
+                title: item.options.label,
+                headerShown: item.options.showHeader,
+                drawerIcon: ({ focused }) => (
+                  <Ionicons
+                    style={styles.icon}
+                    name={item.options.icon as any}
+                    size={17}
+                    focused={focused}
+                  />
+                ),
+              }}
+            />
+          ))}
         </Drawer>
       </GestureHandlerRootView>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    color: "#aaa",
+  },
+});
