@@ -5,20 +5,14 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useCallback, useState } from "react";
+import { Image, StyleSheet } from "react-native";
+import { useState } from "react";
 
 export default function ViolenceScreen() {
+  //
   const [openForm, setOpenForm] = useState<boolean>(false);
-  const handleOpenForm = useCallback(() => {
-    setOpenForm(!openForm);
-  }, [openForm, setOpenForm]);
-
-  const _renderItem = ({ item }: { item: any }) => (
-    <TouchableOpacity onPress={() => {}}>
-      <ThemedText>{item.title}</ThemedText>
-    </TouchableOpacity>
-  );
+  const handleOpenForm = () => setOpenForm(true);
+  const handleCloseForm = () => setOpenForm(false);
 
   return (
     <>
@@ -44,12 +38,12 @@ export default function ViolenceScreen() {
         </ThemedView>
       </ParallaxScrollView>
 
-      <ThemeFAB position="bottom-right" onPress={handleOpenForm} />
+      <ThemeFAB name="add" position="bottom-right" onPress={handleOpenForm} />
 
       <ThemedDialog
         title="New Violence"
         open={openForm}
-        handleClose={handleOpenForm}
+        handleClose={handleCloseForm}
       />
     </>
   );

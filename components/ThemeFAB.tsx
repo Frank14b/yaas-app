@@ -6,6 +6,8 @@ import {
 import { ThemedText } from "./ThemedText";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants";
+import { ComponentProps } from "react";
+import { IconProps } from "@expo/vector-icons/build/createIconSet";
 
 export enum ThemeFABPosition {
   "center",
@@ -35,12 +37,13 @@ const ThemeFABPositionStyle = {
   },
 };
 
-export type ThemeFABProps = TouchableOpacityProps & {
-  position: keyof typeof ThemeFABPosition;
-  style?: any;
-};
+export type ThemeFABProps = TouchableOpacityProps &
+  IconProps<ComponentProps<typeof Ionicons>["name"]> & {
+    position: keyof typeof ThemeFABPosition;
+    style?: any;
+  };
 
-export function ThemeFAB({ position, style, ...rest }: ThemeFABProps) {
+export function ThemeFAB({ name, position, style, ...rest }: ThemeFABProps) {
   const dynamicStyle = {
     ...ThemeFABPositionStyle[position],
   };
@@ -52,7 +55,7 @@ export function ThemeFAB({ position, style, ...rest }: ThemeFABProps) {
         style={[styles.button, { ...dynamicStyle }, style]}
       >
         <ThemedText>
-          <Ionicons name="add" size={24} color="white" />
+          <Ionicons name={name} size={24} color="white" />
         </ThemedText>
       </TouchableOpacity>
     </>
