@@ -33,6 +33,8 @@ export function ThemedFormDateTime({
 
   const { errors } = formState ?? {};
 
+  const value = watch?.(name);
+
   useEffect(() => {
     if (!errors) return setHasError(null);
     if (errors[name]) {
@@ -42,8 +44,8 @@ export function ThemedFormDateTime({
   }, [name, errors, setHasError]);
 
   const handleDateSelected = useCallback((date?: Date) => {
-    setValue(`${name}`, date, { shouldValidate: true });
-  }, []);
+    setValue?.(`${name}`, date, { shouldValidate: true });
+  }, [setValue]);
 
   if (!reactHookUseForm) return <></>;
 
@@ -57,12 +59,12 @@ export function ThemedFormDateTime({
       <ThemedView style={styles.viewWrapper}>
         <RNDateTimePicker
           onChange={(_, date) => handleDateSelected(date)}
-          value={new Date()}
           {...rest.datePickerProps}
+          value={value ? new Date(value) : new Date()}
         />
       </ThemedView>
       {hasError && (
-        <ThemedView style={{ marginTop: -15 }}>
+        <ThemedView>
           <ThemedText type="small" darkColor="red" lightColor="red">
             {hasError.message}
           </ThemedText>

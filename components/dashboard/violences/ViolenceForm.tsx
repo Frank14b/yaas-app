@@ -10,7 +10,7 @@ export function ViolenceForm() {
     schema: AddViolenceSchema(),
     defaultValues: {
       nature: "",
-      date_occured: "",
+      date_occured: new Date(),
       details: "",
     },
   });
