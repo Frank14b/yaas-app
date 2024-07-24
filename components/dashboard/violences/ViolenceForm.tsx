@@ -3,6 +3,7 @@ import { useAppForm } from "@/hooks";
 import { AddViolenceSchema } from "@/validators";
 import { useCallback } from "react";
 import { StyleSheet } from "react-native";
+import { ThemedFormDateTime } from "@/components/common/ThemedFormDateTime";
 
 export function ViolenceForm() {
   const { handleSubmit } = useAppForm({
@@ -19,7 +20,11 @@ export function ViolenceForm() {
   return (
     <>
       <ThemedView style={[styles.container]}>
-        <ThemedInput name="date_occured" label="Incident Date" />
+        <ThemedFormDateTime
+          datePickerProps={{ value: new Date(), mode: "datetime" }}
+          name="date_occured"
+          label="Incident Date"
+        />
         <ThemedInput name="nature" label="Nature" />
         <ThemedInput
           name="details"

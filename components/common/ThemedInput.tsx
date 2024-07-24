@@ -38,7 +38,7 @@ export function ThemedInput({
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const { reactHookUseForm } = useFormStore();
-  const { formState, register, setValue, watch } =
+  const { formState, register } =
     (reactHookUseForm as UseFormReturn<any>) ?? {};
 
   const { errors } = formState ?? {};
