@@ -1,5 +1,6 @@
 import { Image, StyleSheet } from "react-native";
 import {
+  DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
@@ -10,7 +11,11 @@ import ThemedSwitch from "./ThemedSwitch";
 import { ThemedText } from "./ThemedText";
 import { NavigationMenuItem } from "./NavigationMenuItem";
 
-export default function ThemedDrawer({ ...props }: any) {
+export type ThemedDrawerProps = DrawerContentComponentProps & {
+  logout: () => void;
+}
+
+export default function ThemedDrawer({ logout, ...props }: ThemedDrawerProps) {
   return (
     <ThemedView style={{ flex: 1 }}>
       <DrawerContentScrollView
@@ -65,7 +70,7 @@ export default function ThemedDrawer({ ...props }: any) {
         style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#333" }}
       >
         <NavigationMenuItem name="share-social-outline" title="Tell a friend" />
-        <NavigationMenuItem name="exit-outline" title="Sign out" />
+        <NavigationMenuItem onPress={logout} name="exit-outline" title="Sign out" />
       </ThemedView>
     </ThemedView>
   );
