@@ -1,8 +1,8 @@
 import { ThemedText, ThemedView } from "@/components";
-import { StorageKeys } from "@/constants/Storage";
-import { storage } from "@/utils/expo-storage";
+import { Colors } from "@/constants";
+import { useUserStore } from "@/stores";
 import { useCallback, useState } from "react";
-import { Button, Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, useColorScheme } from "react-native";
 import Swiper from "react-native-swiper";
 
 const SLIDES = [
@@ -23,11 +23,12 @@ const SLIDES = [
   },
 ];
 
-export default function OnBoardingScreen({
-  handleOnBoarding,
-}: {
-  handleOnBoarding: () => void;
-}) {
+export default function OnBoardingScreen() {
+  //
+  const theme = useColorScheme();
+  //
+  const { setOnBoardingCompleted } = useUserStore();
+
   const [currentIndex, setCurrenIndex] = useState<number>(0);
 
   const handleIndexChanged = useCallback(
@@ -37,18 +38,20 @@ export default function OnBoardingScreen({
     [setCurrenIndex]
   );
 
-  const handlePressNext = useCallback(() => {
-    console.log(currentIndex + 1);
-  }, [currentIndex]);
-
   const handlePressStart = useCallback(async () => {
     if (currentIndex != SLIDES.length - 1) return;
 
-    const rs = await storage.setItem(StorageKeys.ON_BOARDING_PASS, "1");
-    if (rs) {
-      handleOnBoarding();
-    }
-  }, [currentIndex]);
+    setOnBoardingCompleted(true);
+  }, [currentIndex, setOnBoardingCompleted]);
+
+  const dynamicStyle = {
+    slide: {
+      backgroundColor: theme == "dark" ? Colors.primaryDark : "",
+    },
+    image: {
+      backgroundColor: theme == "dark" ? Colors.secondaryDark : "#f5f5f5",
+    },
+  };
 
   return (
     <>
@@ -62,15 +65,18 @@ export default function OnBoardingScreen({
           showsPagination={true}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          nextButton={<Button title="Next" onPress={() => handlePressNext()} />}
+          // nextButton={<Button title="Next" onPress={() => handlePressNext()} />}
           buttonWrapperStyle={{
             alignItems: "flex-end",
           }}
           onIndexChanged={handleIndexChanged}
         >
           {SLIDES.map((item, index: number) => (
-            <ThemedView style={styles.slide} key={index}>
-              <Image source={item.image} style={styles.image} />
+            <ThemedView style={[styles.slide, dynamicStyle.slide]} key={index}>
+              <Image
+                source={item.image}
+                style={[styles.image, dynamicStyle.image]}
+              />
               <ThemedText type="subtitle" style={styles.slideTitle}>
                 {item.title}
               </ThemedText>
@@ -100,7 +106,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#050549",
   },
   slideTitle: {
     position: "absolute",
@@ -110,7 +115,6 @@ const styles = StyleSheet.create({
     width: 350,
     height: 350,
     borderRadius: 350,
-    backgroundColor: "#070d5a",
   },
   slideStartBtn: {
     position: "absolute",

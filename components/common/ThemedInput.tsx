@@ -24,7 +24,6 @@ export function ThemedInput({
   label,
   name,
   style,
-  defaultValue,
   lightColor,
   darkColor,
   keyboardType,
@@ -33,15 +32,16 @@ export function ThemedInput({
 }: ThemedInputProps) {
   const theme = useColorScheme() ?? "light";
   const [isPasswordField] = useState(keyboardType === "visible-password");
-  const [text, setText] = useState(defaultValue);
   const [hasError, setHasError] = useState<AnyObject | null>(null);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const { reactHookUseForm } = useFormStore();
-  const { formState, register } =
+  const { formState, register, setValue, watch } =
     (reactHookUseForm as UseFormReturn<any>) ?? {};
 
   const { errors } = formState ?? {};
+
+  const value = watch?.(name);
 
   useEffect(() => {
     if (!errors) return setHasError(null);
@@ -60,7 +60,7 @@ export function ThemedInput({
 
   const dynamicStyle: StyleSheet.NamedStyles<any> = {
     input: {
-      color: "#fff",
+      color: theme == "dark" ? "#fff" : "#444",
       borderColor: hasError ? "red" : "gray",
       paddingRight: isPasswordField ? 50 : 8,
     },
@@ -79,10 +79,10 @@ export function ThemedInput({
       </ThemedText>
       <ThemedView style={styles.viewWrapper}>
         <TextInput
-          value={text}
+          value={value}
           showSoftInputOnFocus={true}
           secureTextEntry={showPlainValue}
-          onChangeText={(t: string) => setText(t)}
+          onChangeText={(t: string) => setValue(name, t)}
           style={[styles.input, { ...dynamicStyle.input }, style]}
           multiline={multiline}
           {...rest}
@@ -105,7 +105,7 @@ export function ThemedInput({
         )}
       </ThemedView>
       {hasError && (
-        <ThemedView style={{ marginTop: -15 }}>
+        <ThemedView style={{ marginTop: -15, backgroundColor: "transparent" }}>
           <ThemedText type="small" darkColor="red" lightColor="red">
             {hasError.message}
           </ThemedText>

@@ -1,4 +1,9 @@
-import { ThemedView, ThemedInput, ThemedButton } from "@/components";
+import {
+  ThemedView,
+  ThemedInput,
+  ThemedButton,
+  ThemedFormView,
+} from "@/components";
 import { useAppForm } from "@/hooks";
 import { AddViolenceSchema } from "@/validators";
 import { useCallback } from "react";
@@ -19,7 +24,7 @@ export function ViolenceForm() {
 
   return (
     <>
-      <ThemedView style={[styles.container]}>
+      <ThemedFormView style={[styles.container]}>
         <ThemedFormDateTime
           datePickerProps={{ value: new Date(), mode: "datetime" }}
           name="date_occured"
@@ -38,7 +43,7 @@ export function ViolenceForm() {
           title="Save Violence"
           onPress={handleSubmit(proceedSaveViolence)}
         />
-      </ThemedView>
+      </ThemedFormView>
     </>
   );
 }

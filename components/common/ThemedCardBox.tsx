@@ -1,4 +1,4 @@
-import { ButtonProps, StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { Colors } from "@/constants";
 import { ThemedText } from "./ThemedText";
@@ -28,7 +28,7 @@ export function ThemedCardBox({
   const theme = useColorScheme() ?? "light";
 
   const dynamicStyle = {
-    backgroundColor: theme == "dark" ? Colors.secondaryDark : lightColor,
+    backgroundColor: theme == "dark" ? Colors.secondaryDark : "#ddd",
   };
 
   return (
@@ -37,7 +37,9 @@ export function ThemedCardBox({
         <Ionicons size={30} name={name} />
       </ThemedText>
       <ThemedText style={[styles.text, styles.boxValue]}>{value}</ThemedText>
-      <ThemedText {...rest} style={styles.text}>{title}</ThemedText>
+      <ThemedText {...rest} style={styles.text}>
+        {title}
+      </ThemedText>
     </ThemedView>
   );
 }
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 5,
     padding: 10,
-    paddingVertical: 15
+    paddingVertical: 15,
   },
   textIcon: {
     paddingVertical: 5,

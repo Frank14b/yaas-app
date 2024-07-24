@@ -1,13 +1,9 @@
 import SignInScreen from "./sign-in";
 
-export default function AuthLayout({
-  handleSession,
-}: {
-  handleSession: () => void;
-}) {
+export default function AuthLayout() {
   return (
     <>
-      <SignInScreen handleSession={handleSession}/>
+      <SignInScreen />
     </>
   );
 }

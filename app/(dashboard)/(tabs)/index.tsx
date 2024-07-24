@@ -60,7 +60,7 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedView style={styles.boxContainer}>
         {CARD_BOX.map((item, index) => (
-          <ThemedView key={index} style={styles.boxCard}>
+          <ThemedView key={index} style={[styles.boxCard]}>
             <AnimateFadeInView>
               <ThemedCardBox
                 onPress={() => goToPage(item.path)}
