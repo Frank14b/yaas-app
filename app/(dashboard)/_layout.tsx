@@ -1,4 +1,4 @@
-import ThemedDrawer from "@/components/ThemedDrawer";
+import ThemedDrawer from "@/components/common/ThemedDrawer";
 import { Ionicons } from "@expo/vector-icons";
 import { Drawer } from "expo-router/drawer";
 import { StyleSheet } from "react-native";

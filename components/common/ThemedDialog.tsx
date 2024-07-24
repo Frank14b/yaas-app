@@ -134,6 +134,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     flex: 1,
+    borderRadius: 8,
+    paddingHorizontal: 15
   },
   ellipsis: {
     textAlign: "center",

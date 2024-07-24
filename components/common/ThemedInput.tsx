@@ -1,15 +1,17 @@
-// import { useThemeColor } from "@/hooks/useThemeColor";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   StyleSheet,
-  Text,
   TextInput,
   TextInputProps,
   useColorScheme,
 } from "react-native";
+
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { Ionicons } from "@expo/vector-icons";
+import { useFormStore } from "@/stores";
+import { UseFormReturn } from "react-hook-form";
+import { AnyObject } from "yup";
 
 export type ThemedInputProps = TextInputProps & {
   label: string;
@@ -26,13 +28,28 @@ export function ThemedInput({
   lightColor,
   darkColor,
   keyboardType,
+  multiline = false,
   ...rest
 }: ThemedInputProps) {
   const theme = useColorScheme() ?? "light";
   const [isPasswordField] = useState(keyboardType === "visible-password");
   const [text, setText] = useState(defaultValue);
-  const [hasError, setHasError] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<AnyObject | null>(null);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const { reactHookUseForm } = useFormStore();
+  const { formState, register, setValue, watch } =
+    (reactHookUseForm as UseFormReturn<any>) ?? {};
+
+  const { errors } = formState ?? {};
+
+  useEffect(() => {
+    if (!errors) return setHasError(null);
+    if (errors[name]) {
+      setHasError(errors[name] as AnyObject);
+    } else if (name.includes(".")) {
+    }
+  }, [name, errors, setHasError]);
 
   const showPlainValue = useMemo(() => {
     if (isPasswordField) {
@@ -41,13 +58,19 @@ export function ThemedInput({
     return false;
   }, [isPasswordField, passwordVisible]);
 
-  const dynamicStyle = {
+  const dynamicStyle: StyleSheet.NamedStyles<any> = {
     input: {
       color: "#fff",
       borderColor: hasError ? "red" : "gray",
       paddingRight: isPasswordField ? 50 : 8,
     },
   };
+
+  if (multiline) {
+    dynamicStyle.input["height"] = 130;
+  }
+
+  if (!reactHookUseForm) return <></>;
 
   return (
     <>
@@ -61,7 +84,9 @@ export function ThemedInput({
           secureTextEntry={showPlainValue}
           onChangeText={(t: string) => setText(t)}
           style={[styles.input, { ...dynamicStyle.input }, style]}
+          multiline={multiline}
           {...rest}
+          {...register(name)}
         />
 
         {isPasswordField && (
@@ -79,6 +104,13 @@ export function ThemedInput({
           </ThemedText>
         )}
       </ThemedView>
+      {hasError && (
+        <ThemedView style={{ marginTop: -15 }}>
+          <ThemedText type="small" darkColor="red" lightColor="red">
+            {hasError.message}
+          </ThemedText>
+        </ThemedView>
+      )}
     </>
   );
 }
