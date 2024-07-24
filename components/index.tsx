@@ -12,3 +12,5 @@ export * from "./NavigationMenuItem";
 export * from "./ThemedSwitch";
 export * from "./ThemeFAB";
 export * from "./ThemedDialog";
+export * from "./animate/AnimateFadeInView";
+export * from "./animate/AnimateSlideInView";

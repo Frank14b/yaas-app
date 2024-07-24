@@ -1,4 +1,5 @@
 import {
+  AnimateSlideInView,
   ParallaxScrollView,
   ThemeFAB,
   ThemedDialog,
@@ -7,6 +8,7 @@ import {
 } from "@/components";
 import { Image, StyleSheet } from "react-native";
 import { useState } from "react";
+import { ViolenceForm } from "@/components/dashboard";
 
 export default function ViolenceScreen() {
   //
@@ -16,27 +18,29 @@ export default function ViolenceScreen() {
 
   return (
     <>
-      <ParallaxScrollView
-        headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-        headerImage={
-          <Image
-            source={require("@/assets/images/parallax/violence.avif")}
-            style={styles.reactLogo}
-          />
-        }
-        style={styles.parallaxView}
-      >
-        <ThemedView style={[styles.titleContainer, styles.container]}>
-          <ThemedText type="title">Violences</ThemedText>
-        </ThemedView>
+      <AnimateSlideInView duration={300}>
+        <ParallaxScrollView
+          headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+          headerImage={
+            <Image
+              source={require("@/assets/images/parallax/violence.avif")}
+              style={styles.reactLogo}
+            />
+          }
+          style={styles.parallaxView}
+        >
+          <ThemedView style={[styles.titleContainer, styles.container]}>
+            <ThemedText type="title">Violences</ThemedText>
+          </ThemedView>
 
-        <ThemedView style={styles.container}>
-          {/* <FlatList
+          <ThemedView style={styles.container}>
+            {/* <FlatList
             data={[{ title: "Frank Fontcha" }]}
             renderItem={_renderItem}
           ></FlatList> */}
-        </ThemedView>
-      </ParallaxScrollView>
+          </ThemedView>
+        </ParallaxScrollView>
+      </AnimateSlideInView>
 
       <ThemeFAB name="add" position="bottom-right" onPress={handleOpenForm} />
 
@@ -44,7 +48,9 @@ export default function ViolenceScreen() {
         title="New Violence"
         open={openForm}
         handleClose={handleCloseForm}
-      />
+      >
+        <ViolenceForm />
+      </ThemedDialog>
     </>
   );
 }

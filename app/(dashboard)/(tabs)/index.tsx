@@ -1,6 +1,7 @@
 import { Image, StyleSheet } from "react-native";
 
 import {
+  AnimateFadeInView,
   HelloWave,
   ParallaxScrollView,
   ThemedCardBox,
@@ -9,6 +10,33 @@ import {
 } from "@/components";
 import { useCallback } from "react";
 import { router } from "expo-router";
+
+const CARD_BOX = [
+  {
+    title: "Reports",
+    icon: "warning-sharp",
+    value: 30,
+    path: "(tabs)/violences",
+  },
+  {
+    title: "Users",
+    icon: "people",
+    value: 40,
+    path: "users",
+  },
+  {
+    title: "Countries",
+    icon: "globe",
+    value: 5,
+    path: "countries",
+  },
+  {
+    title: "Services",
+    icon: "settings",
+    value: 15,
+    path: "(tabs)/services",
+  },
+];
 
 export default function HomeScreen() {
   //
@@ -31,34 +59,18 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.boxContainer}>
-        <ThemedCardBox
-          onPress={() => goToPage("(tabs)/violences")}
-          name="warning-sharp"
-          title="Reports"
-          value={30}
-          style={styles.boxCard}
-        ></ThemedCardBox>
-        <ThemedCardBox
-          onPress={() => goToPage("users")}
-          name="people"
-          title="Users"
-          value={20}
-          style={styles.boxCard}
-        ></ThemedCardBox>
-        <ThemedCardBox
-          onPress={() => goToPage("countries")}
-          name="globe"
-          title="Countries"
-          value={5}
-          style={styles.boxCard}
-        ></ThemedCardBox>
-        <ThemedCardBox
-          onPress={() => goToPage("(tabs)/services")}
-          name="settings"
-          title="Services"
-          value={15}
-          style={styles.boxCard}
-        ></ThemedCardBox>
+        {CARD_BOX.map((item, index) => (
+          <ThemedView key={index} style={styles.boxCard}>
+            <AnimateFadeInView>
+              <ThemedCardBox
+                onPress={() => goToPage(item.path)}
+                name={item.icon as any}
+                title={item.title}
+                value={item.value}
+              ></ThemedCardBox>
+            </AnimateFadeInView>
+          </ThemedView>
+        ))}
       </ThemedView>
     </ParallaxScrollView>
   );
