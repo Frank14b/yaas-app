@@ -14,6 +14,8 @@ import AuthLayout from "./(auth)/_layout";
 import { Stack } from "expo-router";
 import { useUserStore } from "@/stores";
 
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -38,19 +40,24 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {!onBoardingCompleted ? (
-        <OnBoardingLayout />
-      ) : !userConnected ? (
-        <AuthLayout />
-      ) : (
-        <>
-          <Stack>
-            <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </>
-      )}
-    </ThemeProvider>
+    <ActionSheetProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        {!onBoardingCompleted ? (
+          <OnBoardingLayout />
+        ) : !userConnected ? (
+          <AuthLayout />
+        ) : (
+          <>
+            <Stack>
+              <Stack.Screen
+                name="(dashboard)"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </>
+        )}
+      </ThemeProvider>
+    </ActionSheetProvider>
   );
 }

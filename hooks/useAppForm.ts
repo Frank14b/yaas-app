@@ -1,6 +1,6 @@
 import { useFormStore } from "@/stores";
 import { DefaultValues, UseFormReturn, useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 
 export type DefaultValuesProps = {
@@ -16,17 +16,17 @@ export function useAppForm<T extends DefaultValuesProps>({
   schema,
   defaultValues,
 }: UseFormProps<T>): UseFormReturn<T> {
-    const { setReactHookUseForm } = useFormStore();
+  const { setReactHookUseForm } = useFormStore();
 
-    const appForm = useForm({
-        resolver: yupResolver(schema),
-        defaultValues: defaultValues as DefaultValues<T> | undefined,
-        reValidateMode: "onChange"
-    });
+  const appForm = useForm({
+    resolver: yupResolver(schema as any) as any,
+    defaultValues: defaultValues as DefaultValues<T> | undefined,
+    reValidateMode: "onChange",
+  });
 
-    useEffect(() => {
-        setReactHookUseForm(appForm);
-    }, [appForm, setReactHookUseForm]);
+  useEffect(() => {
+    setReactHookUseForm(appForm);
+  }, [appForm, setReactHookUseForm]);
 
-    return appForm;
+  return appForm;
 }

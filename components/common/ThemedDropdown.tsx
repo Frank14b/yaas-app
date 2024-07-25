@@ -33,8 +33,8 @@ export function ThemedDropdown({
   ...rest
 }: ThemedDropdownProps) {
   //
-  const [selected, setSelected] = useState<string | null>(null);
-  const [isFocus, setIsFocus] = useState(false);
+  // const [selected, setSelected] = useState<string | null>(null);
+  // const [isFocus, setIsFocus] = useState(false);
   //
   const [hasError, setHasError] = useState<AnyObject | null>(null);
 
@@ -57,7 +57,7 @@ export function ThemedDropdown({
   const handleValueSelected = useCallback(
     (item: DataProps) => {
       setValue?.(`${name}`, item.value, { shouldValidate: true });
-      setIsFocus(false);
+      // setIsFocus(false);
     },
     [setValue]
   );
@@ -68,39 +68,46 @@ export function ThemedDropdown({
 
   return (
     <>
-      <ThemedText lightColor="#222" darkColor="#fff">
-        {label}
-      </ThemedText>
-      <ThemedView style={styles.viewWrapper}>
-        <Dropdown
-          {...rest}
-          data={data}
-          labelField={"label"}
-          valueField={"value"}
-          onChange={handleValueSelected}
-          maxHeight={300}
-          search={search}
-          containerStyle={styles.dropDrownContainerStyle}
-          itemTextStyle={styles.dropDownItemTextStyle}
-          selectedTextStyle={styles.dropDownSelectedTextStyle}
-          placeholderStyle={{
-            color: "gray",
-          }}
-          activeColor={"transparent"}
-        />
-      </ThemedView>
-      {hasError && (
-        <ThemedView>
-          <ThemedText type="small" darkColor="red" lightColor="red">
-            {hasError.message}
-          </ThemedText>
+      <ThemedView style={styles.container}>
+        <ThemedText lightColor="#222" darkColor="#fff">
+          {label}
+        </ThemedText>
+        <ThemedView style={styles.viewWrapper}>
+          <Dropdown
+            {...rest}
+            data={data}
+            value={value}
+            labelField={"label"}
+            valueField={"value"}
+            onChange={handleValueSelected}
+            maxHeight={300}
+            search={search}
+            containerStyle={styles.dropDrownContainerStyle}
+            itemTextStyle={styles.dropDownItemTextStyle}
+            selectedTextStyle={styles.dropDownSelectedTextStyle}
+            itemContainerStyle={styles.dropDownItemContainerStyle}
+            placeholderStyle={{
+              color: "gray",
+            }}
+            activeColor={Colors.primaryDark}
+          />
         </ThemedView>
-      )}
+        {hasError && (
+          <ThemedView>
+            <ThemedText type="small" darkColor="red" lightColor="red">
+              {hasError.message}
+            </ThemedText>
+          </ThemedView>
+        )}
+      </ThemedView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 20,
+  },
   label: {
     padding: 1,
     paddingBottom: 6,
@@ -109,17 +116,19 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   dropDrownContainerStyle: {
-    backgroundColor: Colors.secondaryDark,
+    backgroundColor: Colors.tertiaryDark,
     borderWidth: 0,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    paddingVertical: 8,
+    borderRadius: 10,
   },
   dropDownSelectedTextStyle: {
     backgroundColor: "transparent",
-    color: "#eee",
+    color: "#bbb",
+    fontSize: 14
   },
   dropDownItemTextStyle: {
     color: "#fff",
     backgroundColor: "transparent",
   },
+  dropDownItemContainerStyle: {}
 });

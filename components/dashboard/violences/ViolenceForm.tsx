@@ -6,12 +6,18 @@ import {
   ThemedDropdown,
 } from "@/components";
 import { useAppForm } from "@/hooks";
+import { useAppActionSheet } from "@/hooks/useAppActionSheet";
 import { AddViolenceSchema } from "@/validators";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { StyleSheet } from "react-native";
 
 export function ViolenceForm() {
-  const { handleSubmit } = useAppForm({
+  //
+  const { openActionSheet, setOptions } = useAppActionSheet({
+    title: "Violence Nature",
+  });
+
+  const { handleSubmit, setValue } = useAppForm({
     schema: AddViolenceSchema(),
     defaultValues: {
       nature: "",
@@ -21,17 +27,57 @@ export function ViolenceForm() {
   });
 
   const natures = useMemo(() => {
-    return [{
-      label: "test 1",
-      value: "text 1"
-    },{
-      label: "test 2",
-      value: "text 2"
-    },{
-      label: "test 3",
-      value: "text 3"
-    }]
-  }, [])
+    return [
+      {
+        label: "text 1",
+        value: "text 1",
+      },
+      {
+        label: "text 2",
+        value: "text 2",
+      },
+      {
+        label: "text 3",
+        value: "text 3",
+      },
+    ];
+  }, []);
+
+  const natures_s = useMemo(() => {
+    return [
+      {
+        key: 1,
+        title: "text 1",
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {
+          setValue("nature", "text 1");
+        },
+      },
+      {
+        key: 2,
+        title: "text 2",
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {
+          setValue("nature", "text 2");
+        },
+      },
+      {
+        key: 3,
+        title: "cancel",
+        destructiveBtn: false,
+        cancelBtn: true,
+        callBackFn: () => {
+          setValue("nature", "text 3");
+        },
+      },
+    ];
+  }, [setValue]);
+
+  useEffect(() => {
+    setOptions(natures_s);
+  }, [natures_s, setOptions]);
 
   const proceedSaveViolence = useCallback(() => {}, []);
 
@@ -51,7 +97,8 @@ export function ViolenceForm() {
           multiline={true}
           numberOfLines={5}
         />
-        {/* <ThemedIosContextMenu /> */}
+
+        <ThemedButton onPress={openActionSheet} title="Text" />
 
         <ThemedButton
           title="Save Violence"

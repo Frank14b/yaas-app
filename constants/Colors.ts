@@ -6,6 +6,7 @@
 const primaryColor = '#FFA600';
 const primaryDark = '#151718';
 const secondaryDark = '#3A3B3C';
+const tertiaryDark = '#3A3B3D';
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 
@@ -15,6 +16,7 @@ export const Colors = {
   tintColorDark,
   primaryDark,
   secondaryDark,
+  tertiaryDark,
   
   light: {
     text: '#11181C',
