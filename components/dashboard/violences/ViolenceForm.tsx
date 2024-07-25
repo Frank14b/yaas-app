@@ -1,14 +1,14 @@
 import {
-  ThemedView,
+  ThemedFormDateTime,
   ThemedInput,
   ThemedButton,
   ThemedFormView,
+  ThemedDropdown,
 } from "@/components";
 import { useAppForm } from "@/hooks";
 import { AddViolenceSchema } from "@/validators";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { ThemedFormDateTime } from "@/components/common/ThemedFormDateTime";
 
 export function ViolenceForm() {
   const { handleSubmit } = useAppForm({
@@ -20,6 +20,19 @@ export function ViolenceForm() {
     },
   });
 
+  const natures = useMemo(() => {
+    return [{
+      label: "test 1",
+      value: "text 1"
+    },{
+      label: "test 2",
+      value: "text 2"
+    },{
+      label: "test 3",
+      value: "text 3"
+    }]
+  }, [])
+
   const proceedSaveViolence = useCallback(() => {}, []);
 
   return (
@@ -30,7 +43,7 @@ export function ViolenceForm() {
           name="date_occured"
           label="Incident Date"
         />
-        <ThemedInput name="nature" label="Nature" />
+        <ThemedDropdown label="Nature" name="nature" data={natures as any} />
         <ThemedInput
           name="details"
           label="Details"
@@ -38,6 +51,7 @@ export function ViolenceForm() {
           multiline={true}
           numberOfLines={5}
         />
+        {/* <ThemedIosContextMenu /> */}
 
         <ThemedButton
           title="Save Violence"

@@ -2,8 +2,8 @@ import ThemedDrawer from "@/components/common/ThemedDrawer";
 import { useUserStore } from "@/stores";
 import { Ionicons } from "@expo/vector-icons";
 import { Drawer } from "expo-router/drawer";
-import { useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { useCallback, useMemo } from "react";
+import { StyleSheet, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const SCREENS = [
@@ -44,6 +44,7 @@ const SCREENS = [
 export default function DashBoardLayout() {
   //
   const { setUserConnected, setOnBoardingCompleted } = useUserStore();
+  const theme = useColorScheme();
 
   const proceedLogout = useCallback(() => {
     useUserStore.persist.clearStorage();
@@ -51,12 +52,16 @@ export default function DashBoardLayout() {
     setUserConnected(false);
   }, [setUserConnected, setOnBoardingCompleted]);
 
+  const isDark = useMemo(() => {
+    return theme === "dark";
+  }, [theme]);
+
   return (
     <>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer
           drawerContent={(props) => (
-            <ThemedDrawer logout={proceedLogout} {...props} />
+            <ThemedDrawer isDark={isDark} logout={proceedLogout} {...props} />
           )}
         >
           {SCREENS.map((item, index) => (

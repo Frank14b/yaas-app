@@ -12,10 +12,15 @@ import { ThemedText } from "./ThemedText";
 import { NavigationMenuItem } from "./NavigationMenuItem";
 
 export type ThemedDrawerProps = DrawerContentComponentProps & {
+  isDark: boolean;
   logout: () => void;
-}
+};
 
-export default function ThemedDrawer({ logout, ...props }: ThemedDrawerProps) {
+export default function ThemedDrawer({
+  isDark,
+  logout,
+  ...props
+}: ThemedDrawerProps) {
   return (
     <ThemedView style={{ flex: 1 }}>
       <DrawerContentScrollView
@@ -45,7 +50,7 @@ export default function ThemedDrawer({ logout, ...props }: ThemedDrawerProps) {
         <ThemedView
           style={{
             flex: 1,
-            backgroundColor: Colors.primaryDark,
+            backgroundColor: isDark ? Colors.primaryDark : "#fff",
             paddingTop: 10,
           }}
         >
@@ -55,7 +60,7 @@ export default function ThemedDrawer({ logout, ...props }: ThemedDrawerProps) {
       <ThemedView
         style={{
           borderTopWidth: 1,
-          borderTopColor: "#333",
+          borderTopColor: isDark ? "#333" : "#eee",
           padding: 20,
         }}
       >
@@ -63,14 +68,22 @@ export default function ThemedDrawer({ logout, ...props }: ThemedDrawerProps) {
           Preferences
         </ThemedText>
         <ThemedView style={styles.switchTextContainer}>
-          <ThemedSwitch value={true} onChange={() => {}} title="Dark Theme" />
+          <ThemedSwitch value={isDark} onChange={() => {}} title="Dark Theme" />
         </ThemedView>
       </ThemedView>
       <ThemedView
-        style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#333" }}
+        style={{
+          padding: 20,
+          borderTopWidth: 1,
+          borderTopColor: isDark ? "#333" : "#eee",
+        }}
       >
         <NavigationMenuItem name="share-social-outline" title="Tell a friend" />
-        <NavigationMenuItem onPress={logout} name="exit-outline" title="Sign out" />
+        <NavigationMenuItem
+          onPress={logout}
+          name="exit-outline"
+          title="Sign out"
+        />
       </ThemedView>
     </ThemedView>
   );
