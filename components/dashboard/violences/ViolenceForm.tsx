@@ -46,6 +46,15 @@ export function ViolenceForm() {
   const natures_s = useMemo(() => {
     return [
       {
+        key: 0,
+        title: "Select violence nature",
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {
+          setValue("nature", "text 3");
+        },
+      },
+      {
         key: 1,
         title: "text 1",
         destructiveBtn: false,
@@ -71,7 +80,7 @@ export function ViolenceForm() {
         callBackFn: () => {
           setValue("nature", "text 3");
         },
-      },
+      }
     ];
   }, [setValue]);
 

@@ -53,8 +53,9 @@ export function useAppActionSheet({
         icons,
         cancelButtonTintColor: "red",
         showSeparators: true,
-        title,
-        message,
+        // title,
+        // message,
+        disabledButtonIndices: [0]
       },
       (selectedIndex: number | undefined) => {
         if (selectedIndex) {
