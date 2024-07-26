@@ -1,4 +1,4 @@
-import { ThemedView } from "@/components";
+import { AnimateFadeInView, ThemedView } from "@/components";
 import { ImageBackground, StyleSheet, useColorScheme } from "react-native";
 import { BlurView } from "expo-blur";
 import { SignInForm } from "@/components/dashboard";
@@ -15,19 +15,23 @@ export default function SignInScreen() {
 
   return (
     <>
-      <ThemedView style={styles.container}>
-        <ImageBackground
-          resizeMode="cover"
-          style={styles.bgImage}
-          source={require("@/assets/images/hand-solidarity.png")}
-        >
-          <BlurView intensity={40} style={styles.blurContainer}>
-            <ThemedView style={[styles.wrapperView, dynamicStyle.wrapperView]}>
-              <SignInForm />
-            </ThemedView>
-          </BlurView>
-        </ImageBackground>
-      </ThemedView>
+      <AnimateFadeInView>
+        <ThemedView style={styles.container}>
+          <ImageBackground
+            resizeMode="cover"
+            style={styles.bgImage}
+            source={require("@/assets/images/hand-solidarity.png")}
+          >
+            <BlurView intensity={40} style={styles.blurContainer}>
+              <ThemedView
+                style={[styles.wrapperView, dynamicStyle.wrapperView]}
+              >
+                <SignInForm />
+              </ThemedView>
+            </BlurView>
+          </ImageBackground>
+        </ThemedView>
+      </AnimateFadeInView>
     </>
   );
 }
