@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Animated } from "react-native";
 
-export type AnimateFadeInViewProps = {
+export type AnimateZoomInViewProps = {
   children: React.ReactNode;
   duration?: number;
   style?: any;
@@ -9,24 +9,24 @@ export type AnimateFadeInViewProps = {
   loop?: boolean;
 };
 
-export const AnimateFadeInView = ({
+export const AnimateZoomInView = ({
   children,
   duration = 800,
   style,
   start = true,
   loop = false,
-}: AnimateFadeInViewProps) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+}: AnimateZoomInViewProps) => {
+  const scaleAnim = useRef(new Animated.Value(0.7)).current;
 
   useEffect(() => {
     if (!start) {
       if (loop) {
-        fadeAnim.resetAnimation();
+        scaleAnim.resetAnimation();
       }
       return;
     }
 
-    Animated.timing(fadeAnim, {
+    Animated.timing(scaleAnim, {
       toValue: 1,
       duration: duration, // Adjust duration as needed
       useNativeDriver: true, // For better performance
@@ -34,7 +34,9 @@ export const AnimateFadeInView = ({
   }, [start, loop]);
 
   return (
-    <Animated.View style={[{ opacity: fadeAnim }, { flex: 1 }, style]}>
+    <Animated.View
+      style={[{ transform: [{ scale: scaleAnim }] }, { flex: 1 }, style]}
+    >
       {/* Your content here */}
       {children}
     </Animated.View>

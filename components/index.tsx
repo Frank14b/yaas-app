@@ -14,6 +14,8 @@ export * from "./common/ThemeFAB";
 export * from "./common/ThemedDialog";
 export * from "./common/ThemedFormDateTime";
 export * from "./common/ThemedDropdown";
+export * from "./common/ThemedBottomSheet";
 
 export * from "./animate/AnimateFadeInView";
 export * from "./animate/AnimateSlideInView";
+export * from "./animate/AnimateZoomInView";

@@ -1,6 +1,7 @@
 import ThemedDrawer from "@/components/common/ThemedDrawer";
 import { useUserStore } from "@/stores";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useCallback, useMemo } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
@@ -48,8 +49,9 @@ export default function DashBoardLayout() {
 
   const proceedLogout = useCallback(() => {
     useUserStore.persist.clearStorage();
-    setOnBoardingCompleted(true);
+    setOnBoardingCompleted(false);
     setUserConnected(false);
+    router.push("/");
   }, [setUserConnected, setOnBoardingCompleted]);
 
   const isDark = useMemo(() => {
