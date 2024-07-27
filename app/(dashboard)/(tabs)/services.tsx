@@ -5,11 +5,15 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
+import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 import { Image, Platform, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
+  //
+  const { slidePosition } = useTabNavigationContext();
+  
   return (
-    <AnimateSlideInView duration={300}>
+    <AnimateSlideInView duration={200} position={slidePosition}>
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
         headerImage={

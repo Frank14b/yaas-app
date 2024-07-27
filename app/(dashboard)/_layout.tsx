@@ -1,4 +1,5 @@
 import ThemedDrawer from "@/components/common/ThemedDrawer";
+import { TabNavigationWrapper } from "@/contexts/TabNavigationContext";
 import { useUserStore } from "@/stores";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -60,33 +61,35 @@ export default function DashBoardLayout() {
 
   return (
     <>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer
-          drawerContent={(props) => (
-            <ThemedDrawer isDark={isDark} logout={proceedLogout} {...props} />
-          )}
-        >
-          {SCREENS.map((item, index) => (
-            <Drawer.Screen
-              key={index}
-              name={item.name}
-              options={{
-                drawerLabel: item.options.label,
-                title: item.options.label,
-                headerShown: item.options.showHeader,
-                drawerIcon: ({ focused }) => (
-                  <Ionicons
-                    style={styles.icon}
-                    name={item.options.icon as any}
-                    size={17}
-                    focused={focused}
-                  />
-                ),
-              }}
-            />
-          ))}
-        </Drawer>
-      </GestureHandlerRootView>
+      <TabNavigationWrapper>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Drawer
+            drawerContent={(props) => (
+              <ThemedDrawer isDark={isDark} logout={proceedLogout} {...props} />
+            )}
+          >
+            {SCREENS.map((item, index) => (
+              <Drawer.Screen
+                key={index}
+                name={item.name}
+                options={{
+                  drawerLabel: item.options.label,
+                  title: item.options.label,
+                  headerShown: item.options.showHeader,
+                  drawerIcon: ({ focused }) => (
+                    <Ionicons
+                      style={styles.icon}
+                      name={item.options.icon as any}
+                      size={17}
+                      focused={focused}
+                    />
+                  ),
+                }}
+              />
+            ))}
+          </Drawer>
+        </GestureHandlerRootView>
+      </TabNavigationWrapper>
     </>
   );
 }

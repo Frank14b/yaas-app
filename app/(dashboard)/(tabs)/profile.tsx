@@ -9,10 +9,14 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
+import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 
 export default function ProfileScreen() {
+  //
+  const { slidePosition } = useTabNavigationContext();
+
   return (
-    <AnimateSlideInView duration={300}>
+    <AnimateSlideInView duration={300} position={slidePosition}>
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={

@@ -9,16 +9,19 @@ import {
 import { Image, StyleSheet } from "react-native";
 import { useState } from "react";
 import { ViolenceForm } from "@/components/dashboard";
+import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 
 export default function ViolenceScreen() {
   //
+  const { slidePosition } = useTabNavigationContext();
+
   const [openForm, setOpenForm] = useState<boolean>(false);
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
 
   return (
     <>
-      <AnimateSlideInView duration={300}>
+      <AnimateSlideInView duration={200} position={slidePosition}>
         <ParallaxScrollView
           headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
           headerImage={
@@ -51,10 +54,6 @@ export default function ViolenceScreen() {
       >
         <ViolenceForm />
       </ThemedDialog>
-
-      {/* <ThemedBottomSheet>
-        <ThemedText>Tokoss</ThemedText>
-      </ThemedBottomSheet> */}
     </>
   );
 }

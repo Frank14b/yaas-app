@@ -4,10 +4,12 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 
 export default function TabLayout() {
   //
   const colorScheme = useColorScheme();
+  const { TAB_SCREENS, handleTabPress } = useTabNavigationContext();
 
   return (
     <>
@@ -17,55 +19,27 @@ export default function TabLayout() {
           headerShown: false,
           unmountOnBlur: true,
         }}
+        screenListeners={{
+          tabPress: (e) => handleTabPress(e.target as string),
+        }}
       >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: "Home",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "home" : "home-outline"}
-                color={color}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="violences"
-          options={{
-            title: "Violences",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "warning" : "warning-outline"}
-                color={color}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="services"
-          options={{
-            title: "Services",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "settings" : "settings-outline"}
-                color={color}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "person-circle-sharp" : "person-circle-outline"}
-                color={color}
-              />
-            ),
-          }}
-        />
+        {TAB_SCREENS.map((item, index) => (
+          <Tabs.Screen
+            key={index}
+            name={item.name}
+            options={{
+              title: item.title,
+              tabBarIcon: ({ color, focused }) => (
+                <TabBarIcon
+                  name={
+                    focused ? (item.icon.default as any) : item.icon.focused
+                  }
+                  color={color}
+                />
+              ),
+            }}
+          />
+        ))}
       </Tabs>
     </>
   );

@@ -4,9 +4,7 @@ import {
   ThemedButton,
   ThemedFormView,
   ThemedDropdown,
-  ThemedText,
 } from "@/components";
-import { ThemedBottomSheet } from "@/components/common/ThemedBottomSheet";
 import { useAppForm } from "@/hooks";
 import { useAppActionSheet } from "@/hooks";
 import { AddViolenceSchema } from "@/validators";

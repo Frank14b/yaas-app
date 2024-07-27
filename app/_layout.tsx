@@ -15,6 +15,7 @@ import { Stack } from "expo-router";
 import { useUserStore } from "@/stores";
 
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,6 +30,8 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
+  const queryClient = new QueryClient();
+
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
@@ -40,24 +43,28 @@ export default function RootLayout() {
   }
 
   return (
-    <ActionSheetProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {!onBoardingCompleted ? (
-          <OnBoardingLayout />
-        ) : !userConnected ? (
-          <AuthLayout />
-        ) : (
-          <>
-            <Stack>
-              <Stack.Screen
-                name="(dashboard)"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </>
-        )}
-      </ThemeProvider>
-    </ActionSheetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ActionSheetProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          {!onBoardingCompleted ? (
+            <OnBoardingLayout />
+          ) : !userConnected ? (
+            <AuthLayout />
+          ) : (
+            <>
+              <Stack>
+                <Stack.Screen
+                  name="(dashboard)"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </>
+          )}
+        </ThemeProvider>
+      </ActionSheetProvider>
+    </QueryClientProvider>
   );
 }

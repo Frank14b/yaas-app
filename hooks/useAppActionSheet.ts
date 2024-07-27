@@ -59,7 +59,6 @@ export function useAppActionSheet({
       },
       (selectedIndex: number | undefined) => {
         if (selectedIndex) {
-          console.log("🚀 ~ openActionSheet ~ selectedIndex:", selectedIndex)
           options[selectedIndex].callBackFn();
         }
       }

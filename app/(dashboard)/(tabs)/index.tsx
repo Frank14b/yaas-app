@@ -2,6 +2,7 @@ import { Image, StyleSheet } from "react-native";
 
 import {
   AnimateFadeInView,
+  AnimateSlideInView,
   HelloWave,
   ParallaxScrollView,
   ThemedCardBox,
@@ -10,6 +11,7 @@ import {
 } from "@/components";
 import { useCallback } from "react";
 import { router } from "expo-router";
+import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 
 const CARD_BOX = [
   {
@@ -40,12 +42,14 @@ const CARD_BOX = [
 
 export default function HomeScreen() {
   //
+  const { slidePosition } = useTabNavigationContext();
+
   const goToPage = useCallback((path: string) => {
     router.push(path);
   }, []);
 
   return (
-    <AnimateFadeInView>
+    <AnimateSlideInView duration={300} position={slidePosition}>
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
         headerImage={
@@ -74,7 +78,7 @@ export default function HomeScreen() {
           ))}
         </ThemedView>
       </ParallaxScrollView>
-    </AnimateFadeInView>
+    </AnimateSlideInView>
   );
 }
 
