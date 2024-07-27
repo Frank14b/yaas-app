@@ -16,7 +16,7 @@ export default function ProfileScreen() {
   const { slidePosition } = useTabNavigationContext();
 
   return (
-    <AnimateSlideInView duration={300} position={slidePosition}>
+    <AnimateSlideInView duration={200} position={slidePosition}>
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={

@@ -4,15 +4,16 @@ import {
   ThemedFormView,
   ThemedText,
 } from "@/components";
-import { useAppForm } from "@/hooks";
+import { useAppForm, useSignIn } from "@/hooks";
 import { useUserStore } from "@/stores";
+import { AuthDto } from "@/types";
 import { SignInSchema } from "@/validators";
 import { useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 
 export function SignInForm() {
   //
-  const { setUserConnected } = useUserStore();
+  const { setUserConnected, setUser } = useUserStore();
 
   const { handleSubmit } = useAppForm({
     schema: SignInSchema(),
@@ -22,9 +23,23 @@ export function SignInForm() {
     },
   });
 
-  const proceedSignIn = useCallback(async () => {
-    setUserConnected(true);
-  }, [setUserConnected]);
+  const { isLoading, mutateAsync } = useSignIn();
+
+  const proceedSignIn = useCallback(
+    async (data: AuthDto) => {
+      const result = await mutateAsync(data);
+
+      if (result.status) {
+        setUserConnected(true);
+        setUser(result.data?.data as any);
+        return;
+      }
+
+      Alert.alert("Authentication failed", result.message);
+      //
+    },
+    [setUserConnected]
+  );
 
   return (
     <>
@@ -47,7 +62,11 @@ export function SignInForm() {
           keyboardType="visible-password"
         />
 
-        <ThemedButton title="Proceed" onPress={handleSubmit(proceedSignIn)} />
+        <ThemedButton
+          disabled={isLoading}
+          title="Proceed"
+          onPress={handleSubmit(proceedSignIn)}
+        />
 
         <ThemedText style={styles.forgotPassword}>
           Forgot your password?

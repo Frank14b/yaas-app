@@ -6,18 +6,40 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
-import { Image, StyleSheet } from "react-native";
-import { useState } from "react";
+import { FlatList, Image, StyleSheet } from "react-native";
+import { useMemo, useState } from "react";
 import { ViolenceForm } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
+import { useViolences } from "@/hooks";
 
 export default function ViolenceScreen() {
   //
   const { slidePosition } = useTabNavigationContext();
 
+  const { getViolences } = useViolences();
+
   const [openForm, setOpenForm] = useState<boolean>(false);
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
+
+  const violences = useMemo(() => {
+    if (getViolences.isLoading) return <ThemedText>Loading...</ThemedText>;
+    if (!getViolences.data?.status)
+      return <ThemedText>Violence no found</ThemedText>;
+
+    const formattedData = getViolences.data.data?.data.map((item) => {
+      return {
+        title: item.details,
+      };
+    });
+
+    return (
+      <FlatList
+        data={formattedData}
+        renderItem={({ item }) => <ThemedText>{item.title}</ThemedText>}
+      ></FlatList>
+    );
+  }, [getViolences.data]);
 
   return (
     <>
@@ -36,12 +58,7 @@ export default function ViolenceScreen() {
             <ThemedText type="title">Violences</ThemedText>
           </ThemedView>
 
-          <ThemedView style={styles.container}>
-            {/* <FlatList
-            data={[{ title: "Frank Fontcha" }]}
-            renderItem={_renderItem}
-          ></FlatList> */}
-          </ThemedView>
+          <ThemedView style={styles.container}>{violences}</ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
 

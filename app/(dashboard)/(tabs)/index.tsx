@@ -12,44 +12,73 @@ import {
 import { useCallback } from "react";
 import { router } from "expo-router";
 import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
+import { useDashboardStats } from "@/hooks";
+import { DashboardStatsDto } from "@/types";
 
-const CARD_BOX = [
+export type CardBox = {
+  title: string;
+  icon: string;
+  value: number;
+  path: string;
+  valueKey: keyof DashboardStatsDto;
+}[];
+
+const CARD_BOX: CardBox = [
   {
     title: "Reports",
     icon: "warning-sharp",
-    value: 30,
+    value: 0,
     path: "(tabs)/violences",
+    valueKey: "incidents_count",
   },
   {
     title: "Users",
     icon: "people",
-    value: 40,
+    value: 0,
     path: "users",
+    valueKey: "users_count",
   },
   {
     title: "Countries",
     icon: "globe",
-    value: 5,
+    value: 0,
     path: "countries",
+    valueKey: "countries_count",
   },
   {
     title: "Services",
     icon: "settings",
-    value: 15,
+    value: 0,
     path: "(tabs)/services",
+    valueKey: "consultations_count",
+  },
+  {
+    title: "Organizations",
+    icon: "bookmarks",
+    value: 0,
+    path: "(tabs)/organizations",
+    valueKey: "ong_count",
+  },
+  {
+    title: "Victims",
+    icon: "person-add",
+    value: 0,
+    path: "(tabs)/victims",
+    valueKey: "victims_count",
   },
 ];
 
 export default function HomeScreen() {
   //
   const { slidePosition } = useTabNavigationContext();
+  const { isLoading, stats } = useDashboardStats();
 
   const goToPage = useCallback((path: string) => {
     router.push(path);
   }, []);
 
   return (
-    <AnimateSlideInView duration={300} position={slidePosition}>
+    <AnimateSlideInView duration={200} position={slidePosition}>
       <ParallaxScrollView
         headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
         headerImage={
@@ -71,7 +100,7 @@ export default function HomeScreen() {
                   onPress={() => goToPage(item.path)}
                   name={item.icon as any}
                   title={item.title}
-                  value={item.value}
+                  value={stats?.[item.valueKey] ?? 0}
                 ></ThemedCardBox>
               </AnimateFadeInView>
             </ThemedView>

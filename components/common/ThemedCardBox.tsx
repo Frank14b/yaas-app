@@ -36,8 +36,8 @@ export function ThemedCardBox({
       <ThemedText style={[styles.textIcon, styles.text]}>
         <Ionicons size={30} name={name} />
       </ThemedText>
-      <ThemedText style={[styles.text, styles.boxValue]}>{value}</ThemedText>
-      <ThemedText {...rest} style={styles.text}>
+      <ThemedText type="subtitle" style={[styles.text, styles.boxValue]}>{value}</ThemedText>
+      <ThemedText type="defaultSemiBold" {...rest} style={styles.text}>
         {title}
       </ThemedText>
     </ThemedView>
@@ -47,7 +47,7 @@ export function ThemedCardBox({
 const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
     padding: 10,
     paddingVertical: 15,
   },
