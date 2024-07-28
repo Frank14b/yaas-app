@@ -9,7 +9,7 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { router } from "expo-router";
 import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
 import { useDashboardStats } from "@/hooks";
@@ -71,11 +71,26 @@ const CARD_BOX: CardBox = [
 export default function HomeScreen() {
   //
   const { slidePosition } = useTabNavigationContext();
-  const { isLoading, stats } = useDashboardStats();
+  const { stats } = useDashboardStats();
 
   const goToPage = useCallback((path: string) => {
     router.push(path);
   }, []);
+
+  const statsComponent = useMemo(() => {
+    return CARD_BOX.map((item, index) => (
+      <ThemedView key={index} style={[styles.boxCard]}>
+        <AnimateFadeInView>
+          <ThemedCardBox
+            onPress={() => goToPage(item.path)}
+            name={item.icon as any}
+            title={item.title}
+            value={stats?.[item.valueKey] ?? 0}
+          ></ThemedCardBox>
+        </AnimateFadeInView>
+      </ThemedView>
+    ));
+  }, [stats, goToPage]);
 
   return (
     <AnimateSlideInView duration={200} position={slidePosition}>
@@ -92,20 +107,7 @@ export default function HomeScreen() {
           <ThemedText type="title">Welcome!</ThemedText>
           <HelloWave />
         </ThemedView>
-        <ThemedView style={styles.boxContainer}>
-          {CARD_BOX.map((item, index) => (
-            <ThemedView key={index} style={[styles.boxCard]}>
-              <AnimateFadeInView>
-                <ThemedCardBox
-                  onPress={() => goToPage(item.path)}
-                  name={item.icon as any}
-                  title={item.title}
-                  value={stats?.[item.valueKey] ?? 0}
-                ></ThemedCardBox>
-              </AnimateFadeInView>
-            </ThemedView>
-          ))}
-        </ThemedView>
+        <ThemedView style={styles.boxContainer}>{statsComponent}</ThemedView>
       </ParallaxScrollView>
     </AnimateSlideInView>
   );

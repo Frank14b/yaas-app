@@ -1,26 +1,39 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
-  ThemeFAB,
   ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
 import { Image, StyleSheet } from "react-native";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ViolenceForm } from "@/components/dashboard";
-import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
+import { useTabNavigationContext } from "@/contexts";
 import { useViolences } from "@/hooks";
 import { Colors } from "@/constants";
+import { useNavigation } from "expo-router";
 
 export default function ViolenceScreen() {
   //
-  const { slidePosition } = useTabNavigationContext();
+  const navigation = useNavigation();
+  const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
   const { getViolences } = useViolences();
 
   const [openForm, setOpenForm] = useState<boolean>(false);
   const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
+
+  const handleHeaderIconPress = useCallback((action: string) => {
+    if (action === "add") {
+      handleOpenForm();
+    }
+  }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => <>{TAB_SCREENS[1].header?.(handleHeaderIconPress)}</>,
+    });
+  }, []);
 
   const violences = useMemo(() => {
     //
@@ -28,12 +41,13 @@ export default function ViolenceScreen() {
     if (!getViolences.data?.status)
       return <ThemedText>Violence no found</ThemedText>;
 
-    return getViolences.data.data?.data.map((item) => {
+    return getViolences.data.data?.data.map((item, index) => {
       return (
         <ThemedView
           lightColor="#eee"
           darkColor={Colors.secondaryDark}
           style={[styles.itemBox]}
+          key={index}
         >
           <Image
             source={require("@/assets/images/parallax/violence.avif")}
@@ -72,17 +86,11 @@ export default function ViolenceScreen() {
           }
           style={styles.parallaxView}
         >
-          <ThemedView style={[styles.titleContainer, styles.container]}>
-            <ThemedText type="title">Violences</ThemedText>
-          </ThemedView>
-
           <ThemedView style={{ flex: 1, padding: 10, gap: 10 }}>
             {violences}
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
-
-      <ThemeFAB name="add" position="bottom-right" onPress={handleOpenForm} />
 
       <ThemedDialog
         title="New Violence"

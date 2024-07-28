@@ -13,12 +13,12 @@ import { Alert, StyleSheet } from "react-native";
 
 export function SignInForm() {
   //
-  const { setUserConnected, setUser } = useUserStore();
+  const { user, setUserConnected, setUser } = useUserStore();
 
   const { handleSubmit } = useAppForm({
     schema: SignInSchema(),
     defaultValues: {
-      email: "",
+      email: user?.email ?? "",
       password: "",
     },
   });
@@ -53,6 +53,8 @@ export function SignInForm() {
           name="email"
           placeholder="Enter email address"
           keyboardType="email-address"
+          autoCorrect={false}
+          autoComplete={"off"}
         />
 
         <ThemedInput

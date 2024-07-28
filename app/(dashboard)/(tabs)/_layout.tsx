@@ -5,18 +5,20 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
+import { ThemedText, ThemedView } from "@/components";
+import { StyleSheet } from "react-native";
 
 export default function TabLayout() {
   //
   const colorScheme = useColorScheme();
-  const { TAB_SCREENS, handleTabPress } = useTabNavigationContext();
+  const { TAB_SCREENS, currentIndex, handleTabPress } =
+    useTabNavigationContext();
 
   return (
     <>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-          headerShown: false,
           unmountOnBlur: true,
         }}
         screenListeners={{
@@ -37,6 +39,13 @@ export default function TabLayout() {
                   color={color}
                 />
               ),
+              headerShown: item.headerShown,
+              header: () => (
+                <ThemedView style={styles.tabScreenHeader}>
+                  <ThemedText type="subtitle">{item.title}</ThemedText>
+                </ThemedView>
+              ),
+              tabBarShowLabel: true,
             }}
           />
         ))}
@@ -44,3 +53,11 @@ export default function TabLayout() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  tabScreenHeader: {
+    padding: 10,
+    paddingTop: 60,
+    flexDirection: "row",
+  },
+});

@@ -2,9 +2,9 @@ import axios, { CancelTokenSource } from "axios";
 
 import { ApiResponseDto, ObjectKeyDto, RequestMethod } from "../types";
 import { Environments } from "@/constants/Environment";
-import { useUserStore } from "@/stores";
 import { storage } from "@/utils/expo-storage";
 import { StorageKeys } from "@/constants";
+import { router } from "expo-router";
 
 //create axios api call instance
 const instance = axios.create({
@@ -62,7 +62,7 @@ export const apiCall = async <R, T = unknown, P = unknown>({
       data,
       params,
       headers,
-      cancelToken: requestSource.token,
+      // cancelToken: requestSource.token,
       timeout: 20000,
     });
 

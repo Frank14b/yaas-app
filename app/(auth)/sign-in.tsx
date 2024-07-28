@@ -15,22 +15,20 @@ export default function SignInScreen() {
 
   return (
     <>
-      <AnimateFadeInView>
-        <ThemedView style={styles.container}>
-          <ImageBackground
-            resizeMode="cover"
-            style={styles.bgImage}
-            source={require("@/assets/images/hand-solidarity.png")}
-          >
-            <BlurView intensity={40} style={styles.blurContainer}>
-              <ThemedView
-                style={[styles.wrapperView, dynamicStyle.wrapperView]}
-              >
-                <SignInForm />
-              </ThemedView>
-            </BlurView>
-          </ImageBackground>
-        </ThemedView>
+    <AnimateFadeInView>
+      <ThemedView style={styles.container}>
+        <ImageBackground
+          resizeMode="cover"
+          style={styles.bgImage}
+          source={require("@/assets/images/hand-solidarity.png")}
+        >
+          <BlurView intensity={40} style={styles.blurContainer}>
+            <ThemedView style={[styles.wrapperView, dynamicStyle.wrapperView]}>
+              <SignInForm />
+            </ThemedView>
+          </BlurView>
+        </ImageBackground>
+      </ThemedView>
       </AnimateFadeInView>
     </>
   );

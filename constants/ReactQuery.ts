@@ -1,5 +1,6 @@
 export const Keys = {
   Queries: {
+    VALIDATE_SESSION: "VALIDATE_SESSION",
     DASHBOARD_STATS: "DASHBOARD_STATS",
     GET_VIOLENCES: "GET_VIOLENCES",
   },

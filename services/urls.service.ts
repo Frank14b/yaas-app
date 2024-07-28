@@ -21,6 +21,11 @@ export const apiUrls: {
       url: `${apiVersion.v1}/admin/signin`,
       method: 'POST',
       isSecure: false,
+    },
+    validateSession: {
+      url: `${apiVersion.v1}/admin/validate-token`,
+      method: 'POST',
+      isSecure: false,
     }
   },
   dashboard: {

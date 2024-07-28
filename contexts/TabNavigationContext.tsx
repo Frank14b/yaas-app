@@ -1,11 +1,7 @@
-import { SlidePositionProps } from "@/components";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { SlidePositionProps, ThemedText, ThemedView } from "@/components";
+import { Ionicons } from "@expo/vector-icons";
+import { createContext, useCallback, useContext, useState } from "react";
+import { StyleSheet } from "react-native";
 
 const TabNavigationContext = createContext<any>({});
 
@@ -16,6 +12,8 @@ export type TabScreen = {
     focused: string;
   };
   title: string;
+  headerShown?: boolean;
+  header?: (handleClick: (action: string) => void) => React.ReactNode;
 };
 
 export function TabNavigationWrapper({ children }: { children: any }) {
@@ -28,6 +26,7 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         focused: "home-outline",
       },
       title: "Home",
+      headerShown: false,
     },
     {
       name: "violences",
@@ -36,6 +35,25 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         focused: "warning-outline",
       },
       title: "Violences",
+      header: (handleClick: (action: string) => void) => (
+        <ThemedView style={styles.tabScreenHeader}>
+          <ThemedText type="subtitle">{"Violences"}</ThemedText>
+          <ThemedView style={styles.tabHeaderIconsWrapper}>
+            <ThemedText
+              onPress={() => handleClick("search")}
+              style={styles.tabHeaderIcon}
+            >
+              <Ionicons name="search" size={30} />
+            </ThemedText>
+            <ThemedText
+              onPress={() => handleClick("add")}
+              style={styles.tabHeaderIcon}
+            >
+              <Ionicons name="add-circle" size={30} />
+            </ThemedText>
+          </ThemedView>
+        </ThemedView>
+      ),
     },
     {
       name: "services",
@@ -77,10 +95,6 @@ export function TabNavigationWrapper({ children }: { children: any }) {
     [currentIndex, setCurrentIndex, setSlidePosition]
   );
 
-  useEffect(() => {
-    console.log("slidePosition", slidePosition);
-  }, [slidePosition]);
-
   const TabNavigationData: TabNavigationContextDto = {
     TAB_SCREENS,
     currentIndex,
@@ -104,3 +118,22 @@ export type TabNavigationContextDto = {
   slidePosition: keyof typeof SlidePositionProps;
   handleTabPress: (target: string) => void;
 };
+
+const styles = StyleSheet.create({
+  tabScreenHeader: {
+    padding: 10,
+    paddingTop: 60,
+    flexDirection: "row",
+  },
+  tabHeaderIconsWrapper: {
+    textAlign: "right",
+    position: "absolute",
+    flexDirection: "row",
+    right: 10,
+    top: 50,
+    gap: 15,
+  },
+  tabHeaderIcon: {
+    paddingTop: 12,
+  },
+});
