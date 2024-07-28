@@ -8,14 +8,17 @@ export enum TabBarIconAction {
   SEARCH = "SEARCH",
 }
 
-export function TabBarHeader({
-  handleIconClick,
-}: {
+export type TabBarHeaderProps = {
+  title: string;
   handleIconClick: (action: keyof typeof TabBarIconAction) => void;
-}) {
+};
+
+export function TabBarHeader({ title, handleIconClick }: TabBarHeaderProps) {
   return (
     <ThemedView style={styles.tabScreenHeader}>
-      <ThemedText type="subtitle">{"Violences"}</ThemedText>
+      <ThemedText lightColor="#fff" darkColor="#fff" type="subtitle">
+        {title}
+      </ThemedText>
       <ThemedView style={styles.tabHeaderIconsWrapper}>
         <ThemedText
           onPress={() => handleIconClick(TabBarIconAction.SEARCH)}
@@ -39,16 +42,22 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 60,
     flexDirection: "row",
+    backgroundColor: "transparent",
+    position: "absolute",
+    right: 0,
+    left: 0,
   },
   tabHeaderIconsWrapper: {
     textAlign: "right",
     position: "absolute",
     flexDirection: "row",
+    backgroundColor: "transparent",
     right: 10,
     top: 50,
     gap: 15,
   },
   tabHeaderIcon: {
     paddingTop: 12,
+    color: "#fff",
   },
 });

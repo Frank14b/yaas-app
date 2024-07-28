@@ -34,6 +34,7 @@ export const apiUrls: {
       method: 'GET',
       isSecure: true,
     },
+
     getViolences: {
       url: `${apiVersion.v1}/admin/notices`,
       method: 'GET',
@@ -41,6 +42,17 @@ export const apiUrls: {
     },
     addViolence: {
       url: `${apiVersion.v1}/admin/notices/add`,
+      method: 'POST',
+      isSecure: true,
+    },
+
+    getServices: {
+      url: `${apiVersion.v1}/admin/consultations`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addService: {
+      url: `${apiVersion.v1}/admin/consultations/add`,
       method: 'POST',
       isSecure: true,
     }

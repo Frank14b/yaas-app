@@ -4,7 +4,6 @@ import { ApiResponseDto, ObjectKeyDto, RequestMethod } from "../types";
 import { Environments } from "@/constants/Environment";
 import { storage } from "@/utils/expo-storage";
 import { StorageKeys } from "@/constants";
-import { router } from "expo-router";
 
 //create axios api call instance
 const instance = axios.create({
@@ -76,6 +75,7 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     const finalError = error as ObjectKeyDto;
     if (finalError.response?.status == 401) {
+      await storage.deleteItem(StorageKeys.AUTH_TOKEN);
       console.log("Unauthorized User");
     }
 

@@ -1,83 +1,97 @@
 import {
   AnimateSlideInView,
-  HelloWave,
   ParallaxScrollView,
+  ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
-import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
-import { Image, Platform, StyleSheet } from "react-native";
+import { ServiceListItem } from "@/components/dashboard";
+import { useTabNavigationContext } from "@/contexts";
+import { useServices } from "@/hooks";
+import { useNavigation } from "expo-router";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Image, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
   //
-  const { slidePosition } = useTabNavigationContext();
-  
+  const navigation = useNavigation();
+  const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
+
+  const { getServices } = useServices();
+
+  const [openForm, setOpenForm] = useState<boolean>(false);
+  const handleOpenForm = () => setOpenForm(true);
+  const handleCloseForm = () => setOpenForm(false);
+
+  const handleHeaderIconPress = useCallback((action: string) => {
+    if (action === "ADD") {
+      handleOpenForm();
+    }
+  }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => <>{TAB_SCREENS[2].header?.(handleHeaderIconPress)}</>,
+    });
+  }, []);
+
+  const services = useMemo(() => {
+    if (getServices.isLoading) return <ThemedText>Loading...</ThemedText>;
+    if (!getServices.data?.status)
+      return <ThemedText>Service no found</ThemedText>;
+
+    return getServices.data.data?.data.map((item, index) => {
+      return <ServiceListItem key={index} item={item} />;
+    });
+  }, [getServices.data]);
+
   return (
-    <AnimateSlideInView duration={200} position={slidePosition}>
-      <ParallaxScrollView
-        headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-        headerImage={
-          <Image
-            source={require("@/assets/images/partial-react-logo.png")}
-            style={styles.reactLogo}
-          />
-        }
+    <>
+      <AnimateSlideInView duration={200} position={slidePosition}>
+        <ParallaxScrollView
+          headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+          headerImage={
+            <Image
+              source={require("@/assets/images/parallax/services.webp")}
+              style={styles.reactLogo}
+            />
+          }
+          style={styles.parallaxView}
+        >
+          <ThemedView style={{ flex: 1, padding: 10, gap: 10 }}>
+            {services}
+          </ThemedView>
+        </ParallaxScrollView>
+      </AnimateSlideInView>
+
+      <ThemedDialog
+        title="New Service"
+        open={openForm}
+        handleClose={handleCloseForm}
       >
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Welcome!</ThemedText>
-          <HelloWave />
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-          <ThemedText>
-            Edit{" "}
-            <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-            to see changes. Press{" "}
-            <ThemedText type="defaultSemiBold">
-              {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-            </ThemedText>{" "}
-            to open developer tools.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          <ThemedText>
-            Tap the Explore tab to learn more about what's included in this
-            starter app.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-          <ThemedText>
-            When you're ready, run{" "}
-            <ThemedText type="defaultSemiBold">
-              npm run reset-project
-            </ThemedText>{" "}
-            to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-            directory. This will move the current{" "}
-            <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-            <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-          </ThemedText>
-        </ThemedView>
-      </ParallaxScrollView>
-    </AnimateSlideInView>
+        {/* <ViolenceForm /> */}
+      </ThemedDialog>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
+    marginTop: 10,
+  },
+  container: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+    padding: 10,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  parallaxView: {
+    height: 160,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
+    height: 180,
+    width: "100%",
+    top: 0,
     left: 0,
     position: "absolute",
   },

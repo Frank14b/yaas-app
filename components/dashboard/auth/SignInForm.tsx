@@ -65,6 +65,7 @@ export function SignInForm() {
         />
 
         <ThemedButton
+          isLoading={isLoading}
           disabled={isLoading}
           title="Proceed"
           onPress={handleSubmit(proceedSignIn)}

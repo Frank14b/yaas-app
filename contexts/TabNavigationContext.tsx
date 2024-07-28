@@ -34,7 +34,7 @@ export function TabNavigationWrapper({ children }: { children: any }) {
       },
       title: "Violences",
       header: (handleClick: (action: string) => void) => (
-        <TabBarHeader handleIconClick={handleClick} />
+        <TabBarHeader title={"Violences"} handleIconClick={handleClick} />
       ),
     },
     {
@@ -44,6 +44,9 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         focused: "settings-outline",
       },
       title: "Services",
+      header: (handleClick: (action: string) => void) => (
+        <TabBarHeader title={"Services"} handleIconClick={handleClick} />
+      ),
     },
     {
       name: "profile",

@@ -42,7 +42,13 @@ export default function TabLayout() {
               headerShown: item.headerShown,
               header: () => (
                 <ThemedView style={styles.tabScreenHeader}>
-                  <ThemedText type="subtitle">{item.title}</ThemedText>
+                  <ThemedText
+                    lightColor="#333"
+                    darkColor="#fff"
+                    type="subtitle"
+                  >
+                    {item.title}
+                  </ThemedText>
                 </ThemedView>
               ),
               tabBarShowLabel: true,
@@ -59,5 +65,9 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 60,
     flexDirection: "row",
+    backgroundColor: "transparent",
+    position: "absolute",
+    left: 0,
+    right: 0
   },
 });

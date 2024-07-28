@@ -1,4 +1,4 @@
-import { Keys } from "@/constants/ReactQuery";
+import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
 import { CreateViolenceDto, ResultViolenceDto } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";

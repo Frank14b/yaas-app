@@ -107,8 +107,6 @@ export function ViolenceForm() {
           numberOfLines={5}
         />
 
-        <ThemedButton onPress={openActionSheet} title="Text" />
-
         <ThemedButton
           title="Save Violence"
           onPress={handleSubmit(proceedSaveViolence)}
