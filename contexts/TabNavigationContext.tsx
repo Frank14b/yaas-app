@@ -1,7 +1,5 @@
-import { SlidePositionProps, ThemedText, ThemedView } from "@/components";
-import { Ionicons } from "@expo/vector-icons";
+import { SlidePositionProps, TabBarHeader } from "@/components";
 import { createContext, useCallback, useContext, useState } from "react";
-import { StyleSheet } from "react-native";
 
 const TabNavigationContext = createContext<any>({});
 
@@ -36,23 +34,7 @@ export function TabNavigationWrapper({ children }: { children: any }) {
       },
       title: "Violences",
       header: (handleClick: (action: string) => void) => (
-        <ThemedView style={styles.tabScreenHeader}>
-          <ThemedText type="subtitle">{"Violences"}</ThemedText>
-          <ThemedView style={styles.tabHeaderIconsWrapper}>
-            <ThemedText
-              onPress={() => handleClick("search")}
-              style={styles.tabHeaderIcon}
-            >
-              <Ionicons name="search" size={30} />
-            </ThemedText>
-            <ThemedText
-              onPress={() => handleClick("add")}
-              style={styles.tabHeaderIcon}
-            >
-              <Ionicons name="add-circle" size={30} />
-            </ThemedText>
-          </ThemedView>
-        </ThemedView>
+        <TabBarHeader handleIconClick={handleClick} />
       ),
     },
     {
@@ -118,22 +100,3 @@ export type TabNavigationContextDto = {
   slidePosition: keyof typeof SlidePositionProps;
   handleTabPress: (target: string) => void;
 };
-
-const styles = StyleSheet.create({
-  tabScreenHeader: {
-    padding: 10,
-    paddingTop: 60,
-    flexDirection: "row",
-  },
-  tabHeaderIconsWrapper: {
-    textAlign: "right",
-    position: "absolute",
-    flexDirection: "row",
-    right: 10,
-    top: 50,
-    gap: 15,
-  },
-  tabHeaderIcon: {
-    paddingTop: 12,
-  },
-});

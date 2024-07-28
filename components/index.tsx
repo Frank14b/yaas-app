@@ -19,3 +19,5 @@ export * from "./common/ThemedBottomSheet";
 export * from "./animate/AnimateFadeInView";
 export * from "./animate/AnimateSlideInView";
 export * from "./animate/AnimateZoomInView";
+
+export * from "./navigation/TabBarHeader";

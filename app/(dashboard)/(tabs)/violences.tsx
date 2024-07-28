@@ -24,7 +24,7 @@ export default function ViolenceScreen() {
   const handleCloseForm = () => setOpenForm(false);
 
   const handleHeaderIconPress = useCallback((action: string) => {
-    if (action === "add") {
+    if (action === "ADD") {
       handleOpenForm();
     }
   }, []);
