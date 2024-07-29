@@ -15,6 +15,7 @@ const SCREENS = [
       label: "Home",
       showHeader: false,
       icon: "home",
+      drawerItemStyle: {},
     },
   },
   {
@@ -23,6 +24,7 @@ const SCREENS = [
       label: "Countries",
       showHeader: true,
       icon: "globe",
+      drawerItemStyle: {},
     },
   },
   {
@@ -31,6 +33,7 @@ const SCREENS = [
       label: "Users",
       showHeader: true,
       icon: "people",
+      drawerItemStyle: {},
     },
   },
   {
@@ -39,6 +42,16 @@ const SCREENS = [
       label: "Role Access",
       showHeader: true,
       icon: "lock-open",
+      drawerItemStyle: {},
+    },
+  },
+  {
+    name: "(forms)",
+    options: {
+      label: "Forms",
+      showHeader: false,
+      icon: "lock-open",
+      drawerItemStyle: { display: "none" },
     },
   },
 ];
@@ -49,7 +62,6 @@ export default function DashBoardLayout() {
   const theme = useColorScheme();
 
   const proceedLogout = useCallback(() => {
-    // useUserStore.persist.clearStorage();
     setOnBoardingCompleted(true);
     setUserConnected(false);
     router.push("/");
@@ -78,6 +90,7 @@ export default function DashBoardLayout() {
                   key={index}
                   name={item.name}
                   options={{
+                    drawerItemStyle: item.options.drawerItemStyle as any,
                     drawerLabel: item.options.label,
                     title: item.options.label,
                     headerShown: item.options.showHeader,

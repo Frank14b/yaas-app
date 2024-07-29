@@ -11,6 +11,7 @@ export type TabScreen = {
   };
   title: string;
   headerShown?: boolean;
+  excluded?: boolean;
   header?: (handleClick: (action: string) => void) => React.ReactNode;
 };
 
@@ -55,7 +56,7 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         focused: "person-circle-outline",
       },
       title: "Profile",
-    },
+    }
   ];
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);

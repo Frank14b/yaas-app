@@ -11,8 +11,7 @@ import { StyleSheet } from "react-native";
 export default function TabLayout() {
   //
   const colorScheme = useColorScheme();
-  const { TAB_SCREENS, currentIndex, handleTabPress } =
-    useTabNavigationContext();
+  const { TAB_SCREENS, handleTabPress } = useTabNavigationContext();
 
   return (
     <>
@@ -30,6 +29,7 @@ export default function TabLayout() {
             key={index}
             name={item.name}
             options={{
+              href: item.excluded ? null : undefined,
               title: item.title,
               tabBarIcon: ({ color, focused }) => (
                 <TabBarIcon
@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     position: "absolute",
     left: 0,
-    right: 0
+    right: 0,
   },
 });

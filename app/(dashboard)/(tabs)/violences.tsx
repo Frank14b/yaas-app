@@ -5,16 +5,17 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
-import { Image, StyleSheet } from "react-native";
+import { Image, Platform, StyleSheet } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ViolenceForm, ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useViolences } from "@/hooks";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 
 export default function ViolenceScreen() {
   //
   const navigation = useNavigation();
+  const router = useRouter();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
   const { getViolences } = useViolences();
 
@@ -24,7 +25,11 @@ export default function ViolenceScreen() {
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      handleOpenForm();
+      if (Platform.OS != "ios") {
+        router.push("(forms)/violence");
+      } else {
+        handleOpenForm();
+      }
     }
   }, []);
 
@@ -51,7 +56,7 @@ export default function ViolenceScreen() {
           headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
           headerImage={
             <Image
-              source={require("@/assets/images/parallax/violence.avif")}
+              source={require("@/assets/images/parallax/violence.jpg")}
               style={styles.reactLogo}
             />
           }

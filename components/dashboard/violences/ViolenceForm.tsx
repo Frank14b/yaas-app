@@ -80,7 +80,7 @@ export function ViolenceForm() {
         callBackFn: () => {
           setValue("nature", "text 3");
         },
-      }
+      },
     ];
   }, [setValue]);
 
@@ -118,7 +118,7 @@ export function ViolenceForm() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingVertical: 10,
+    justifyContent: "flex-start",
   },
 });

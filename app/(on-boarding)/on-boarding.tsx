@@ -2,7 +2,7 @@ import { AnimateZoomInView, ThemedText, ThemedView } from "@/components";
 import { Colors } from "@/constants";
 import { useUserStore } from "@/stores";
 import { useCallback, useRef, useState } from "react";
-import { Button, Image, StyleSheet, useColorScheme } from "react-native";
+import { Image, StyleSheet, useColorScheme } from "react-native";
 import Swiper from "react-native-swiper";
 
 const SLIDES = [
@@ -18,7 +18,7 @@ const SLIDES = [
   },
   {
     key: 3,
-    image: require(`@/assets/images/on-boarding/support.avif`),
+    image: require(`@/assets/images/on-boarding/support.png`),
     title: "Give the biggest support",
   },
 ];
@@ -73,20 +73,8 @@ export default function OnBoardingScreen() {
           showsPagination={true}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          prevButton={
-            <Button
-              color={theme == "dark" ? "#fff" : "#222"}
-              title="Prev"
-              onPress={handlePressPrev}
-            />
-          }
-          nextButton={
-            <Button
-              color={theme == "dark" ? "#fff" : "#222"}
-              title="Next"
-              onPress={handlePressNext}
-            />
-          }
+          prevButton={<ThemedText style={styles.navigationBtn} onPress={handlePressPrev}>Prev</ThemedText>}
+          nextButton={<ThemedText style={styles.navigationBtn} onPress={handlePressNext}>Next</ThemedText>}
           buttonWrapperStyle={{
             alignItems: "flex-end",
           }}
@@ -154,7 +142,7 @@ const styles = StyleSheet.create({
   slideStartBtn: {
     position: "absolute",
     right: 17,
-    bottom: 17,
+    bottom: 18,
   },
   slideSkipBtn: {
     position: "absolute",
@@ -164,5 +152,10 @@ const styles = StyleSheet.create({
   zoom: {
     position: "absolute",
     flex: 1,
+  },
+  navigationBtn: {
+    backgroundColor: "transparent",
+    paddingBottom: 8,
+    paddingHorizontal: 10
   },
 });

@@ -30,13 +30,17 @@ export function AuthWrapper({ children }: { children: any }) {
 
   useEffect(() => {
     if (data?.statusCode == 401) {
+
+      console.log("401 data", data)
+
       setUserConnected(false);
       return;
     }
 
     if (data) {
       if (!data.data) {
-        setUserConnected(false);
+        console.log("Not found data", data)
+        // setUserConnected(false);
         return;
       }
     }

@@ -85,6 +85,7 @@ export function ThemedInput({
           onChangeText={(t: string) => setValue(name, t)}
           style={[styles.input, { ...dynamicStyle.input }, style]}
           multiline={multiline}
+          placeholderTextColor={"#aaa"}
           {...rest}
           {...register(name)}
         />
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 8,
     marginBottom: 15,
+    textAlignVertical: "top",
   },
   passwordEye: {
     position: "absolute",

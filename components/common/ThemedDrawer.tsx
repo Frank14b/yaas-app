@@ -33,7 +33,7 @@ export default function ThemedDrawer({
       >
         <Image
           alt="Not find"
-          source={require("@/assets/images/on-boarding/support.avif")}
+          source={require("@/assets/images/on-boarding/Team-spirit-bro.png")}
           style={styles.userAvatar}
         />
         <ThemedText
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 50,
     marginLeft: 20,
+    backgroundColor: "#fff"
   },
   switchTextContainer: {
     flexDirection: "row",

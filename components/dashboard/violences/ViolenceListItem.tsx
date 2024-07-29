@@ -17,7 +17,7 @@ export function ViolenceListItem({ item, onPress }: ViolenceListItemProps) {
       style={[styles.itemBox]}
     >
       <Image
-        source={require("@/assets/images/parallax/violence.avif")}
+        source={require("@/assets/images/parallax/violence.jpg")}
         style={styles.itemUserPhoto}
       />
       <Pressable style={styles.pressable} onPress={() => onPress?.(item)}>
@@ -32,9 +32,6 @@ export function ViolenceListItem({ item, onPress }: ViolenceListItemProps) {
           <ThemedText type="small" style={styles.itemFlag}>
             {item.flags.name}
           </ThemedText>
-          {/* <ThemedText type="small" style={styles.itemType}>
-            Type: {item.types.name}
-          </ThemedText> */}
         </ThemedView>
       </Pressable>
     </ThemedView>

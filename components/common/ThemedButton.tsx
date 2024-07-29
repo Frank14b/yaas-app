@@ -1,13 +1,14 @@
 import {
   ActivityIndicator,
-  Button,
-  ButtonProps,
+  Pressable,
+  PressableProps,
   StyleSheet,
 } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { Colors } from "@/constants";
+import { ThemedText } from "./ThemedText";
 
-export type ThemedButtonProps = ButtonProps & {
+export type ThemedButtonProps = PressableProps & {
   title: string;
   lightColor?: string;
   darkColor?: string;
@@ -22,13 +23,15 @@ export function ThemedButton({
   ...rest
 }: ThemedButtonProps) {
   return (
-    <ThemedView style={[styles.wrapper]}>
-      {isLoading ? (
-        <ActivityIndicator color={"#fff"} size={"large"} />
-      ) : (
-        <Button title={title} color={"#fff"} {...rest} />
-      )}
-    </ThemedView>
+    <Pressable {...rest}>
+      <ThemedView style={[styles.wrapper]}>
+        {isLoading ? (
+          <ActivityIndicator color={"#fff"} size={"large"} />
+        ) : (
+          <ThemedText style={styles.buttonText}>{title}</ThemedText>
+        )}
+      </ThemedView>
+    </Pressable>
   );
 }
 
@@ -38,5 +41,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     borderRadius: 5,
     marginVertical: 15,
+  },
+
+  buttonText: {
+    textAlign: "center",
+    padding: 5,
   },
 });

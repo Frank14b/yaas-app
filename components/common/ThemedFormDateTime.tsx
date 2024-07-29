@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { Platform, Pressable, StyleSheet } from "react-native";
 
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
@@ -11,6 +11,7 @@ import RNDateTimePicker, {
   AndroidNativeProps,
   IOSNativeProps,
   WindowsNativeProps,
+  DateTimePickerAndroid,
 } from "@react-native-community/datetimepicker";
 
 export type ThemedFormDateTimeProps = {
@@ -43,9 +44,21 @@ export function ThemedFormDateTime({
     }
   }, [name, errors, setHasError]);
 
-  const handleDateSelected = useCallback((date?: Date) => {
-    setValue?.(`${name}`, date, { shouldValidate: true });
-  }, [setValue]);
+  const handleDateSelected = useCallback(
+    (date?: Date) => {
+      Platform.OS == "android" && DateTimePickerAndroid.dismiss("date");
+      setValue?.(`${name}`, date, { shouldValidate: true });
+    },
+    [setValue]
+  );
+
+  const triggerAndroidDatePicker = useCallback(() => {
+    DateTimePickerAndroid.open({
+      display: "calendar",
+      value: value ? new Date(value) : new Date(),
+      onChange: (_, date) => handleDateSelected(date),
+    });
+  }, [value, handleDateSelected]);
 
   if (!reactHookUseForm) return <></>;
 
@@ -57,11 +70,20 @@ export function ThemedFormDateTime({
         {label}
       </ThemedText>
       <ThemedView style={styles.viewWrapper}>
-        <RNDateTimePicker
-          onChange={(_, date) => handleDateSelected(date)}
-          {...rest.datePickerProps}
-          value={value ? new Date(value) : new Date()}
-        />
+        {Platform.OS == "ios" ? (
+          <RNDateTimePicker
+            onChange={(_, date) => handleDateSelected(date)}
+            {...rest.datePickerProps}
+            value={value ? new Date(value) : new Date()}
+            display={"calendar"}
+          />
+        ) : (
+          <Pressable onPress={triggerAndroidDatePicker}>
+            <ThemedView>
+              <ThemedText>{new Date(value).toDateString()}</ThemedText>
+            </ThemedView>
+          </Pressable>
+        )}
       </ThemedView>
       {hasError && (
         <ThemedView>

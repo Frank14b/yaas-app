@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
-  // Platform,
   ScrollView,
   StyleSheet,
 } from "react-native";
@@ -41,7 +40,6 @@ export function ThemedFormView({ style, children }: ThemedFormViewProps) {
   return (
     <KeyboardAvoidingView
       behavior="padding"
-      // keyboardVerticalOffset={Platform.OS == "ios" ? 100 : 0}
       style={styles.wrapper}
     >
       <ScrollView
