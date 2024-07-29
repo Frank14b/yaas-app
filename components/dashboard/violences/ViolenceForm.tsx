@@ -13,7 +13,7 @@ import { StyleSheet } from "react-native";
 
 export function ViolenceForm() {
   //
-  const { openActionSheet, setOptions } = useAppActionSheet({
+  const { openActionSheet } = useAppActionSheet({
     title: "Violence Nature",
   });
 
@@ -83,10 +83,6 @@ export function ViolenceForm() {
       },
     ];
   }, [setValue]);
-
-  useEffect(() => {
-    setOptions(natures_s);
-  }, [natures_s, setOptions]);
 
   const proceedSaveViolence = useCallback(() => {}, []);
 

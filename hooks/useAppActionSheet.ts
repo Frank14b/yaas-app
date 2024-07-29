@@ -1,5 +1,4 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { useMemo, useState } from "react";
 
 export type AppActionSheetOptions = {
   key?: number;
@@ -19,35 +18,28 @@ export function useAppActionSheet({
 }) {
   //
   const { showActionSheetWithOptions } = useActionSheet();
-  const [options, setOptions] = useState<AppActionSheetOptions[]>([]);
 
-  const formattedOptions = useMemo(() => {
-    return options.map((item) => {
+  const openActionSheet = (data: AppActionSheetOptions[]) => {
+    //
+    const formattedData = data.map((item) => {
       return item.title;
     });
-  }, [options]);
 
-  const cancelButtonIndex = useMemo(() => {
-    return options.findIndex((item) => item.cancelBtn == true);
-  }, [options]);
+    const cancelButtonIndex = data.findIndex((item) => item.cancelBtn == true);
 
-  const destructiveButtonIndex = useMemo(() => {
-    return options.findIndex((item) => item.destructiveBtn == true);
-  }, [options]);
+    const destructiveButtonIndex = data.findIndex(
+      (item) => item.destructiveBtn == true
+    );
 
-  const icons = useMemo(() => {
-    return options.map((item) => {
+    const icons = data.map((item) => {
       return item.icon ?? "";
     });
-  }, [options]);
 
-  const openActionSheet = () => {
-    //
-    if (formattedOptions.length == 0) return;
+    if (formattedData.length == 0) return;
     //
     showActionSheetWithOptions(
       {
-        options: formattedOptions,
+        options: formattedData,
         cancelButtonIndex,
         destructiveButtonIndex,
         icons,
@@ -55,15 +47,15 @@ export function useAppActionSheet({
         showSeparators: true,
         // title,
         // message,
-        disabledButtonIndices: [0]
+        disabledButtonIndices: [0],
       },
       (selectedIndex: number | undefined) => {
         if (selectedIndex) {
-          options[selectedIndex].callBackFn();
+          data[selectedIndex].callBackFn();
         }
       }
     );
   };
 
-  return { openActionSheet, setOptions };
+  return { openActionSheet };
 }

@@ -21,3 +21,4 @@ export * from "./animate/AnimateSlideInView";
 export * from "./animate/AnimateZoomInView";
 
 export * from "./navigation/TabBarHeader";
+export * from "./navigation/StackHeader";

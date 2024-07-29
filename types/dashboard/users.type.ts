@@ -18,3 +18,16 @@ export type UserRoleDto = {
     id: number;
     name: string;
 }
+
+export type CreateUserDto = {
+    firstname: string;
+    lastname: string;
+    username: string;
+    email: string;
+    phone: string;
+    country: string;
+    city: string;
+    country_code: number;
+    is_su_admin: boolean;
+    is_admin: boolean;
+}

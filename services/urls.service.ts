@@ -55,6 +55,39 @@ export const apiUrls: {
       url: `${apiVersion.v1}/admin/consultations/add`,
       method: 'POST',
       isSecure: true,
+    },
+
+    getCountries: {
+      url: `${apiVersion.v1}/admin/countries`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addCountry: {
+      url: `${apiVersion.v1}/admin/countries/add`,
+      method: 'POST',
+      isSecure: true,
+    },
+
+    getRoles: {
+      url: `${apiVersion.v1}/admin/roles`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addRole: {
+      url: `${apiVersion.v1}/admin/roles/add`,
+      method: 'POST',
+      isSecure: true,
+    },
+
+    getUsers: {
+      url: `${apiVersion.v1}/admin/users`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addUser: {
+      url: `${apiVersion.v1}/admin/users/add`,
+      method: 'POST',
+      isSecure: true,
     }
   },
 };

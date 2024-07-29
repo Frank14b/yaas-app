@@ -2,7 +2,7 @@ import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
 import { useUserStore } from "@/stores";
 import { ResultUserDto } from "@/types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { usePathname } from "expo-router";
 import { createContext, useContext, useEffect } from "react";
 
@@ -11,6 +11,7 @@ const AuthContext = createContext<any>({});
 export function AuthWrapper({ children }: { children: any }) {
   //
   const pathName = usePathname();
+  const queryClient = useQueryClient();
 
   const { setUserConnected, setUser } = useUserStore();
 
@@ -30,17 +31,15 @@ export function AuthWrapper({ children }: { children: any }) {
 
   useEffect(() => {
     if (data?.statusCode == 401) {
-
-      console.log("401 data", data)
-
+      queryClient.clear();
       setUserConnected(false);
       return;
     }
 
     if (data) {
       if (!data.data) {
-        console.log("Not found data", data)
-        // setUserConnected(false);
+        queryClient.clear();
+        setUserConnected(false);
         return;
       }
     }

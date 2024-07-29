@@ -68,9 +68,6 @@ export const apiCall = async <R, T = unknown, P = unknown>({
     return ApiSuccessMessage<R>(response.data, response.status);
   } catch (error) {
 
-    const authToken = await storage.getItem<string>(StorageKeys.AUTH_TOKEN);
-    console.log("save authToken", authToken);
-
     if (axios.isCancel(error)) {
       console.log("Request cancelled");
     }
