@@ -1,4 +1,9 @@
-import { ThemeFAB, ThemedText, ThemedView } from "@/components";
+import {
+  ThemeFAB,
+  ThemedPickerSelect,
+  ThemedText,
+  ThemedView,
+} from "@/components";
 import { useAppActionSheet, useCountries } from "@/hooks";
 import { ResultCountriesDto } from "@/types";
 import { useCallback } from "react";
@@ -59,13 +64,16 @@ export default function CountriesScreen() {
     <>
       <ThemedView style={styles.container}>
         {getCountries.isLoading && <ThemedText>Loading...</ThemedText>}
+
+        <ThemedPickerSelect items={[]} />
+
         <FlatList
           data={getCountries.data?.data?.data}
           renderItem={(item) => countries(item.item)}
         />
       </ThemedView>
 
-      <ThemeFAB name="add" position="bottom-right"/>
+      <ThemeFAB name="add" position="bottom-right" />
     </>
   );
 }

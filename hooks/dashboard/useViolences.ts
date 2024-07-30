@@ -1,6 +1,12 @@
 import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
-import { CreateViolenceDto, ResultViolenceDto } from "@/types";
+import {
+  CreateViolenceDto,
+  ResultViolenceDto,
+  ViolenceOptions,
+  ViolenceTypeDto,
+  ViolencesFlagDto,
+} from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useViolences() {
@@ -34,8 +40,53 @@ export function useViolences() {
     },
   });
 
+  const getViolenceOptions = useQuery({
+    queryKey: [Keys.Queries.GET_VIOLENCE_OPTIONS],
+    queryFn: async () => {
+      const result = await apiCall<{
+        data: ViolenceOptions;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.getViolenceOptions,
+      });
+
+      return result;
+    },
+  });
+
+  const getViolenceTypes = useQuery({
+    queryKey: [Keys.Queries.GET_VIOLENCE_TYPES],
+    queryFn: async () => {
+      const result = await apiCall<{
+        data: ViolenceTypeDto[];
+        message: string;
+      }>({
+        ...apiUrls.dashboard.getViolenceTypes,
+      });
+
+      return result;
+    },
+  });
+
+  const getViolenceFlags = useQuery({
+    queryKey: [Keys.Queries.GET_VIOLENCE_FLAGS],
+    queryFn: async () => {
+      const result = await apiCall<{
+        data: ViolencesFlagDto[];
+        message: string;
+      }>({
+        ...apiUrls.dashboard.getViolenceFlags,
+      });
+
+      return result;
+    },
+  });
+
   return {
     getViolences,
+    getViolenceOptions,
+    getViolenceTypes,
+    getViolenceFlags,
     addViolence,
   };
 }

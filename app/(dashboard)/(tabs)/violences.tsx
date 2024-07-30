@@ -25,11 +25,11 @@ export default function ViolenceScreen() {
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      if (Platform.OS != "ios") {
-        router.push("(forms)/violence");
-      } else {
-        handleOpenForm();
-      }
+      // if (Platform.OS != "ios") {
+      router.push("(forms)/violence");
+      // } else {
+      //   handleOpenForm();
+      // }
     }
   }, []);
 

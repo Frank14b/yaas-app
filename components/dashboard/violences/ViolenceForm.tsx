@@ -3,98 +3,137 @@ import {
   ThemedInput,
   ThemedButton,
   ThemedFormView,
-  ThemedDropdown,
+  ThemedFormPickerSelect,
+  ThemedView,
 } from "@/components";
-import { useAppForm } from "@/hooks";
-import { useAppActionSheet } from "@/hooks";
+
+import { useAppForm, useCities, useCountries, useViolences } from "@/hooks";
+import { CreateViolenceDto } from "@/types";
 import { AddViolenceSchema } from "@/validators";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 
 export function ViolenceForm() {
   //
-  const { openActionSheet } = useAppActionSheet({
-    title: "Violence Nature",
-  });
-
-  const { handleSubmit, setValue } = useAppForm({
+  const { handleSubmit } = useAppForm({
     schema: AddViolenceSchema(),
     defaultValues: {
-      nature: "",
-      date_occured: new Date(),
+      id: "",
+      user_id: 0,
+      user: {
+        firstname: "",
+        lastname: "",
+        phone: 1,
+        email: "",
+        gender: "",
+        profession: "",
+        age: 0,
+        address: "",
+      },
+      date_occured: "",
+      country: "",
+      city: "",
       details: "",
+      type_id: 0,
+      flag_id: 0,
+      nature: "",
+      natureLocation: "",
     },
   });
 
+  const {
+    addViolence,
+    getViolenceFlags,
+    getViolenceTypes,
+    getViolenceOptions,
+  } = useViolences();
+
+  const { getCountries } = useCountries();
+
+  const { cities } = useCities({ countryKeyName: "country" });
+
   const natures = useMemo(() => {
-    return [
-      {
-        label: "text 1",
-        value: "text 1",
-      },
-      {
-        label: "text 2",
-        value: "text 2",
-      },
-      {
-        label: "text 3",
-        value: "text 3",
-      },
-    ];
+    return (
+      getViolenceOptions.data?.data?.data.natures.map((item) => {
+        return {
+          label: item,
+          value: `${item}`,
+        };
+      }) ?? []
+    );
+  }, [getViolenceOptions.data]);
+
+  const flags = useMemo(() => {
+    return (
+      getViolenceFlags.data?.data?.data.map((item) => {
+        return {
+          label: item.name,
+          value: `${item.id}`,
+        };
+      }) ?? []
+    );
+  }, [getViolenceFlags.data]);
+
+  const types = useMemo(() => {
+    return (
+      getViolenceTypes.data?.data?.data.map((item) => {
+        return {
+          label: item.name,
+          value: `${item.id}`,
+        };
+      }) ?? []
+    );
+  }, [getViolenceTypes.data]);
+
+  const countries = useMemo(() => {
+    return (
+      getCountries.data?.data?.data.map((item) => {
+        return {
+          label: item.name,
+          value: `${item.name}`,
+        };
+      }) ?? []
+    );
+  }, [getCountries.data]);
+
+  const proceedSaveViolence = useCallback(async (data: CreateViolenceDto) => {
+    await addViolence.mutateAsync(data);
   }, []);
-
-  const natures_s = useMemo(() => {
-    return [
-      {
-        key: 0,
-        title: "Select violence nature",
-        destructiveBtn: false,
-        cancelBtn: false,
-        callBackFn: () => {
-          setValue("nature", "text 3");
-        },
-      },
-      {
-        key: 1,
-        title: "text 1",
-        destructiveBtn: false,
-        cancelBtn: false,
-        callBackFn: () => {
-          setValue("nature", "text 1");
-        },
-      },
-      {
-        key: 2,
-        title: "text 2",
-        destructiveBtn: false,
-        cancelBtn: false,
-        callBackFn: () => {
-          setValue("nature", "text 2");
-        },
-      },
-      {
-        key: 3,
-        title: "cancel",
-        destructiveBtn: false,
-        cancelBtn: true,
-        callBackFn: () => {
-          setValue("nature", "text 3");
-        },
-      },
-    ];
-  }, [setValue]);
-
-  const proceedSaveViolence = useCallback(() => {}, []);
 
   return (
     <>
       <ThemedFormView style={[styles.container]}>
         <ThemedFormDateTime
-          datePickerProps={{ value: new Date(), mode: "datetime" }}
+          datePickerProps={{ value: new Date(), mode: "date" }}
           name="date_occured"
           label="Incident Date"
         />
-        <ThemedDropdown label="Nature" name="nature" data={natures as any} />
+
+        <ThemedFormPickerSelect label="Nature" name="nature" items={natures} />
+
+        <ThemedView style={styles.rowDivider}>
+          <ThemedView style={styles.rowDividerItem}>
+            <ThemedFormPickerSelect label="Type" name="type_id" items={types} />
+          </ThemedView>
+
+          <ThemedView style={styles.rowDividerItem}>
+            <ThemedFormPickerSelect label="Flag" name="flag_id" items={flags} />
+          </ThemedView>
+        </ThemedView>
+
+        <ThemedView style={styles.rowDivider}>
+          <ThemedView style={styles.rowDividerItem}>
+            <ThemedFormPickerSelect
+              label="Country"
+              name="country"
+              items={countries}
+            />
+          </ThemedView>
+          <ThemedView style={styles.rowDividerItem}>
+            <ThemedFormPickerSelect label="City" name="city" items={cities} />
+          </ThemedView>
+        </ThemedView>
+
         <ThemedInput
           name="details"
           label="Details"
@@ -116,5 +155,13 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     justifyContent: "flex-start",
+  },
+  rowDivider: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+  },
+  rowDividerItem: {
+    flex: 0.5,
   },
 });

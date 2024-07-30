@@ -45,6 +45,21 @@ export const apiUrls: {
       method: 'POST',
       isSecure: true,
     },
+    getViolenceOptions: {
+      url: `${apiVersion.v1}/admin/poll-options`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getViolenceTypes: {
+      url: `${apiVersion.v1}/admin/noticetypes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getViolenceFlags: {
+      url: `${apiVersion.v1}/admin/noticeflags`,
+      method: 'GET',
+      isSecure: true,
+    },
 
     getServices: {
       url: `${apiVersion.v1}/admin/consultations`,
