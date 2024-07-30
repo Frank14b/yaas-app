@@ -11,19 +11,21 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useViolences() {
   //
-  const getViolences = useQuery({
-    queryKey: [Keys.Queries.GET_VIOLENCES],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ResultViolenceDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getViolences,
-      });
+  const getViolences = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VIOLENCES],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ResultViolenceDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getViolences,
+        });
 
-      return result;
-    },
-  });
+        return result;
+      },
+    });
+  };
 
   const addViolence = useMutation({
     mutationKey: [Keys.Mutations.ADD_VIOLENCE],
@@ -40,47 +42,53 @@ export function useViolences() {
     },
   });
 
-  const getViolenceOptions = useQuery({
-    queryKey: [Keys.Queries.GET_VIOLENCE_OPTIONS],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ViolenceOptions;
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getViolenceOptions,
-      });
+  const getViolenceOptions = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VIOLENCE_OPTIONS],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ViolenceOptions;
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getViolenceOptions,
+        });
 
-      return result;
-    },
-  });
+        return result;
+      },
+    });
+  };
 
-  const getViolenceTypes = useQuery({
-    queryKey: [Keys.Queries.GET_VIOLENCE_TYPES],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ViolenceTypeDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getViolenceTypes,
-      });
+  const getViolenceTypes = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VIOLENCE_TYPES],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ViolenceTypeDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getViolenceTypes,
+        });
 
-      return result;
-    },
-  });
+        return result;
+      },
+    });
+  };
 
-  const getViolenceFlags = useQuery({
-    queryKey: [Keys.Queries.GET_VIOLENCE_FLAGS],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ViolencesFlagDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getViolenceFlags,
-      });
+  const getViolenceFlags = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VIOLENCE_FLAGS],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ViolencesFlagDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getViolenceFlags,
+        });
 
-      return result;
-    },
-  });
+        return result;
+      },
+    });
+  };
 
   return {
     getViolences,

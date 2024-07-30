@@ -5,9 +5,9 @@ import { useCallback } from "react";
 import { FlatList, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function UsersScreen() {
+export default function VictimsScreen() {
   //
-  const { getUsers } = useUsers();
+  const getUsers = useUsers().getVictims();
   const { openActionSheet } = useAppActionSheet({});
 
   const handleOpenActionSheet = useCallback(

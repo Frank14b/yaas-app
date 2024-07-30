@@ -9,7 +9,8 @@ export const Keys = {
     GET_SERVICES: "GET_SERVICES",
     GET_COUNTRIES: "GET_COUNTRIES",
     GET_ROLES: "GET_ROLES",
-    GET_USERS: "GET_USERS"
+    GET_USERS: "GET_USERS",
+    GET_VICTIMS: "GET_VICTIMS"
   },
   Mutations: {
     SIGNIN: "SIGNIN",

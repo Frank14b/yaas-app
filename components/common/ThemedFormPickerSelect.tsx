@@ -62,7 +62,11 @@ export function ThemedFormPickerSelect({
         <ThemedText lightColor="#222" darkColor="#fff">
           {label}
         </ThemedText>
-        <ThemedView lightColor="#eee" darkColor="#222" style={styles.container}>
+        <ThemedView
+          lightColor="#eee"
+          darkColor="#222"
+          style={[styles.container, errors && styles.containerError]}
+        >
           {value ? (
             <ThemedText>
               {items.find((i) => i.value == value)?.label}
@@ -73,7 +77,9 @@ export function ThemedFormPickerSelect({
         </ThemedView>
 
         {hasError && (
-          <ThemedView style={{ marginTop: -10, backgroundColor: "transparent" }}>
+          <ThemedView
+            style={{ marginTop: -10, backgroundColor: "transparent" }}
+          >
             <ThemedText type="small" darkColor="red" lightColor="red">
               {hasError.message}
             </ThemedText>
@@ -89,6 +95,9 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderRadius: 8,
-    marginBottom: 10
+    marginBottom: 10,
+  },
+  containerError: {
+    borderColor: "red",
   },
 });

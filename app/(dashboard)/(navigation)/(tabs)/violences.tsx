@@ -5,7 +5,7 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
-import { Image, Platform, StyleSheet } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ViolenceForm, ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
@@ -17,19 +17,14 @@ export default function ViolenceScreen() {
   const navigation = useNavigation();
   const router = useRouter();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
-  const { getViolences } = useViolences();
+  const getViolences = useViolences().getViolences();
 
   const [openForm, setOpenForm] = useState<boolean>(false);
-  const handleOpenForm = () => setOpenForm(true);
   const handleCloseForm = () => setOpenForm(false);
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      // if (Platform.OS != "ios") {
       router.push("(forms)/violence");
-      // } else {
-      //   handleOpenForm();
-      // }
     }
   }, []);
 

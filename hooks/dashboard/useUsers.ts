@@ -1,23 +1,22 @@
 import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
-import { CreateUserDto, ResultUserDto } from "@/types";
+import { CreateUserDto, ResultPaginate, ResultUserDto } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useUsers() {
   //
-  const getUsers = useQuery({
-    queryKey: [Keys.Queries.GET_USERS],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ResultUserDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getUsers,
-      });
-
-      return result;
-    },
-  });
+  const getUsers = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_USERS],
+      queryFn: async () => {
+        const result = await apiCall<ResultPaginate<ResultUserDto[]>>({
+          ...apiUrls.dashboard.getUsers,
+        });
+  
+        return result;
+      },
+    })
+  };
 
   const addUser = useMutation({
     mutationKey: [Keys.Mutations.ADD_USER],
@@ -34,8 +33,22 @@ export function useUsers() {
     },
   });
 
+  const getVictims = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VICTIMS],
+      queryFn: async () => {
+        const result = await apiCall<ResultPaginate<ResultUserDto[]>>({
+          ...apiUrls.dashboard.getVictims,
+        });
+
+        return result;
+      },
+    });
+  };
+
   return {
     getUsers,
+    getVictims,
     addUser,
   };
 }

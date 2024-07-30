@@ -5,9 +5,16 @@ import {
   ThemedFormView,
   ThemedFormPickerSelect,
   ThemedView,
+  ThemedDropdown,
 } from "@/components";
 
-import { useAppForm, useCities, useCountries, useViolences } from "@/hooks";
+import {
+  useAppForm,
+  useCities,
+  useCountries,
+  useUsers,
+  useViolences,
+} from "@/hooks";
 import { CreateViolenceDto } from "@/types";
 import { AddViolenceSchema } from "@/validators";
 import { useCallback, useMemo } from "react";
@@ -41,15 +48,14 @@ export function ViolenceForm() {
     },
   });
 
-  const {
-    addViolence,
-    getViolenceFlags,
-    getViolenceTypes,
-    getViolenceOptions,
-  } = useViolences();
+  const violenceHook = useViolences();
+  const getViolenceFlags = violenceHook.getViolenceFlags();
+  const getViolenceTypes = violenceHook.getViolenceTypes();
+  const getViolenceOptions = violenceHook.getViolenceOptions();
+  const addViolence = violenceHook.addViolence;
 
   const { getCountries } = useCountries();
-
+  const getVictims = useUsers().getVictims();
   const { cities } = useCities({ countryKeyName: "country" });
 
   const natures = useMemo(() => {
@@ -96,6 +102,17 @@ export function ViolenceForm() {
     );
   }, [getCountries.data]);
 
+  const victims = useMemo(() => {
+    return (
+      getVictims.data?.data?.data.map((item) => {
+        return {
+          label: `${item.firstname} ${item.lastname} - ${item.email}`,
+          value: `${item.id}`,
+        };
+      }) ?? []
+    );
+  }, [getVictims.data]);
+
   const proceedSaveViolence = useCallback(async (data: CreateViolenceDto) => {
     await addViolence.mutateAsync(data);
   }, []);
@@ -108,6 +125,8 @@ export function ViolenceForm() {
           name="date_occured"
           label="Incident Date"
         />
+
+        <ThemedDropdown search={true} label="Victim" name="user_id" data={victims} />
 
         <ThemedFormPickerSelect label="Nature" name="nature" items={natures} />
 

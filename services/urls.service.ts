@@ -99,6 +99,11 @@ export const apiUrls: {
       method: 'GET',
       isSecure: true,
     },
+    getVictims: {
+      url: `${apiVersion.v1}/admin/victims`,
+      method: 'GET',
+      isSecure: true,
+    },
     addUser: {
       url: `${apiVersion.v1}/admin/users/add`,
       method: 'POST',

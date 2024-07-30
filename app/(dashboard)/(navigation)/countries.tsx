@@ -64,9 +64,6 @@ export default function CountriesScreen() {
     <>
       <ThemedView style={styles.container}>
         {getCountries.isLoading && <ThemedText>Loading...</ThemedText>}
-
-        <ThemedPickerSelect items={[]} />
-
         <FlatList
           data={getCountries.data?.data?.data}
           renderItem={(item) => countries(item.item)}

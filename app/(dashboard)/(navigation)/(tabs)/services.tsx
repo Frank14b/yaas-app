@@ -1,31 +1,26 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
-  ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
+
 import { ServiceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useServices } from "@/hooks";
-import { useNavigation } from "expo-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { router, useNavigation } from "expo-router";
+import { useCallback, useEffect, useMemo } from "react";
 import { Image, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
   //
   const navigation = useNavigation();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
-
   const { getServices } = useServices();
-
-  const [openForm, setOpenForm] = useState<boolean>(false);
-  const handleOpenForm = () => setOpenForm(true);
-  const handleCloseForm = () => setOpenForm(false);
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      handleOpenForm();
+      router.push("(forms)/service");
     }
   }, []);
 
@@ -63,14 +58,6 @@ export default function ServicesScreen() {
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
-
-      <ThemedDialog
-        title="New Service"
-        open={openForm}
-        handleClose={handleCloseForm}
-      >
-        {/* <ViolenceForm /> */}
-      </ThemedDialog>
     </>
   );
 }

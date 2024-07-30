@@ -16,6 +16,7 @@ import { useUserStore } from "@/stores";
 
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthWrapper } from "@/contexts";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -53,7 +54,7 @@ export default function RootLayout() {
           ) : !userConnected ? (
             <AuthLayout />
           ) : (
-            <>
+            <AuthWrapper>
               <Stack>
                 <Stack.Screen
                   name="(dashboard)"
@@ -61,7 +62,7 @@ export default function RootLayout() {
                 />
                 <Stack.Screen name="+not-found" />
               </Stack>
-            </>
+            </AuthWrapper>
           )}
         </ThemeProvider>
       </ActionSheetProvider>

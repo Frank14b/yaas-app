@@ -33,9 +33,6 @@ export function ThemedDropdown({
   ...rest
 }: ThemedDropdownProps) {
   //
-  // const [selected, setSelected] = useState<string | null>(null);
-  // const [isFocus, setIsFocus] = useState(false);
-  //
   const [hasError, setHasError] = useState<AnyObject | null>(null);
 
   const { reactHookUseForm } = useFormStore();
@@ -72,7 +69,11 @@ export function ThemedDropdown({
         <ThemedText lightColor="#222" darkColor="#fff">
           {label}
         </ThemedText>
-        <ThemedView style={styles.viewWrapper}>
+        <ThemedView
+          lightColor="#eee"
+          darkColor="#222"
+          style={styles.viewWrapper}
+        >
           <Dropdown
             {...rest}
             data={data}
@@ -82,6 +83,8 @@ export function ThemedDropdown({
             onChange={handleValueSelected}
             maxHeight={300}
             search={search}
+            searchPlaceholder="Search"
+            inputSearchStyle={styles.dropDownInputSearchStyle}
             containerStyle={styles.dropDrownContainerStyle}
             itemTextStyle={styles.dropDownItemTextStyle}
             selectedTextStyle={styles.dropDownSelectedTextStyle}
@@ -106,14 +109,15 @@ export function ThemedDropdown({
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   label: {
     padding: 1,
     paddingBottom: 6,
   },
   viewWrapper: {
-    backgroundColor: "transparent",
+    padding: 12,
+    borderRadius: 8,
   },
   dropDrownContainerStyle: {
     backgroundColor: Colors.tertiaryDark,
@@ -124,11 +128,14 @@ const styles = StyleSheet.create({
   dropDownSelectedTextStyle: {
     backgroundColor: "transparent",
     color: "#bbb",
-    fontSize: 14
+    fontSize: 14,
   },
   dropDownItemTextStyle: {
     color: "#fff",
     backgroundColor: "transparent",
   },
-  dropDownItemContainerStyle: {}
+  dropDownItemContainerStyle: {},
+  dropDownInputSearchStyle: {
+    borderRadius: 8,
+  },
 });

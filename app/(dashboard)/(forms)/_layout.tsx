@@ -9,6 +9,17 @@ export default function FormsLayout() {
         options={{
           headerShown: true,
           header: () => <StackHeader title="New Violence" />,
+          presentation: "modal",
+          animation: "slide_from_bottom",
+        }}
+      />
+      <Stack.Screen
+        name="service"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title="New Service" />,
+          presentation: "modal",
+          animation: "slide_from_bottom",
         }}
       />
     </Stack>
