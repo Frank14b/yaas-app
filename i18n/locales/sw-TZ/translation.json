@@ -1,0 +1,81 @@
+{
+  "language": "Lugha",
+
+  "signIn": {
+    "title": "Ingia",
+    "form": {
+      "email": "Barua pepe",
+      "placeholder_email": "Ingiza anwani ya barua pepe",
+      "placeholder_password": "Ingiza nenosiri lako",
+      "password": "Nenosiri",
+      "submit_btn": "Endelea"
+    },
+    "auth_failed": "Uthibitisho Ulishindwa",
+    "forgot_password": "Umesahau nenosiri lako?",
+    "reset_text": "Weka Upya Hapa",
+    "schema": {
+      "invalid_email": "Toa barua pepe halali",
+      "email_is_required": "Anwani ya barua pepe inahitajika",
+      "invalid_password": "Toa nenosiri halali"
+    }
+  },
+
+  "navigation": {
+    "home": "Nyumbani",
+    "users": "Watumiaji",
+    "countries": "Nchi",
+    "role_access": "Upatikanaji wa Jukumu",
+    "organizations": "Mashirika",
+    "victims": "Waathiriwa",
+    "settings": "Mipangilio",
+    "preferences": "Mapendeleo",
+    "dark_theme": "Mandhari Nyeusi",
+    "tell_a_friend": "Mwambie Rafiki",
+    "signOut": "Toka"
+  },
+
+  "homeScreen": {
+    "welcome": "Karibu!",
+    "reports": "Ripoti",
+    "users": "Watumiaji",
+    "countries": "Nchi",
+    "services": "Huduma",
+    "organizations": "Mashirika",
+    "victims": "Waathiriwa",
+
+    "tabs": {
+      "home": "Nyumbani",
+      "violences": "Ukatili",
+      "services": "Huduma",
+      "profile": "Profaili"
+    }
+  },
+
+  "violences": {
+    "form": {
+      "title": "Ukatili Mpya",
+      "fields": {
+        "incident_date": "Tarehe ya Tukio",
+        "victim": "Mwathiriwa",
+        "nature": "Aina",
+        "type": "Aina",
+        "flag": "Bendi",
+        "country": "Nchi",
+        "city": "Mji",
+        "details": "Maelezo",
+        "details_placeholder": "Eleza kilichotokea"
+      },
+      "submit_btn": "Hifadhi Ukatili",
+      "schema": {
+        "victim_is_required": "Mwathiriwa anaitajika",
+        "first_name_required": "Jina la kwanza linahitajika",
+        "phone_required": "Simu inahitajika",
+        "gender_required": "Jinsia inahitajika",
+        "type_required": "Aina inahitajika",
+        "flag_required": "Bendi inahitajika",
+        "nature_required": "Aina inahitajika",
+        "location_required": "Mahali panahitajika"
+      }
+    }
+  }
+}

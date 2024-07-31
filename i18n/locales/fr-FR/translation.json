@@ -1,0 +1,16 @@
+{
+  "language": "Language",
+  "signIn": {
+    "title": "Sign In",
+    "form": {
+      "email": "Email",
+      "placeholder_email": "Enter email address",
+      "placeholder_password": "Enter your password",
+      "password": "Password",
+      "submit_btn": "Proceed"
+    },
+    "auth_failed": "Authentication Failed",
+    "forgot_password": "Forgot your password?",
+    "reset_text": "Reset Here"
+  }
+}

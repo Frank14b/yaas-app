@@ -9,11 +9,16 @@ import {
   ThemedText,
   ThemedView,
 } from "@/components";
+
 import { useCallback, useMemo } from "react";
 import { router } from "expo-router";
-import { useTabNavigationContext } from "@/contexts/TabNavigationContext";
+import { useTabNavigationContext } from "@/contexts";
 import { useDashboardStats } from "@/hooks";
 import { DashboardStatsDto } from "@/types";
+import { useTranslation } from "react-i18next";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import { useLanguages } from "@/hooks/useLanguages";
 
 export type CardBox = {
   title: string;
@@ -25,42 +30,42 @@ export type CardBox = {
 
 const CARD_BOX: CardBox = [
   {
-    title: "Reports",
+    title: "homeScreen.reports",
     icon: "warning-sharp",
     value: 0,
     path: "(tabs)/violences",
     valueKey: "incidents_count",
   },
   {
-    title: "Users",
+    title: "homeScreen.users",
     icon: "people",
     value: 0,
     path: "users",
     valueKey: "users_count",
   },
   {
-    title: "Countries",
+    title: "homeScreen.countries",
     icon: "globe",
     value: 0,
     path: "countries",
     valueKey: "countries_count",
   },
   {
-    title: "Services",
+    title: "homeScreen.services",
     icon: "settings",
     value: 0,
     path: "(tabs)/services",
     valueKey: "consultations_count",
   },
   {
-    title: "Organizations",
+    title: "homeScreen.organizations",
     icon: "bookmarks",
     value: 0,
     path: "organizations",
     valueKey: "ong_count",
   },
   {
-    title: "Victims",
+    title: "homeScreen.victims",
     icon: "person-add",
     value: 0,
     path: "victims",
@@ -70,8 +75,10 @@ const CARD_BOX: CardBox = [
 
 export default function HomeScreen() {
   //
+  const { t, i18n } = useTranslation();
   const { slidePosition } = useTabNavigationContext();
   const { stats } = useDashboardStats();
+  const { openLanguageMenu } = useLanguages();
 
   const goToPage = useCallback((path: string) => {
     router.push(path);
@@ -84,13 +91,13 @@ export default function HomeScreen() {
           <ThemedCardBox
             onPress={() => goToPage(item.path)}
             name={item.icon as any}
-            title={item.title}
+            title={t(item.title)}
             value={stats?.[item.valueKey] ?? 0}
           ></ThemedCardBox>
         </AnimateFadeInView>
       </ThemedView>
     ));
-  }, [stats, goToPage]);
+  }, [stats, t, goToPage]);
 
   return (
     <AnimateSlideInView duration={200} position={slidePosition}>
@@ -104,11 +111,25 @@ export default function HomeScreen() {
         }
       >
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Welcome!</ThemedText>
+          <ThemedText type="title">{t("homeScreen.welcome")}</ThemedText>
           <HelloWave />
         </ThemedView>
         <ThemedView style={styles.boxContainer}>{statsComponent}</ThemedView>
       </ParallaxScrollView>
+
+      <ThemedView style={styles.localeContainer}>
+        <TouchableOpacity onPress={openLanguageMenu}>
+          <ThemedView style={styles.localeWrapper}>
+            <ThemedText>
+              <Ionicons name="flag" size={13} />
+            </ThemedText>
+            <ThemedText type="medium" style={styles.localeText}>
+              {i18n.language.split("-")[0]}
+            </ThemedText>
+          </ThemedView>
+        </TouchableOpacity>
+      </ThemedView>
+
     </AnimateSlideInView>
   );
 }
@@ -137,5 +158,21 @@ const styles = StyleSheet.create({
   },
   boxCard: {
     width: "48.5%",
+  },
+
+  localeContainer: {
+    position: "absolute",
+    top: 60,
+    right: 20,
+    backgroundColor: "transparent",
+  },
+  localeText: {
+    textTransform: "uppercase",
+    gap: 4,
+  },
+  localeWrapper: {
+    gap: 5,
+    flexDirection: "row",
+    backgroundColor: "transparent",
   },
 });

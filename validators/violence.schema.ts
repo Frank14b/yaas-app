@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 
 let isFirstNamValid = true;
@@ -14,15 +15,13 @@ const isUserDataValid = (
 };
 
 export const AddViolenceSchema = () => {
-  const scopeT = (d: string) => {
-    return d;
-  };
+  const { t } = useTranslation();
 
   return yup.object({
     user_id: yup
       .number()
-      .min(0, scopeT("victim_is_required"))
-      .required(scopeT("victim_is_required")),
+      .min(0, t("violences.form.schema.victim_is_required"))
+      .required(t("violences.form.schema.victim_is_required")),
     user: yup
       .object()
       .test((_, context) => {
@@ -40,7 +39,7 @@ export const AddViolenceSchema = () => {
       .shape({
         firstname: yup
           .string()
-          .test("firstName", scopeT("first_name_required"), (_) => {
+          .test("firstName", t("violences.form.schema.first_name_required"), (_) => {
             return isFirstNamValid;
           }),
         lastname: yup.string().notRequired(),
@@ -48,56 +47,54 @@ export const AddViolenceSchema = () => {
           .number()
           .positive()
           .integer()
-          .test("phoneNumber", scopeT("phone_required"), (_) => {
+          .test("phoneNumber", t("violences.form.schema.phone_required"), (_) => {
             return isFirstNamValid;
           }),
         email: yup.string().email().notRequired(),
         profession: yup.string().notRequired(),
         age: yup.number().required(),
         address: yup.string().notRequired(),
-        gender: yup.string().test("gender", scopeT("gender_required"), (_) => {
+        gender: yup.string().test("gender", t("violences.form.schema.gender_required"), (_) => {
           return isGenderValid;
         }),
       }),
-    date_occured: yup.date().required(),
-    country: yup.string().required(),
-    city: yup.string().required(),
+    date_occured: yup.string().required(t("violences.form.schema.date_required")),
+    country: yup.string().required(t("violences.form.schema.country_required")),
+    city: yup.string().required(t("violences.form.schema.city_required")),
     details: yup.string().min(10, "Min. 10 Char.").required(),
     type_id: yup
       .number()
-      .min(1, scopeT("type_required"))
-      .required(scopeT("type_required")),
+      .min(1, t("violences.form.schema.type_required"))
+      .required(t("violences.form.schema.type_required")),
     flag_id: yup
       .number()
-      .min(1, scopeT("flag_required"))
-      .required(scopeT("flag_required")),
-    nature: yup.string().required(scopeT("nature_required")),
-    natureLocation: yup.string().required(scopeT("location_required")),
+      .min(1, t("violences.form.schema.flag_required"))
+      .required(t("violences.form.schema.flag_required")),
+    nature: yup.string().required(t("violences.form.schema.nature_required")),
+    natureLocation: yup.string().required(t("violences.form.schema.location_required")),
   });
 };
 
 export const AddInvestigation = () => {
-  const scopeT = (d: string) => {
-    return d;
-  };
+  const { t } = useTranslation();
 
   return yup.object({
     notice_id: yup
       .number()
-      .min(0, scopeT("victim_is_required"))
-      .required(scopeT("victim_is_required")),
+      .min(0, t("investigations.form.schema.victim_is_required"))
+      .required(t("investigations.form.schema.victim_is_required")),
     datepoll: yup.date().required(),
     details: yup.string().min(10, "Min. 10 Char.").required(),
     second_details: yup.string().min(10, "Min. 10 Char.").required(),
     flag_id: yup
       .number()
-      .min(1, scopeT("flag_required"))
-      .required(scopeT("flag_required")),
-    source: yup.string().required(scopeT("source_required")),
-    violenceAuthor: yup.string().required(scopeT("violenceAuthor_required")),
+      .min(1, t("investigations.form.schema.flag_required"))
+      .required(t("investigations.form.schema.flag_required")),
+    source: yup.string().required(t("investigations.form.schema.source_required")),
+    violenceAuthor: yup.string().required(t("investigations.form.schema.violenceAuthor_required")),
     pollmethod_id: yup
       .number()
-      .min(1, scopeT("pollmethod_id_required"))
-      .required(scopeT("pollmethod_id_required")),
+      .min(1, t("investigations.form.schema.pollmethod_id_required"))
+      .required(t("investigations.form.schema.pollmethod_id_required")),
   });
 };

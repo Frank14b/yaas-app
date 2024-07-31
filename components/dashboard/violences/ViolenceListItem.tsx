@@ -2,25 +2,40 @@ import { ThemedText } from "@/components/common/ThemedText";
 import { ThemedView } from "@/components/common/ThemedView";
 import { Colors } from "@/constants";
 import { ResultViolenceDto } from "@/types";
-import { Image, Pressable, StyleSheet } from "react-native";
 
-export type ViolenceListItemProps = {
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
+
+export type ViolenceListItemProps = TouchableOpacityProps & {
   item: ResultViolenceDto;
-  onPress?: (item: ResultViolenceDto) => void;
+  press?: (item: ResultViolenceDto) => void;
+  longPress?: (item: ResultViolenceDto) => void;
 };
 
-export function ViolenceListItem({ item, onPress }: ViolenceListItemProps) {
+export function ViolenceListItem({
+  item,
+  press,
+  longPress,
+}: ViolenceListItemProps) {
   return (
-    <ThemedView
-      lightColor="#eee"
-      darkColor={Colors.secondaryDark}
-      style={[styles.itemBox]}
+    <TouchableOpacity
+      style={styles.pressable}
+      onLongPress={() => longPress?.(item)}
+      onPress={() => press?.(item)}
     >
-      <Image
-        source={require("@/assets/images/parallax/violence.jpg")}
-        style={styles.itemUserPhoto}
-      />
-      <Pressable style={styles.pressable} onPress={() => onPress?.(item)}>
+      <ThemedView
+        lightColor="#eee"
+        darkColor={Colors.secondaryDark}
+        style={[styles.itemBox]}
+      >
+        <Image
+          source={require("@/assets/images/parallax/violence.jpg")}
+          style={styles.itemUserPhoto}
+        />
         <ThemedView style={{ backgroundColor: "transparent", flex: 1 }}>
           <ThemedText style={styles.itemUserName}>
             {item.users.firstname} {item.users.lastname}
@@ -33,8 +48,8 @@ export function ViolenceListItem({ item, onPress }: ViolenceListItemProps) {
             {item.flags.name}
           </ThemedText>
         </ThemedView>
-      </Pressable>
-    </ThemedView>
+      </ThemedView>
+    </TouchableOpacity>
   );
 }
 

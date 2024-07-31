@@ -9,14 +9,16 @@ import { Image, StyleSheet } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ViolenceForm, ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
-import { useViolences } from "@/hooks";
+import { useAppActionSheet, useViolences } from "@/hooks";
 import { useNavigation, useRouter } from "expo-router";
+import { ResultViolenceDto } from "@/types";
 
 export default function ViolenceScreen() {
   //
   const navigation = useNavigation();
   const router = useRouter();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
+  const { openActionSheet } = useAppActionSheet({});
   const getViolences = useViolences().getViolences();
 
   const [openForm, setOpenForm] = useState<boolean>(false);
@@ -34,13 +36,44 @@ export default function ViolenceScreen() {
     });
   }, []);
 
+  const handleLongPress = useCallback((item: ResultViolenceDto) => {
+    openActionSheet([
+      {
+        title: `${item.ref}`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Edit`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Delete`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Cancel`,
+        destructiveBtn: false,
+        cancelBtn: true,
+        callBackFn: () => {},
+      },
+    ]);
+  }, []);
+
   const violences = useMemo(() => {
     if (getViolences.isLoading) return <ThemedText>Loading...</ThemedText>;
     if (!getViolences.data?.status)
       return <ThemedText>Violence no found</ThemedText>;
 
     return getViolences.data.data?.data.map((item, index) => {
-      return <ViolenceListItem key={index} item={item} />;
+      return (
+        <ViolenceListItem longPress={handleLongPress} key={index} item={item} />
+      );
     });
   }, [getViolences.data]);
 

@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -12,7 +13,7 @@ const SCREENS = [
   {
     name: "(tabs)",
     options: {
-      label: "Home",
+      label: "navigation.home",
       showHeader: false,
       icon: "home",
       drawerItemStyle: {},
@@ -21,7 +22,7 @@ const SCREENS = [
   {
     name: "countries",
     options: {
-      label: "Countries",
+      label: "navigation.countries",
       showHeader: true,
       icon: "globe",
       drawerItemStyle: {},
@@ -30,7 +31,7 @@ const SCREENS = [
   {
     name: "users",
     options: {
-      label: "Users",
+      label: "navigation.users",
       showHeader: true,
       icon: "people",
       drawerItemStyle: {},
@@ -39,7 +40,7 @@ const SCREENS = [
   {
     name: "access",
     options: {
-      label: "Role Access",
+      label: "navigation.role_access",
       showHeader: true,
       icon: "lock-open",
       drawerItemStyle: {},
@@ -48,7 +49,7 @@ const SCREENS = [
   {
     name: "victims",
     options: {
-      label: "Victims",
+      label: "navigation.victims",
       showHeader: true,
       icon: "person-add",
       drawerItemStyle: {},
@@ -57,7 +58,7 @@ const SCREENS = [
   {
     name: "organizations",
     options: {
-      label: "Organizations",
+      label: "navigation.organizations",
       showHeader: true,
       icon: "home-outline",
       drawerItemStyle: {},
@@ -66,7 +67,7 @@ const SCREENS = [
   {
     name: "settings",
     options: {
-      label: "Settings",
+      label: "navigation.settings",
       showHeader: true,
       icon: "settings",
       drawerItemStyle: {},
@@ -76,6 +77,7 @@ const SCREENS = [
 
 export default function NavigationLayout() {
   //
+  const { t } = useTranslation();
   const { setUserConnected, setOnBoardingCompleted } = useUserStore();
   const theme = useColorScheme();
 
@@ -104,8 +106,8 @@ export default function NavigationLayout() {
                 name={item.name}
                 options={{
                   drawerItemStyle: item.options.drawerItemStyle as any,
-                  drawerLabel: item.options.label,
-                  title: item.options.label,
+                  drawerLabel: t(item.options.label),
+                  title: t(item.options.label),
                   headerShown: item.options.showHeader,
                   drawerIcon: ({ focused }) => (
                     <Ionicons

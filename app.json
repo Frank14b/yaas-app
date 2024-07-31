@@ -33,7 +33,8 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow yaas to use your location."
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true

@@ -10,6 +10,7 @@ import { ThemedView } from "./ThemedView";
 import ThemedSwitch from "./ThemedSwitch";
 import { ThemedText } from "./ThemedText";
 import { NavigationMenuItem } from "./NavigationMenuItem";
+import { useTranslation } from "react-i18next";
 
 export type ThemedDrawerProps = DrawerContentComponentProps & {
   isDark: boolean;
@@ -21,6 +22,9 @@ export default function ThemedDrawer({
   logout,
   ...props
 }: ThemedDrawerProps) {
+
+  const { t } = useTranslation();
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <DrawerContentScrollView
@@ -65,10 +69,10 @@ export default function ThemedDrawer({
         }}
       >
         <ThemedText lightColor="#222" style={styles.preferences}>
-          Preferences
+          {t("navigation.preferences")}
         </ThemedText>
         <ThemedView style={styles.switchTextContainer}>
-          <ThemedSwitch value={isDark} onChange={() => {}} title="Dark Theme" />
+          <ThemedSwitch disabled={true} value={isDark} onChange={() => {}} title={t("navigation.dark_theme")} />
         </ThemedView>
       </ThemedView>
       <ThemedView
@@ -78,11 +82,11 @@ export default function ThemedDrawer({
           borderTopColor: isDark ? "#333" : "#eee",
         }}
       >
-        <NavigationMenuItem name="share-social-outline" title="Tell a friend" />
+        <NavigationMenuItem name="share-social-outline" title={t("navigation.tell_a_friend")} />
         <NavigationMenuItem
           onPress={logout}
           name="exit-outline"
-          title="Sign out"
+          title={t("navigation.signOut")}
         />
       </ThemedView>
     </ThemedView>

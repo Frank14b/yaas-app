@@ -4,15 +4,18 @@ import {
   ThemedFormView,
   ThemedText,
 } from "@/components";
+
 import { useAppForm, useSignIn } from "@/hooks";
 import { useUserStore } from "@/stores";
 import { AuthDto } from "@/types";
 import { SignInSchema } from "@/validators";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet } from "react-native";
 
 export function SignInForm() {
   //
+  const { t } = useTranslation();
   const { user, setUserConnected, setUser } = useUserStore();
 
   const { handleSubmit } = useAppForm({
@@ -35,7 +38,7 @@ export function SignInForm() {
         return;
       }
 
-      Alert.alert("Authentication failed", result.message);
+      Alert.alert(t("signIn.auth_failed"), result.message);
       //
     },
     [setUserConnected]
@@ -45,35 +48,35 @@ export function SignInForm() {
     <>
       <ThemedFormView>
         <ThemedText style={styles.title} type="title">
-          Sign In
+          {t("signIn.title")}
         </ThemedText>
 
         <ThemedInput
-          label="Email"
+          label={t("signIn.form.email")}
           name="email"
-          placeholder="Enter email address"
+          placeholder={t("signIn.form.placeholder_email")}
           keyboardType="email-address"
           autoCorrect={false}
           autoComplete={"off"}
         />
 
         <ThemedInput
-          label="Password"
+          label={t("signIn.form.password")}
           name="password"
-          placeholder="Enter your password"
+          placeholder={t("signIn.form.placeholder_password")}
           keyboardType="visible-password"
         />
 
         <ThemedButton
           isLoading={isLoading}
           disabled={isLoading}
-          title="Proceed"
+          title={t("signIn.form.submit_btn")}
           onPress={handleSubmit(proceedSignIn)}
         />
 
         <ThemedText style={styles.forgotPassword}>
-          Forgot your password?
-          <ThemedText type="link"> Reset Here</ThemedText>
+          {t("signIn.forgot_password")}
+          <ThemedText type="link"> {t("signIn.reset_text")}</ThemedText>
         </ThemedText>
       </ThemedFormView>
     </>

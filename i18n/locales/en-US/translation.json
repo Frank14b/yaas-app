@@ -1,0 +1,146 @@
+{
+  "language": "Language",
+
+  "signIn": {
+    "title": "Sign In",
+    "form": {
+      "email": "Email",
+      "placeholder_email": "Enter email address",
+      "placeholder_password": "Enter your password",
+      "password": "Password",
+      "submit_btn": "Proceed"
+    },
+    "auth_failed": "Authentication Failed",
+    "forgot_password": "Forgot your password?",
+    "reset_text": "Reset Here",
+    "schema": {
+      "invalid_email": "Provide a valid email",
+      "email_is_required": "Email address is required",
+      "invalid_password": "Provide a valid password"
+    }
+  },
+
+  "navigation": {
+    "home": "Home",
+    "users": "Users",
+    "countries": "Countries",
+    "role_access": "Role Access",
+    "organizations": "Organizations",
+    "victims": "Victims",
+    "settings": "Settings",
+    "preferences": "Preferences",
+    "dark_theme": "Dark Theme",
+    "tell_a_friend": "Tell a friend",
+    "signOut": "Sign Out"
+  },
+
+  "homeScreen": {
+    "welcome": "Welcome!",
+    "reports": "Reports",
+    "users": "Users",
+    "countries": "Countries",
+    "services": "Services",
+    "organizations": "Organizations",
+    "victims": "Victims",
+
+    "tabs": {
+      "home": "Home",
+      "violences": "Violences",
+      "services": "Services",
+      "profile": "Profile"
+    }
+  },
+
+  "violences": {
+    "form": {
+      "title": "New Violence",
+      "fields": {
+        "incident_date": "Incident Date",
+        "victim": "Victim",
+        "nature": "Nature",
+        "type": "Type",
+        "flag": "Flag",
+        "country": "Country",
+        "city": "City",
+        "details": "Details",
+        "details_placeholder": "Describe what happen"
+      },
+      "submit_btn": "Save Violence",
+      "schema": {
+        "victim_is_required": "Victim is required",
+        "first_name_required": "First name is required",
+        "phone_required": "Phone is required",
+        "gender_required": "Gender is required",
+        "type_required": "Type is required",
+        "flag_required": "Flag is required",
+        "nature_required": "Nature is required",
+        "location_required": "Location is required",
+        "country_required": "Country is required",
+        "city_required": "City is required",
+        "date_required": "Date is required"
+      }
+    }
+  },
+
+  "investigations": {
+    "form": {
+      "title": "New Documentation",
+      "fields": {
+        "incident_date": "Investigation Date",
+        "victim": "Victim",
+        "nature": "Nature",
+        "type": "Type",
+        "flag": "Flag",
+        "country": "Country",
+        "city": "City",
+        "details": "Details",
+        "details_placeholder": "Describe what happen"
+      },
+      "submit_btn": "Save Investigation",
+      "schema": {
+        "victim_is_required": "Victim is required",
+        "first_name_required": "First name is required",
+        "phone_required": "Phone is required",
+        "gender_required": "Gender is required",
+        "type_required": "Type is required",
+        "flag_required": "Flag is required",
+        "nature_required": "Nature is required",
+        "location_required": "Location is required",
+        "country_required": "Country is required",
+        "city_required": "City is required",
+        "date_required": "Date is required"
+      }
+    }
+  },
+
+  "services": {
+    "form": {
+      "title": "New Service",
+      "fields": {
+        "incident_date": "Incident Date",
+        "victim": "Victim",
+        "nature": "Nature",
+        "type": "Type",
+        "flag": "Flag",
+        "country": "Country",
+        "city": "City",
+        "details": "Details",
+        "details_placeholder": "Describe what happen"
+      },
+      "submit_btn": "Save Violence",
+      "schema": {
+        "victim_is_required": "Victim is required",
+        "first_name_required": "First name is required",
+        "phone_required": "Phone is required",
+        "gender_required": "Gender is required",
+        "type_required": "Type is required",
+        "flag_required": "Flag is required",
+        "nature_required": "Nature is required",
+        "location_required": "Location is required",
+        "country_required": "Country is required",
+        "city_required": "City is required",
+        "date_required": "Date is required"
+      }
+    }
+  }
+}

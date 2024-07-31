@@ -15,12 +15,16 @@ import {
   useUsers,
   useViolences,
 } from "@/hooks";
+
 import { CreateViolenceDto } from "@/types";
 import { AddViolenceSchema } from "@/validators";
 import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
 export function ViolenceForm() {
+  //
+  const { t } = useTranslation();
   //
   const { handleSubmit } = useAppForm({
     schema: AddViolenceSchema(),
@@ -123,46 +127,67 @@ export function ViolenceForm() {
         <ThemedFormDateTime
           datePickerProps={{ value: new Date(), mode: "date" }}
           name="date_occured"
-          label="Incident Date"
+          label={t("violences.form.fields.incident_date")}
         />
 
-        <ThemedDropdown search={true} label="Victim" name="user_id" data={victims} />
+        <ThemedDropdown
+          search={true}
+          label={t("violences.form.fields.victim")}
+          name="user_id"
+          data={victims}
+        />
 
-        <ThemedFormPickerSelect label="Nature" name="nature" items={natures} />
+        <ThemedFormPickerSelect
+          label={t("violences.form.fields.nature")}
+          name="nature"
+          items={natures}
+        />
 
         <ThemedView style={styles.rowDivider}>
           <ThemedView style={styles.rowDividerItem}>
-            <ThemedFormPickerSelect label="Type" name="type_id" items={types} />
+            <ThemedFormPickerSelect
+              label={t("violences.form.fields.type")}
+              name="type_id"
+              items={types}
+            />
           </ThemedView>
 
           <ThemedView style={styles.rowDividerItem}>
-            <ThemedFormPickerSelect label="Flag" name="flag_id" items={flags} />
+            <ThemedFormPickerSelect
+              label={t("violences.form.fields.flag")}
+              name="flag_id"
+              items={flags}
+            />
           </ThemedView>
         </ThemedView>
 
         <ThemedView style={styles.rowDivider}>
           <ThemedView style={styles.rowDividerItem}>
             <ThemedFormPickerSelect
-              label="Country"
+              label={t("violences.form.fields.country")}
               name="country"
               items={countries}
             />
           </ThemedView>
           <ThemedView style={styles.rowDividerItem}>
-            <ThemedFormPickerSelect label="City" name="city" items={cities} />
+            <ThemedFormPickerSelect
+              label={t("violences.form.fields.city")}
+              name="city"
+              items={cities}
+            />
           </ThemedView>
         </ThemedView>
 
         <ThemedInput
           name="details"
-          label="Details"
-          placeholder="Describe what happen"
+          label={t("violences.form.fields.details")}
+          placeholder={t("violences.form.fields.details_placeholder")}
           multiline={true}
           numberOfLines={5}
         />
 
         <ThemedButton
-          title="Save Violence"
+          title={t("violences.form.submit_btn")}
           onPress={handleSubmit(proceedSaveViolence)}
         />
       </ThemedFormView>

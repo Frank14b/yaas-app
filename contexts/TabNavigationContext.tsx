@@ -1,5 +1,6 @@
 import { SlidePositionProps, TabBarHeader } from "@/components";
 import { createContext, useCallback, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TabNavigationContext = createContext<any>({});
 
@@ -17,6 +18,8 @@ export type TabScreen = {
 
 export function TabNavigationWrapper({ children }: { children: any }) {
   //
+  const { t } = useTranslation();
+
   const TAB_SCREENS = [
     {
       name: "index",
@@ -24,7 +27,7 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         default: "home",
         focused: "home-outline",
       },
-      title: "Home",
+      title: t("homeScreen.tabs.home"),
       headerShown: false,
     },
     {
@@ -33,9 +36,12 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         default: "warning",
         focused: "warning-outline",
       },
-      title: "Violences",
+      title: t("homeScreen.tabs.violences"),
       header: (handleClick: (action: string) => void) => (
-        <TabBarHeader title={"Violences"} handleIconClick={handleClick} />
+        <TabBarHeader
+          title={t("homeScreen.tabs.violences")}
+          handleIconClick={handleClick}
+        />
       ),
     },
     {
@@ -44,9 +50,12 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         default: "settings",
         focused: "settings-outline",
       },
-      title: "Services",
+      title: t("homeScreen.tabs.services"),
       header: (handleClick: (action: string) => void) => (
-        <TabBarHeader title={"Services"} handleIconClick={handleClick} />
+        <TabBarHeader
+          title={t("homeScreen.tabs.services")}
+          handleIconClick={handleClick}
+        />
       ),
     },
     {
@@ -55,8 +64,8 @@ export function TabNavigationWrapper({ children }: { children: any }) {
         default: "person-circle-sharp",
         focused: "person-circle-outline",
       },
-      title: "Profile",
-    }
+      title: t("homeScreen.tabs.profile"),
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
