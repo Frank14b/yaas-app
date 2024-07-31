@@ -11,3 +11,4 @@ export * from "./dashboard/useServices";
 export * from "./dashboard/useCountries";
 export * from "./dashboard/useRoleAccess";
 export * from "./dashboard/useUsers";
+export * from "./dashboard/useOrganizations";

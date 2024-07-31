@@ -55,6 +55,15 @@ const SCREENS = [
     },
   },
   {
+    name: "organizations",
+    options: {
+      label: "Organizations",
+      showHeader: true,
+      icon: "home-outline",
+      drawerItemStyle: {},
+    },
+  },
+  {
     name: "settings",
     options: {
       label: "Settings",

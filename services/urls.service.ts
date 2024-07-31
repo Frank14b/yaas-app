@@ -108,6 +108,17 @@ export const apiUrls: {
       url: `${apiVersion.v1}/admin/users/add`,
       method: 'POST',
       isSecure: true,
-    }
+    },
+
+    getOrganizations: {
+      url: `${apiVersion.v1}/admin/organisations`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addOrganization: {
+      url: `${apiVersion.v1}/admin/organisations/add`,
+      method: 'POST',
+      isSecure: true,
+    },
   },
 };

@@ -56,14 +56,14 @@ const CARD_BOX: CardBox = [
     title: "Organizations",
     icon: "bookmarks",
     value: 0,
-    path: "(tabs)/organizations",
+    path: "organizations",
     valueKey: "ong_count",
   },
   {
     title: "Victims",
     icon: "person-add",
     value: 0,
-    path: "(tabs)/victims",
+    path: "victims",
     valueKey: "victims_count",
   },
 ];

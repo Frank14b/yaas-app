@@ -1,15 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
 import { ThemedText } from "../common/ThemedText";
 import { ThemedView } from "../common/ThemedView";
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { useRouter } from "expo-router";
-
 
 export type StackHeaderProps = {
   title: string;
 };
 
 export function StackHeader({ title }: StackHeaderProps) {
+  //
+  const theme = useColorScheme();
   const router = useRouter();
 
   return (
@@ -18,9 +19,9 @@ export function StackHeader({ title }: StackHeaderProps) {
         onPress={() => router.back()}
         name="arrow-back"
         size={25}
-        color={"#eee"}
+        color={theme == "light" ? "#222" : "#eee"}
       />
-      <ThemedText lightColor="#eee" darkColor="#eee" type="subtitle">
+      <ThemedText lightColor="#222" darkColor="#eee" type="subtitle">
         {title}
       </ThemedText>
     </ThemedView>
