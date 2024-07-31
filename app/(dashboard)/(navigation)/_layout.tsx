@@ -54,6 +54,15 @@ const SCREENS = [
       drawerItemStyle: {},
     },
   },
+  {
+    name: "settings",
+    options: {
+      label: "Settings",
+      showHeader: true,
+      icon: "settings",
+      drawerItemStyle: {},
+    },
+  },
 ];
 
 export default function NavigationLayout() {
