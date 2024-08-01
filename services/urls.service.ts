@@ -25,7 +25,7 @@ export const apiUrls: {
     validateSession: {
       url: `${apiVersion.v1}/admin/validate-token`,
       method: 'POST',
-      isSecure: false,
+      isSecure: true,
     }
   },
   dashboard: {
@@ -78,8 +78,13 @@ export const apiUrls: {
       isSecure: true,
     },
     addCountry: {
-      url: `${apiVersion.v1}/admin/countries/add`,
+      url: `${apiVersion.v1}/admin/country/add`,
       method: 'POST',
+      isSecure: true,
+    },
+    deleteCountry: {
+      url: `${apiVersion.v1}/admin/country`,
+      method: 'DELETE',
       isSecure: true,
     },
 

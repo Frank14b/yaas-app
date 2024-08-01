@@ -2,7 +2,7 @@ import { ThemeFAB, ThemedText, ThemedView } from "@/components";
 import { useAppActionSheet, useOrganizations } from "@/hooks";
 import { ResultOrganizationDto } from "@/types";
 import { useCallback } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function OrganizationScreen() {
@@ -62,14 +62,19 @@ export default function OrganizationScreen() {
   return (
     <>
       <ThemedView style={styles.container}>
-        {getOrganizations.isLoading && <ThemedText>Loading...</ThemedText>}
         <FlatList
           data={getOrganizations.data?.data?.data}
           renderItem={(item) => roles(item.item)}
+          refreshControl={
+            <RefreshControl
+              refreshing={getOrganizations.isLoading}
+              onRefresh={() => getOrganizations.refetch()}
+            />
+          }
         />
       </ThemedView>
 
-      <ThemeFAB name="add" position="bottom-right"/>
+      <ThemeFAB name="add" position="bottom-right" />
     </>
   );
 }

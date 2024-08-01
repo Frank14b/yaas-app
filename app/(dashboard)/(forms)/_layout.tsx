@@ -26,6 +26,15 @@ export default function FormsLayout() {
           animation: "slide_from_bottom",
         }}
       />
+      <Stack.Screen
+        name="country"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("countries.form.title")} />,
+          presentation: "modal",
+          animation: "slide_from_bottom",
+        }}
+      />
     </Stack>
   );
 }

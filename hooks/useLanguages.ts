@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useAppActionSheet } from "./useAppActionSheet";
 import { useTranslation } from "react-i18next";
-import { router } from "expo-router";
 
 export function useLanguages() {
   //
@@ -22,7 +21,6 @@ export function useLanguages() {
         cancelBtn: false,
         callBackFn: () => {
           locale.changeLanguage("en-US");
-          router.push("/");
         },
       },
       {
@@ -31,7 +29,6 @@ export function useLanguages() {
         cancelBtn: false,
         callBackFn: () => {
           locale.changeLanguage("sw-TZ");
-          router.push("/");
         },
       },
       {

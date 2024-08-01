@@ -142,5 +142,34 @@
         "date_required": "Date is required"
       }
     }
+  },
+
+  "countries": {
+    "form": {
+      "title": "Add Country",
+      "fields": {
+        "choose_country": "Choose a country"
+      },
+      "submit_btn": "Save Country",
+      "schema": {
+        "name_is_required": "Name is required",
+        "code_is_required": "Code is required"
+      }
+    }
+  },
+
+  "roles": {
+    "form": {
+      "title": "New Role",
+      "fields": {
+        "name": "Name",
+        "name_placeholder": "Name"
+      },
+      "submit_btn": "Save Role",
+      "schema": {
+        "name_is_required": "Name is required",
+        "code_is_required": "Code is required"
+      }
+    }
   }
 }

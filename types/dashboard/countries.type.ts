@@ -8,5 +8,5 @@ export interface ResultCountriesDto {
 
 export type CreateCountryDto = {
   name: string;
-  code: string;
+  ccid: string;
 };

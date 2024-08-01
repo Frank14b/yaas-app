@@ -16,7 +16,7 @@ export function useSignIn() {
       });
 
       if (result.status) {
-        storage.setItem(StorageKeys.AUTH_TOKEN, `${result.data?.token}`);
+        await storage.setItem(StorageKeys.AUTH_TOKEN, `${result.data?.token}`);
       }
 
       return result;

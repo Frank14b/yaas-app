@@ -2,7 +2,7 @@ import { ThemeFAB, ThemedText, ThemedView } from "@/components";
 import { useAppActionSheet, useUsers } from "@/hooks";
 import { ResultUserDto } from "@/types";
 import { useCallback } from "react";
-import { FlatList, Image, StyleSheet } from "react-native";
+import { FlatList, Image, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function VictimsScreen() {
@@ -77,10 +77,15 @@ export default function VictimsScreen() {
   return (
     <>
       <ThemedView style={styles.container}>
-        {getUsers.isLoading && <ThemedText>Loading...</ThemedText>}
         <FlatList
           data={getUsers.data?.data?.data}
           renderItem={(item) => users(item.item)}
+          refreshControl={
+            <RefreshControl
+              refreshing={getUsers.isLoading}
+              onRefresh={() => getUsers.refetch()}
+            />
+          }
         />
       </ThemedView>
 

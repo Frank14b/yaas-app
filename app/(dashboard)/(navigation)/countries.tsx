@@ -1,19 +1,33 @@
 import {
   ThemeFAB,
-  ThemedPickerSelect,
+  ThemedConfirmDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
+
 import { useAppActionSheet, useCountries } from "@/hooks";
 import { ResultCountriesDto } from "@/types";
-import { useCallback } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { useCallback, useState } from "react";
+import { FlatList, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function CountriesScreen() {
   //
-  const { getCountries } = useCountries();
+  const { useGetCountries, deleteCountry } = useCountries();
+  const getCountries = useGetCountries();
   const { openActionSheet } = useAppActionSheet({});
+  const [showConfirmation, setShowConfirmation] = useState<{
+    status: boolean;
+    item?: ResultCountriesDto;
+  }>({ status: false });
+  const handleCloseConfirmation = () => setShowConfirmation({ status: false });
+
+  const handleDelete = useCallback(async () => {
+    setShowConfirmation({ status: false });
+    await deleteCountry.mutateAsync(showConfirmation.item?.id ?? 0);
+    getCountries.refetch();
+  }, [showConfirmation, setShowConfirmation]);
 
   const handleOpenActionSheet = useCallback(
     (item: ResultCountriesDto) => {
@@ -28,7 +42,7 @@ export default function CountriesScreen() {
           title: `Delete`,
           destructiveBtn: false,
           cancelBtn: false,
-          callBackFn: () => {},
+          callBackFn: () => setShowConfirmation({ status: true, item }),
         },
         {
           title: `Cancel`,
@@ -63,14 +77,32 @@ export default function CountriesScreen() {
   return (
     <>
       <ThemedView style={styles.container}>
-        {getCountries.isLoading && <ThemedText>Loading...</ThemedText>}
         <FlatList
           data={getCountries.data?.data?.data}
           renderItem={(item) => countries(item.item)}
+          refreshControl={
+            <RefreshControl
+              refreshing={getCountries.isLoading}
+              onRefresh={() => getCountries.refetch()}
+            />
+          }
         />
       </ThemedView>
 
-      <ThemeFAB name="add" position="bottom-right" />
+      <ThemeFAB
+        onPress={() => router.push("(forms)/country")}
+        name="add"
+        position="bottom-right"
+      />
+
+      {showConfirmation.status && (
+        <ThemedConfirmDialog
+          message={`Are you sure you want to delete ${showConfirmation.item?.name}?`}
+          visible={showConfirmation.status}
+          cancelFn={handleCloseConfirmation}
+          confirmFn={handleDelete}
+        />
+      )}
     </>
   );
 }

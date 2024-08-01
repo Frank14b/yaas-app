@@ -77,6 +77,7 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     const finalError = error as ObjectKeyDto;
     if (finalError.response?.status == 401) {
+      
       // await storage.deleteItem(StorageKeys.AUTH_TOKEN);
       console.log("Unauthorized User");
       router.push("/")

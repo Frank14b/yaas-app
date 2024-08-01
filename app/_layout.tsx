@@ -53,18 +53,22 @@ export default function RootLayout() {
         >
           {!onBoardingCompleted ? (
             <OnBoardingLayout />
-          ) : !userConnected ? (
-            <AuthLayout />
           ) : (
-            <AuthWrapper>
-              <Stack>
-                <Stack.Screen
-                  name="(dashboard)"
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-            </AuthWrapper>
+            <>
+              <AuthWrapper>
+                {!userConnected ? (
+                  <AuthLayout />
+                ) : (
+                  <Stack>
+                    <Stack.Screen
+                      name="(dashboard)"
+                      options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name="+not-found" />
+                  </Stack>
+                )}
+              </AuthWrapper>
+            </>
           )}
         </ThemeProvider>
       </ActionSheetProvider>

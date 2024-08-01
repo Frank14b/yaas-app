@@ -5,19 +5,21 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useRoleAccess() {
   //
-  const getRoles = useQuery({
-    queryKey: [Keys.Queries.GET_ROLES],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ResultRolesDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getRoles,
-      });
-
-      return result;
-    },
-  });
+  const useGetRoles = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_ROLES],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ResultRolesDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getRoles,
+        });
+  
+        return result;
+      },
+    })
+  };
 
   const addRole = useMutation({
     mutationKey: [Keys.Mutations.ADD_ROLE],
@@ -34,8 +36,24 @@ export function useRoleAccess() {
     },
   });
 
+  const deleteRole = useMutation({
+    mutationKey: [Keys.Mutations.DELETE_COUNTRY],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultRolesDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.deleteCountry,
+        url: apiUrls.dashboard.deleteCountry.url += `/${id}`
+      });
+
+      return result.data;
+    },
+  });
+
   return {
-    getRoles,
+    useGetRoles,
     addRole,
+    deleteRole
   };
 }

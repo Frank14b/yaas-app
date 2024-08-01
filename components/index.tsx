@@ -17,6 +17,7 @@ export * from "./common/ThemedDropdown";
 export * from "./common/ThemedBottomSheet";
 export * from "./common/ThemedPickerSelect";
 export * from "./common/ThemedFormPickerSelect";
+export * from "./common/ThemedConfirmDialog";
 
 export * from "./animate/AnimateFadeInView";
 export * from "./animate/AnimateSlideInView";

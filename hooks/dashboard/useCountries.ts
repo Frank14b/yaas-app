@@ -5,19 +5,21 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useCountries() {
   //
-  const getCountries = useQuery({
-    queryKey: [Keys.Queries.GET_COUNTRIES],
-    queryFn: async () => {
-      const result = await apiCall<{
-        data: ResultCountriesDto[];
-        message: string;
-      }>({
-        ...apiUrls.dashboard.getCountries,
-      });
-
-      return result;
-    },
-  });
+  const useGetCountries = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_COUNTRIES],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ResultCountriesDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getCountries,
+        });
+  
+        return result;
+      },
+    })
+  };
 
   const addCountry = useMutation({
     mutationKey: [Keys.Mutations.ADD_COUNTRY],
@@ -34,8 +36,24 @@ export function useCountries() {
     },
   });
 
+  const deleteCountry = useMutation({
+    mutationKey: [Keys.Mutations.DELETE_COUNTRY],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultCountriesDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.deleteCountry,
+        url: apiUrls.dashboard.deleteCountry.url += `/${id}`
+      });
+
+      return result.data;
+    },
+  });
+
   return {
-    getCountries,
+    useGetCountries,
     addCountry,
+    deleteCountry
   };
 }

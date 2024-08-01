@@ -58,7 +58,8 @@ export function ViolenceForm() {
   const getViolenceOptions = violenceHook.getViolenceOptions();
   const addViolence = violenceHook.addViolence;
 
-  const { getCountries } = useCountries();
+  const { useGetCountries } = useCountries();
+  const getCountries = useGetCountries();
   const getVictims = useUsers().getVictims();
   const { cities } = useCities({ countryKeyName: "country" });
 
