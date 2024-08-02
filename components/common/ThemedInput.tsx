@@ -86,6 +86,7 @@ export function ThemedInput({
           style={[styles.input, { ...dynamicStyle.input }, style]}
           multiline={multiline}
           placeholderTextColor={"#aaa"}
+          keyboardType={keyboardType}
           {...rest}
           {...register(name)}
         />

@@ -34,7 +34,12 @@ export function useViolences() {
         data: ResultViolenceDto;
         message: string;
       }>({
-        data,
+        data: {
+          ...data,
+          name: "-",
+          area: "-",
+          date_occured: new Date(data.date_occured).getTime()
+        },
         ...apiUrls.dashboard.addViolence,
       });
 

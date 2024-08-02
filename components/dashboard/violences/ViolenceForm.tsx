@@ -7,6 +7,7 @@ import {
   ThemedView,
   ThemedDropdown,
 } from "@/components";
+import { Keys } from "@/constants";
 
 import {
   useAppForm,
@@ -18,6 +19,9 @@ import {
 
 import { CreateViolenceDto } from "@/types";
 import { AddViolenceSchema } from "@/validators";
+import { Ionicons } from "@expo/vector-icons";
+import { useQueryClient } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -25,6 +29,7 @@ import { StyleSheet } from "react-native";
 export function ViolenceForm() {
   //
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   //
   const { handleSubmit } = useAppForm({
     schema: AddViolenceSchema(),
@@ -41,7 +46,7 @@ export function ViolenceForm() {
         age: 0,
         address: "",
       },
-      date_occured: "",
+      date_occured: `${new Date()}`,
       country: "",
       city: "",
       details: "",
@@ -60,12 +65,23 @@ export function ViolenceForm() {
 
   const { useGetCountries } = useCountries();
   const getCountries = useGetCountries();
-  const getVictims = useUsers().getVictims();
+  const getVictims = useUsers().useGetVictims();
   const { cities } = useCities({ countryKeyName: "country" });
 
   const natures = useMemo(() => {
     return (
       getViolenceOptions.data?.data?.data.natures.map((item) => {
+        return {
+          label: item,
+          value: `${item}`,
+        };
+      }) ?? []
+    );
+  }, [getViolenceOptions.data]);
+
+  const natureLocations = useMemo(() => {
+    return (
+      getViolenceOptions.data?.data?.data.locations.map((item) => {
         return {
           label: item,
           value: `${item}`,
@@ -119,7 +135,11 @@ export function ViolenceForm() {
   }, [getVictims.data]);
 
   const proceedSaveViolence = useCallback(async (data: CreateViolenceDto) => {
-    await addViolence.mutateAsync(data);
+    const result = await addViolence.mutateAsync(data);
+    if (result.status) {
+      queryClient.invalidateQueries({ queryKey: [Keys.Queries.GET_VIOLENCES] });
+      router.back();
+    }
   }, []);
 
   return (
@@ -131,17 +151,34 @@ export function ViolenceForm() {
           label={t("violences.form.fields.incident_date")}
         />
 
-        <ThemedDropdown
-          search={true}
-          label={t("violences.form.fields.victim")}
-          name="user_id"
-          data={victims}
-        />
+        <ThemedView style={styles.userContainer}>
+          <ThemedView style={styles.userDropdown}>
+            <ThemedDropdown
+              search={true}
+              label={t("violences.form.fields.victim")}
+              name="user_id"
+              data={victims}
+            />
+          </ThemedView>
+          <Ionicons
+            style={styles.userAddIcon}
+            color={"#aaa"}
+            name="person-add"
+            size={25}
+            onPress={() => router.push(`(forms)/victim`)}
+          />
+        </ThemedView>
 
         <ThemedFormPickerSelect
           label={t("violences.form.fields.nature")}
           name="nature"
           items={natures}
+        />
+
+        <ThemedFormPickerSelect
+          label={t("violences.form.fields.location")}
+          name="natureLocation"
+          items={natureLocations}
         />
 
         <ThemedView style={styles.rowDivider}>
@@ -190,6 +227,8 @@ export function ViolenceForm() {
         <ThemedButton
           title={t("violences.form.submit_btn")}
           onPress={handleSubmit(proceedSaveViolence)}
+          isLoading={addViolence.isPending}
+          disabled={addViolence.isPending}
         />
       </ThemedFormView>
     </>
@@ -208,5 +247,15 @@ const styles = StyleSheet.create({
   },
   rowDividerItem: {
     flex: 0.5,
+  },
+  userContainer: {
+    flexDirection: "row",
+  },
+  userDropdown: {
+    flex: 1,
+    paddingRight: 15,
+  },
+  userAddIcon: {
+    marginTop: 45,
   },
 });

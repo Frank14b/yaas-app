@@ -94,8 +94,13 @@ export const apiUrls: {
       isSecure: true,
     },
     addRole: {
-      url: `${apiVersion.v1}/admin/roles/add`,
+      url: `${apiVersion.v1}/admin/role/add`,
       method: 'POST',
+      isSecure: true,
+    },
+    deleteRole: {
+      url: `${apiVersion.v1}/admin/role`,
+      method: 'DELETE',
       isSecure: true,
     },
 
@@ -104,15 +109,20 @@ export const apiUrls: {
       method: 'GET',
       isSecure: true,
     },
+    addUser: {
+      url: `${apiVersion.v1}/admin/user/add`,
+      method: 'POST',
+      isSecure: true,
+    },
     getVictims: {
       url: `${apiVersion.v1}/admin/victims`,
       method: 'GET',
       isSecure: true,
     },
-    addUser: {
-      url: `${apiVersion.v1}/admin/users/add`,
-      method: 'POST',
-      isSecure: true,
+    addVictims: {
+      url: `${apiVersion.v1}/admin/victim/add`,
+      method: "POST",
+      isSecure: true
     },
 
     getOrganizations: {
@@ -123,6 +133,11 @@ export const apiUrls: {
     addOrganization: {
       url: `${apiVersion.v1}/admin/organisations/add`,
       method: 'POST',
+      isSecure: true,
+    },
+    deleteOrganization: {
+      url: `${apiVersion.v1}/admin/organisations`,
+      method: 'DELETE',
       isSecure: true,
     },
   },

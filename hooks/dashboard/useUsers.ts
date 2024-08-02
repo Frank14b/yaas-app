@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useUsers() {
   //
-  const getUsers = () => {
+  const useGetUsers = () => {
     return useQuery({
       queryKey: [Keys.Queries.GET_USERS],
       queryFn: async () => {
@@ -33,7 +33,7 @@ export function useUsers() {
     },
   });
 
-  const getVictims = () => {
+  const useGetVictims = () => {
     return useQuery({
       queryKey: [Keys.Queries.GET_VICTIMS],
       queryFn: async () => {
@@ -46,9 +46,25 @@ export function useUsers() {
     });
   };
 
+  const addVictim = useMutation({
+    mutationKey: [Keys.Mutations.ADD_VICTIM],
+    mutationFn: async (data: CreateUserDto) => {
+      const result = await apiCall<{
+        data: ResultUserDto;
+        message: string;
+      }>({
+        data,
+        ...apiUrls.dashboard.addVictims,
+      });console.log(result)
+
+      return result;
+    },
+  });
+
   return {
-    getUsers,
-    getVictims,
+    useGetUsers,
+    useGetVictims,
     addUser,
+    addVictim,
   };
 }

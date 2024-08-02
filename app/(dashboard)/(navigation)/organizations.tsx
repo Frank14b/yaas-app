@@ -1,14 +1,32 @@
-import { ThemeFAB, ThemedText, ThemedView } from "@/components";
+import {
+  ThemeFAB,
+  ThemedConfirmDialog,
+  ThemedText,
+  ThemedView,
+} from "@/components";
 import { useAppActionSheet, useOrganizations } from "@/hooks";
 import { ResultOrganizationDto } from "@/types";
-import { useCallback } from "react";
+import { router } from "expo-router";
+import { useCallback, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function OrganizationScreen() {
   //
-  const getOrganizations = useOrganizations().getOrganizations();
+  const { useGetOrganizations, deleteOrganization } = useOrganizations();
+  const getOrganizations = useGetOrganizations();
   const { openActionSheet } = useAppActionSheet({});
+  const [showConfirmation, setShowConfirmation] = useState<{
+    status: boolean;
+    item?: ResultOrganizationDto;
+  }>({ status: false });
+  const handleCloseConfirmation = () => setShowConfirmation({ status: false });
+
+  const handleDelete = useCallback(async () => {
+    setShowConfirmation({ status: false });
+    await deleteOrganization.mutateAsync(showConfirmation.item?.id ?? 0);
+    getOrganizations.refetch();
+  }, [showConfirmation, setShowConfirmation]);
 
   const handleOpenActionSheet = useCallback(
     (item: ResultOrganizationDto) => {
@@ -29,7 +47,7 @@ export default function OrganizationScreen() {
           title: `Delete`,
           destructiveBtn: false,
           cancelBtn: false,
-          callBackFn: () => {},
+          callBackFn: () => setShowConfirmation({ status: true, item }),
         },
         {
           title: `Cancel`,
@@ -74,7 +92,20 @@ export default function OrganizationScreen() {
         />
       </ThemedView>
 
-      <ThemeFAB name="add" position="bottom-right" />
+      <ThemeFAB
+        onPress={() => router.push("(forms)/organization")}
+        name="add"
+        position="bottom-right"
+      />
+
+      {showConfirmation.status && (
+        <ThemedConfirmDialog
+          message={`Are you sure you want to delete ${showConfirmation.item?.name}?`}
+          visible={showConfirmation.status}
+          cancelFn={handleCloseConfirmation}
+          confirmFn={handleDelete}
+        />
+      )}
     </>
   );
 }

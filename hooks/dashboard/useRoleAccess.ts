@@ -43,8 +43,8 @@ export function useRoleAccess() {
         data: ResultRolesDto;
         message: string;
       }>({
-        ...apiUrls.dashboard.deleteCountry,
-        url: apiUrls.dashboard.deleteCountry.url += `/${id}`
+        ...apiUrls.dashboard.deleteRole,
+        url: apiUrls.dashboard.deleteRole.url += `/${id}`
       });
 
       return result.data;

@@ -1,13 +1,14 @@
 import { ThemeFAB, ThemedText, ThemedView } from "@/components";
 import { useAppActionSheet, useUsers } from "@/hooks";
 import { ResultUserDto } from "@/types";
+import { router } from "expo-router";
 import { useCallback } from "react";
 import { FlatList, Image, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function VictimsScreen() {
   //
-  const getUsers = useUsers().getVictims();
+  const getUsers = useUsers().useGetVictims();
   const { openActionSheet } = useAppActionSheet({});
 
   const handleOpenActionSheet = useCallback(
@@ -89,7 +90,11 @@ export default function VictimsScreen() {
         />
       </ThemedView>
 
-      <ThemeFAB name="add" position="bottom-right" />
+      <ThemeFAB
+        onPress={() => router.push("(forms)/victim")}
+        name="add"
+        position="bottom-right"
+      />
     </>
   );
 }

@@ -1,11 +1,17 @@
 import { useCallback } from "react";
 import { useAppActionSheet } from "./useAppActionSheet";
 import { useTranslation } from "react-i18next";
+import { storage } from "@/utils/expo-storage";
 
 export function useLanguages() {
   //
   const locale = useTranslation().i18n;
   const { openActionSheet } = useAppActionSheet({});
+
+  const handleChangeLanguage = useCallback((lang: string) => {
+    storage.setItem("language", lang);
+    locale.changeLanguage(lang);
+  }, []);
 
   const handleOpenActionSheet = useCallback(() => {
     openActionSheet([
@@ -20,7 +26,7 @@ export function useLanguages() {
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {
-          locale.changeLanguage("en-US");
+          handleChangeLanguage("en-US");
         },
       },
       {
@@ -28,7 +34,7 @@ export function useLanguages() {
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {
-          locale.changeLanguage("sw-TZ");
+          handleChangeLanguage("sw-TZ");
         },
       },
       {
@@ -38,7 +44,7 @@ export function useLanguages() {
         callBackFn: () => {},
       },
     ]);
-  }, [locale, openActionSheet]);
+  }, [locale, openActionSheet, handleChangeLanguage]);
 
   return {
     openLanguageMenu: handleOpenActionSheet,

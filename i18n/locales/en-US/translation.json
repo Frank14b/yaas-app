@@ -63,7 +63,8 @@
         "country": "Country",
         "city": "City",
         "details": "Details",
-        "details_placeholder": "Describe what happen"
+        "details_placeholder": "Describe what happen",
+        "location": "Location"
       },
       "submit_btn": "Save Violence",
       "schema": {
@@ -170,6 +171,52 @@
         "name_is_required": "Name is required",
         "code_is_required": "Code is required"
       }
+    }
+  },
+
+  "organizations": {
+    "form": {
+      "title": "New Organization",
+      "fields": {
+        "name": "Name",
+        "name_placeholder": "Name"
+      },
+      "submit_btn": "Save Organization",
+      "schema": {
+        "name_is_required": "Name is required",
+        "code_is_required": "Code is required"
+      }
+    }
+  },
+
+  "users": {
+    "form": {
+      "title": "New User",
+      "fields": {
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "username": "User Name",
+        "phone": "Phone Number",
+        "email": "Email",
+        "type": "Super Admin",
+        "role": "Role",
+        "country": "Country",
+        "city": "City"
+      },
+      "submit_btn": "Save",
+      "schema": {
+        "invalid_email": "Invalid Email",
+        "field_is_required": "Field is required"
+      }
+    }
+  },
+
+  "victims": {
+    "form": {
+      "title": "New Victim",
+      "fields": {},
+      "submit_btn": "Save",
+      "schema": {}
     }
   }
 }

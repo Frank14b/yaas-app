@@ -9,6 +9,7 @@ import { useAppForm, useSignIn } from "@/hooks";
 import { useUserStore } from "@/stores";
 import { AuthDto } from "@/types";
 import { SignInSchema } from "@/validators";
+import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet } from "react-native";
@@ -16,6 +17,7 @@ import { Alert, StyleSheet } from "react-native";
 export function SignInForm() {
   //
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const { user, setUserConnected, setUser } = useUserStore();
 
   const { handleSubmit } = useAppForm({
@@ -35,6 +37,7 @@ export function SignInForm() {
       if (result.status) {
         setUserConnected(true);
         setUser(result.data?.data as any);
+        queryClient.clear();
         return;
       }
 

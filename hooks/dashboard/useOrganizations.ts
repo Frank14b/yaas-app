@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useOrganizations() {
   //
-  const getOrganizations = () => {
+  const useGetOrganizations = () => {
     return useQuery({
       queryKey: [Keys.Queries.GET_ORGANIZATIONS],
       queryFn: async () => {
@@ -36,8 +36,24 @@ export function useOrganizations() {
     },
   });
 
+  const deleteOrganization = useMutation({
+    mutationKey: [Keys.Mutations.DELETE_ORGANIZATION],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultOrganizationDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.deleteOrganization,
+        url: (apiUrls.dashboard.deleteOrganization.url += `/${id}`),
+      });
+
+      return result.data;
+    },
+  });
+
   return {
-    getOrganizations,
+    useGetOrganizations,
     addOrganization,
+    deleteOrganization,
   };
 }
