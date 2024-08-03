@@ -1,10 +1,15 @@
+import { Environments } from "@/constants";
 import * as Sentry from "@sentry/react-native";
+import allSettled from "promise.allsettled";
 
 const init = () => {
   Sentry.init({
-    dsn: "YOUR_DSN_HERE",
-    // Other configuration options
+    dsn: Environments.SENTRY_DSN,
+    debug: true, // For development
+    enableNative: true, // To capture native crashes
+    tracesSampleRate: 1.0,
   });
+  allSettled.shim();
 };
 
 const Error = <T>(err: T) => {
