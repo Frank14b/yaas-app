@@ -67,8 +67,13 @@ export const apiUrls: {
       isSecure: true,
     },
     addService: {
-      url: `${apiVersion.v1}/admin/consultations/add`,
+      url: `${apiVersion.v1}/admin/consultations`,
       method: 'POST',
+      isSecure: true,
+    },
+    getServiceTypes: {
+      url: `${apiVersion.v1}/admin/consultation-types`,
+      method: 'GET',
       isSecure: true,
     },
 

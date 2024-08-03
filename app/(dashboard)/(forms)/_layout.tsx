@@ -68,6 +68,16 @@ export default function FormsLayout() {
             Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
         }}
       />
+      <Stack.Screen
+        name="user"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("users.form.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
     </Stack>
   );
 }

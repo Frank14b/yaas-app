@@ -1,7 +1,8 @@
-import { Keys } from "@/constants";
+import { Keys, StorageKeys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
 import { useUserStore } from "@/stores";
 import { ResultUserDto } from "@/types";
+import { storage } from "@/utils/expo-storage";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "expo-router";
 import { createContext, useContext, useEffect } from "react";
@@ -24,29 +25,25 @@ export function AuthWrapper({ children }: { children: any }) {
         ...apiUrls.auth.validateSession,
       });
 
+      if (result?.statusCode == 401) {
+        //
+        setUserConnected(false);
+        await storage.deleteItem(StorageKeys.AUTH_TOKEN);
+      } else if (result) {
+        //
+        if (!result.data) {
+          setUserConnected(false);
+          await storage.deleteItem(StorageKeys.AUTH_TOKEN);
+        } else if (result?.data?.data?.id) {
+          //
+          setUserConnected(true);
+          setUser(result.data.data as any);
+        }
+      }
+
       return result;
     },
   });
-
-  useEffect(() => {
-    if (data?.statusCode == 401) {
-      setUserConnected(false);
-      return;
-    }
-
-    if (data) {
-      if (!data.data) {
-        setUserConnected(false);
-        return;
-      }
-    }
-
-    if(data?.data?.data?.id) {
-      setUserConnected(true);
-      setUser(data.data.data as any);
-    }
-    
-  }, [data, setUser, setUserConnected]);
 
   useEffect(() => {
     refetch();

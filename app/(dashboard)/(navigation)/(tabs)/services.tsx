@@ -16,7 +16,8 @@ export default function ServicesScreen() {
   //
   const navigation = useNavigation();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
-  const { getServices } = useServices();
+  const { useGetServices } = useServices();
+  const getServices = useGetServices();
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {

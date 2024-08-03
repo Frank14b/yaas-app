@@ -12,9 +12,11 @@ export interface ResultServiceDto {
 }
 
 export type CreateServiceDto = {
+  booking_date: string;
   details: string;
-  booking_date: Date;
   type_id: number;
+  country: string;
+  city: string;
 };
 
 export type ServiceUserDto = {
@@ -26,4 +28,11 @@ export type ServiceUserDto = {
 export type ServiceTypeDto = {
   id: number;
   name: string;
+};
+
+export type ResultServiceTypeDto = {
+  id: number;
+  name: string;
+  status: boolean;
+  created_at: Date
 };

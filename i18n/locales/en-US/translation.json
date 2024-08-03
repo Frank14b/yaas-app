@@ -118,29 +118,17 @@
     "form": {
       "title": "New Service",
       "fields": {
-        "incident_date": "Incident Date",
+        "booking_date": "Request Date",
         "victim": "Victim",
-        "nature": "Nature",
         "type": "Type",
-        "flag": "Flag",
         "country": "Country",
         "city": "City",
         "details": "Details",
-        "details_placeholder": "Describe what happen"
+        "details_placeholder": "Describe your needs"
       },
-      "submit_btn": "Save Violence",
+      "submit_btn": "Submit",
       "schema": {
-        "victim_is_required": "Victim is required",
-        "first_name_required": "First name is required",
-        "phone_required": "Phone is required",
-        "gender_required": "Gender is required",
-        "type_required": "Type is required",
-        "flag_required": "Flag is required",
-        "nature_required": "Nature is required",
-        "location_required": "Location is required",
-        "country_required": "Country is required",
-        "city_required": "City is required",
-        "date_required": "Date is required"
+        "field_is_required": "Field is required"
       }
     }
   },
