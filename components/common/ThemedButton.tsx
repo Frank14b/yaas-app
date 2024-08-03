@@ -2,8 +2,7 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
-  StyleSheet,
-  StyleSheetProperties,
+  StyleSheet
 } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { Colors } from "@/constants";
