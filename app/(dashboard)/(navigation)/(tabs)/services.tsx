@@ -1,15 +1,17 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
+  ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
 
-import { ServiceListItem } from "@/components/dashboard";
+import { ServiceDetails, ServiceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
-import { useServices } from "@/hooks";
+import { useAppActionSheet, useServices } from "@/hooks";
+import { ResultServiceDto } from "@/types";
 import { router, useNavigation } from "expo-router";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
@@ -18,6 +20,17 @@ export default function ServicesScreen() {
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
   const { useGetServices } = useServices();
   const getServices = useGetServices();
+  const { openActionSheet } = useAppActionSheet({});
+
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<ResultServiceDto | null>(
+    null
+  );
+  const handleCloseDetails = () => setShowDetails(false);
+  const handleOpenDetails = (item: ResultServiceDto) => {
+    setSelectedItem(item);
+    setShowDetails(true);
+  };
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
@@ -31,13 +44,44 @@ export default function ServicesScreen() {
     });
   }, []);
 
+  const handleLongPress = useCallback((item: ResultServiceDto) => {
+    openActionSheet([
+      {
+        title: `${item.ref}`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Edit`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Delete`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {},
+      },
+      {
+        title: `Cancel`,
+        destructiveBtn: false,
+        cancelBtn: true,
+        callBackFn: () => {},
+      },
+    ]);
+  }, []);
+
   const services = useMemo(() => {
     if (getServices.isLoading) return <ThemedText>Loading...</ThemedText>;
     if (!getServices.data?.status)
       return <ThemedText>Service no found</ThemedText>;
 
     return getServices.data.data?.data.map((item, index) => {
-      return <ServiceListItem key={index} item={item} />;
+      return (
+        <ServiceListItem press={handleOpenDetails} longPress={handleLongPress} key={index} item={item} />
+      );
     });
   }, [getServices.data]);
 
@@ -59,6 +103,16 @@ export default function ServicesScreen() {
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
+
+      {selectedItem && showDetails && (
+        <ThemedDialog
+          title={"Details"}
+          open={showDetails}
+          handleClose={handleCloseDetails}
+        >
+          <ServiceDetails item={selectedItem} />
+        </ThemedDialog>
+      )}
     </>
   );
 }

@@ -8,7 +8,7 @@ import {
 
 import { Image, StyleSheet } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ViolenceForm, ViolenceListItem } from "@/components/dashboard";
+import { ViolenceDetails, ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useViolences } from "@/hooks";
 import { useNavigation, useRouter } from "expo-router";
@@ -22,8 +22,15 @@ export default function ViolenceScreen() {
   const { openActionSheet } = useAppActionSheet({});
   const getViolences = useViolences().getViolences();
 
-  const [openForm, setOpenForm] = useState<boolean>(false);
-  const handleCloseForm = () => setOpenForm(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<ResultViolenceDto | null>(
+    null
+  );
+  const handleCloseDetails = () => setShowDetails(false);
+  const handleOpenDetails = (item: ResultViolenceDto) => {
+    setSelectedItem(item);
+    setShowDetails(true);
+  };
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
@@ -73,7 +80,12 @@ export default function ViolenceScreen() {
 
     return getViolences.data.data?.data.map((item, index) => {
       return (
-        <ViolenceListItem longPress={handleLongPress} key={index} item={item} />
+        <ViolenceListItem
+          press={handleOpenDetails}
+          longPress={handleLongPress}
+          key={index}
+          item={item}
+        />
       );
     });
   }, [getViolences.data]);
@@ -97,13 +109,15 @@ export default function ViolenceScreen() {
         </ParallaxScrollView>
       </AnimateSlideInView>
 
-      <ThemedDialog
-        title="New Violence"
-        open={openForm}
-        handleClose={handleCloseForm}
-      >
-        <ViolenceForm />
-      </ThemedDialog>
+      {selectedItem && showDetails && (
+        <ThemedDialog
+          title={'Details'}
+          open={showDetails}
+          handleClose={handleCloseDetails}
+        >
+          <ViolenceDetails item={selectedItem} />
+        </ThemedDialog>
+      )}
     </>
   );
 }

@@ -2,25 +2,39 @@ import { ThemedText } from "@/components/common/ThemedText";
 import { ThemedView } from "@/components/common/ThemedView";
 import { Colors } from "@/constants";
 import { ResultServiceDto } from "@/types";
-import { Image, Pressable, StyleSheet } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
 
-export type ServiceListItemProps = {
+export type ServiceListItemProps = TouchableOpacityProps & {
   item: ResultServiceDto;
-  onPress?: (item: ResultServiceDto) => void;
+  press?: (item: ResultServiceDto) => void;
+  longPress?: (item: ResultServiceDto) => void;
 };
 
-export function ServiceListItem({ item, onPress }: ServiceListItemProps) {
+export function ServiceListItem({
+  item,
+  press,
+  longPress,
+}: ServiceListItemProps) {
   return (
-    <ThemedView
-      lightColor="#eee"
-      darkColor={Colors.secondaryDark}
-      style={[styles.itemBox]}
+    <TouchableOpacity
+      style={styles.pressable}
+      onLongPress={() => longPress?.(item)}
+      onPress={() => press?.(item)}
     >
-      <Image
-        source={require("@/assets/images/parallax/services.webp")}
-        style={styles.itemUserPhoto}
-      />
-      <Pressable style={styles.pressable} onPress={() => onPress?.(item)}>
+      <ThemedView
+        lightColor="#eee"
+        darkColor={Colors.secondaryDark}
+        style={[styles.itemBox]}
+      >
+        <Image
+          source={require("@/assets/images/parallax/services.webp")}
+          style={styles.itemUserPhoto}
+        />
         <ThemedView style={{ backgroundColor: "transparent", flex: 1 }}>
           <ThemedText style={styles.itemUserName}>
             {item.user.firstname} {item.user.lastname}
@@ -33,8 +47,8 @@ export function ServiceListItem({ item, onPress }: ServiceListItemProps) {
             {item.country}
           </ThemedText>
         </ThemedView>
-      </Pressable>
-    </ThemedView>
+      </ThemedView>
+    </TouchableOpacity>
   );
 }
 
