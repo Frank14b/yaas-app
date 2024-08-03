@@ -80,6 +80,24 @@
         "city_required": "City is required",
         "date_required": "Date is required"
       }
+    },
+    "details": {
+      "ref": "Reference",
+      "title": "Violence Details",
+      "date_occurred": "Incident Date",
+      "date_created": "Date Created",
+      "victim": "Victim",
+      "nature": "Nature",
+      "type": "Type",
+      "flag": "Flag",
+      "country": "Country",
+      "city": "City",
+      "details": "Details",
+      "location": "Location",
+      "add_doc": "Add Documentation",
+      "place": "Place",
+      "added_by": "Added By",
+      "agent": "Agent"
     }
   },
 
@@ -130,6 +148,20 @@
       "schema": {
         "field_is_required": "Field is required"
       }
+    },
+    "details": {
+      "ref": "Reference",
+      "title": "Service Details",
+      "booking_date": "Request Date",
+      "date_created": "Date Created",
+      "user": "User",
+      "type": "Type",
+      "country": "Country",
+      "city": "City",
+      "details": "Details",
+      "location": "Location",
+      "assign_to_me": "Assign To Me",
+      "agent": "Agent"
     }
   },
 

@@ -10,9 +10,9 @@
       "password": "Nenosiri",
       "submit_btn": "Endelea"
     },
-    "auth_failed": "Uthibitisho Ulishindwa",
+    "auth_failed": "Uthibitisho Uliwa",
     "forgot_password": "Umesahau nenosiri lako?",
-    "reset_text": "Weka Upya Hapa",
+    "reset_text": "Rudisha Hapa",
     "schema": {
       "invalid_email": "Toa barua pepe halali",
       "email_is_required": "Anwani ya barua pepe inahitajika",
@@ -29,7 +29,7 @@
     "victims": "Waathiriwa",
     "settings": "Mipangilio",
     "preferences": "Mapendeleo",
-    "dark_theme": "Mandhari Nyeusi",
+    "dark_theme": "Mandhari Giza",
     "tell_a_friend": "Mwambie Rafiki",
     "signOut": "Toka"
   },
@@ -63,33 +63,180 @@
         "country": "Nchi",
         "city": "Mji",
         "details": "Maelezo",
-        "details_placeholder": "Eleza kilichotokea"
+        "details_placeholder": "Eleza kilichotokea",
+        "location": "Mahali"
       },
       "submit_btn": "Hifadhi Ukatili",
       "schema": {
-        "victim_is_required": "Mwathiriwa anaitajika",
+        "victim_is_required": "Mwathiriwa anahitajika",
         "first_name_required": "Jina la kwanza linahitajika",
         "phone_required": "Simu inahitajika",
         "gender_required": "Jinsia inahitajika",
         "type_required": "Aina inahitajika",
         "flag_required": "Bendi inahitajika",
         "nature_required": "Aina inahitajika",
-        "location_required": "Mahali panahitajika"
+        "location_required": "Mahali inahitajika",
+        "country_required": "Nchi inahitajika",
+        "city_required": "Mji unahitajika",
+        "date_required": "Tarehe inahitajika"
       }
+    },
+    "details": {
+      "ref": "Rejea",
+      "title": "Maelezo ya Ukatili",
+      "date_occurred": "Tarehe ya Tukio",
+      "date_created": "Tarehe Iliyoundwa",
+      "victim": "Mwathiriwa",
+      "nature": "Aina",
+      "type": "Aina",
+      "flag": "Bendi",
+      "country": "Nchi",
+      "city": "Mji",
+      "details": "Maelezo",
+      "location": "Mahali",
+      "add_doc": "Ongeza Hati",
+      "place": "Mahali",
+      "added_by": "Imeongezwa Na",
+      "agent": "Mwakilishi"
+    }
+  },
+
+  "investigations": {
+    "form": {
+      "title": "Hati Mpya",
+      "fields": {
+        "incident_date": "Tarehe ya Uchunguzi",
+        "victim": "Mwathiriwa",
+        "nature": "Aina",
+        "type": "Aina",
+        "flag": "Bendi",
+        "country": "Nchi",
+        "city": "Mji",
+        "details": "Maelezo",
+        "details_placeholder": "Eleza kilichotokea"
+      },
+      "submit_btn": "Hifadhi Uchunguzi",
+      "schema": {
+        "victim_is_required": "Mwathiriwa anahitajika",
+        "first_name_required": "Jina la kwanza linahitajika",
+        "phone_required": "Simu inahitajika",
+        "gender_required": "Jinsia inahitajika",
+        "type_required": "Aina inahitajika",
+        "flag_required": "Bendi inahitajika",
+        "nature_required": "Aina inahitajika",
+        "location_required": "Mahali inahitajika",
+        "country_required": "Nchi inahitajika",
+        "city_required": "Mji unahitajika",
+        "date_required": "Tarehe inahitajika"
+      }
+    }
+  },
+
+  "services": {
+    "form": {
+      "title": "Huduma Mpya",
+      "fields": {
+        "booking_date": "Tarehe ya Ombi",
+        "victim": "Mwathiriwa",
+        "type": "Aina",
+        "country": "Nchi",
+        "city": "Mji",
+        "details": "Maelezo",
+        "details_placeholder": "Eleza mahitaji yako"
+      },
+      "submit_btn": "Wasilisha",
+      "schema": {
+        "field_is_required": "Uwanja unahitajika"
+      }
+    },
+    "details": {
+      "ref": "Rejea",
+      "title": "Maelezo ya Huduma",
+      "booking_date": "Tarehe ya Ombi",
+      "date_created": "Tarehe Iliyoundwa",
+      "user": "Mtumiaji",
+      "type": "Aina",
+      "country": "Nchi",
+      "city": "Mji",
+      "details": "Maelezo",
+      "location": "Mahali",
+      "assign_to_me": "Nipega",
+      "agent": "Mwakilishi"
     }
   },
 
   "countries": {
     "form": {
-      "title": "Add Country",
+      "title": "Ongeza Nchi",
       "fields": {
-        "choose_country": "Choose a country"
+        "choose_country": "Chagua nchi"
       },
-      "submit_btn": "Save Country",
+      "submit_btn": "Hifadhi Nchi",
       "schema": {
-        "name_is_required": "Name is required",
-        "code_is_required": "Code is required"
+        "name_is_required": "Jina linahitajika",
+        "code_is_required": "Kanuni inahitajika"
       }
+    }
+  },
+
+  "roles": {
+    "form": {
+      "title": "Jukumu Jipya",
+      "fields": {
+        "name": "Jina",
+        "name_placeholder": "Jina"
+      },
+      "submit_btn": "Hifadhi Jukumu",
+      "schema": {
+        "name_is_required": "Jina linahitajika",
+        "code_is_required": "Kanuni inahitajika"
+      }
+    }
+  },
+
+  "organizations": {
+    "form": {
+      "title": "Shirika Jipya",
+      "fields": {
+        "name": "Jina",
+        "name_placeholder": "Jina"
+      },
+      "submit_btn": "Hifadhi Shirika",
+      "schema": {
+        "name_is_required": "Jina linahitajika",
+        "code_is_required": "Kanuni inahitajika"
+      }
+    }
+  },
+
+  "users": {
+    "form": {
+      "title": "Mtumiaji Mpya",
+      "fields": {
+        "firstname": "Jina la Kwanza",
+        "lastname": "Jina la Mwisho",
+        "username": "Jina la Mtumiaji",
+        "phone": "Nambari ya Simu",
+        "email": "Barua pepe",
+        "type": "Msimamizi Mkuu",
+        "role": "Jukumu",
+        "country": "Nchi",
+        "city": "Mji"
+      },
+      "submit_btn": "Hifadhi",
+      "schema": {
+        "invalid_email": "Barua pepe isiyo halali",
+        "field_is_required": "Uwanja unahitajika"
+      }
+    }
+  },
+
+  "victims": {
+    "form": {
+      "title": "Mwathiriwa Mpya",
+      "fields": {},
+      "submit_btn": "Hifadhi",
+      "schema": {}
     }
   }
 }

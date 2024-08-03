@@ -1,14 +1,13 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
-  ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
 
-import { Image, StyleSheet } from "react-native";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { ViolenceDetails, ViolenceListItem } from "@/components/dashboard";
+import { Image, StyleSheet, } from "react-native";
+import { useCallback, useEffect, useMemo } from "react";
+import { ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useViolences } from "@/hooks";
 import { useNavigation, useRouter } from "expo-router";
@@ -22,14 +21,8 @@ export default function ViolenceScreen() {
   const { openActionSheet } = useAppActionSheet({});
   const getViolences = useViolences().getViolences();
 
-  const [showDetails, setShowDetails] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<ResultViolenceDto | null>(
-    null
-  );
-  const handleCloseDetails = () => setShowDetails(false);
   const handleOpenDetails = (item: ResultViolenceDto) => {
-    setSelectedItem(item);
-    setShowDetails(true);
+    router.push(`(details)/violence?id=${item.id}`);
   };
 
   const handleHeaderIconPress = useCallback((action: string) => {
@@ -108,16 +101,6 @@ export default function ViolenceScreen() {
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
-
-      {selectedItem && showDetails && (
-        <ThemedDialog
-          title={'Details'}
-          open={showDetails}
-          handleClose={handleCloseDetails}
-        >
-          <ViolenceDetails item={selectedItem} />
-        </ThemedDialog>
-      )}
     </>
   );
 }

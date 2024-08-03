@@ -2,6 +2,7 @@ import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
 import {
   CreateViolenceDto,
+  ResultPaginate,
   ResultViolenceDto,
   ViolenceOptions,
   ViolenceTypeDto,
@@ -15,11 +16,25 @@ export function useViolences() {
     return useQuery({
       queryKey: [Keys.Queries.GET_VIOLENCES],
       queryFn: async () => {
+        const result = await apiCall<ResultPaginate<ResultViolenceDto[]>>({
+          ...apiUrls.dashboard.getViolences,
+        });
+
+        return result;
+      },
+    });
+  };
+
+  const useGetViolence = (id: number) => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_VIOLENCE, id],
+      queryFn: async () => {
         const result = await apiCall<{
-          data: ResultViolenceDto[];
+          data: ResultViolenceDto;
           message: string;
         }>({
-          ...apiUrls.dashboard.getViolences,
+          ...apiUrls.dashboard.getViolence,
+          url: apiUrls.dashboard.getViolence.url + `/${id}`
         });
 
         return result;
@@ -97,6 +112,7 @@ export function useViolences() {
 
   return {
     getViolences,
+    useGetViolence,
     getViolenceOptions,
     getViolenceTypes,
     getViolenceFlags,

@@ -8,7 +8,12 @@ import { storage } from "@/utils/expo-storage";
 
 const resources = {
   "en-US": { translation: translationEn },
+  "en-UK": { translation: translationEn },
+  "en-CM": { translation: translationEn },
   "fr-FR": { translation: translationFr },
+  "fr-CA": { translation: translationFr },
+  "fr-CM": { translation: translationFr },
+  "fr-CI": { translation: translationFr },
   "sw-TZ": { translation: translationSw },
 };
 

@@ -1,17 +1,16 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
-  ThemedDialog,
   ThemedText,
   ThemedView,
 } from "@/components";
 
-import { ServiceDetails, ServiceListItem } from "@/components/dashboard";
+import { ServiceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useServices } from "@/hooks";
 import { ResultServiceDto } from "@/types";
 import { router, useNavigation } from "expo-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { Image, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
@@ -22,14 +21,8 @@ export default function ServicesScreen() {
   const getServices = useGetServices();
   const { openActionSheet } = useAppActionSheet({});
 
-  const [showDetails, setShowDetails] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<ResultServiceDto | null>(
-    null
-  );
-  const handleCloseDetails = () => setShowDetails(false);
   const handleOpenDetails = (item: ResultServiceDto) => {
-    setSelectedItem(item);
-    setShowDetails(true);
+    router.push(`(details)/service?id=${item.id}`);
   };
 
   const handleHeaderIconPress = useCallback((action: string) => {
@@ -80,7 +73,12 @@ export default function ServicesScreen() {
 
     return getServices.data.data?.data.map((item, index) => {
       return (
-        <ServiceListItem press={handleOpenDetails} longPress={handleLongPress} key={index} item={item} />
+        <ServiceListItem
+          press={handleOpenDetails}
+          longPress={handleLongPress}
+          key={index}
+          item={item}
+        />
       );
     });
   }, [getServices.data]);
@@ -103,16 +101,6 @@ export default function ServicesScreen() {
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
-
-      {selectedItem && showDetails && (
-        <ThemedDialog
-          title={"Details"}
-          open={showDetails}
-          handleClose={handleCloseDetails}
-        >
-          <ServiceDetails item={selectedItem} />
-        </ThemedDialog>
-      )}
     </>
   );
 }

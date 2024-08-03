@@ -1,16 +1,242 @@
 {
-  "language": "Language",
+  "language": "Langue",
+
   "signIn": {
-    "title": "Sign In",
+    "title": "Connexion",
     "form": {
-      "email": "Email",
-      "placeholder_email": "Enter email address",
-      "placeholder_password": "Enter your password",
-      "password": "Password",
-      "submit_btn": "Proceed"
+      "email": "Courriel",
+      "placeholder_email": "Entrez votre courriel",
+      "placeholder_password": "Entrez votre mot de passe",
+      "password": "Mot de passe",
+      "submit_btn": "Continuer"
     },
-    "auth_failed": "Authentication Failed",
-    "forgot_password": "Forgot your password?",
-    "reset_text": "Reset Here"
+    "auth_failed": "Authentification échouée",
+    "forgot_password": "Mot de passe oublié ?",
+    "reset_text": "Réinitialiser ici",
+    "schema": {
+      "invalid_email": "Veuillez fournir un courriel valide",
+      "email_is_required": "Le courriel est requis",
+      "invalid_password": "Veuillez fournir un mot de passe valide"
+    }
+  },
+
+  "navigation": {
+    "home": "Accueil",
+    "users": "Utilisateurs",
+    "countries": "Pays",
+    "role_access": "Accès aux rôles",
+    "organizations": "Organisations",
+    "victims": "Victimes",
+    "settings": "Paramètres",
+    "preferences": "Préférences",
+    "dark_theme": "Thème sombre",
+    "tell_a_friend": "Parlez-en à un ami",
+    "signOut": "Déconnexion"
+  },
+
+  "homeScreen": {
+    "welcome": "Bienvenue !",
+    "reports": "Rapports",
+    "users": "Utilisateurs",
+    "countries": "Pays",
+    "services": "Services",
+    "organizations": "Organisations",
+    "victims": "Victimes",
+
+    "tabs": {
+      "home": "Accueil",
+      "violences": "Violences",
+      "services": "Services",
+      "profile": "Profil"
+    }
+  },
+
+  "violences": {
+    "form": {
+      "title": "Nouvelle Violence",
+      "fields": {
+        "incident_date": "Date de l'incident",
+        "victim": "Victime",
+        "nature": "Nature",
+        "type": "Type",
+        "flag": "Drapeau",
+        "country": "Pays",
+        "city": "Ville",
+        "details": "Détails",
+        "details_placeholder": "Décrivez ce qui s'est passé",
+        "location": "Emplacement"
+      },
+      "submit_btn": "Enregistrer la violence",
+      "schema": {
+        "victim_is_required": "La victime est requise",
+        "first_name_required": "Le prénom est requis",
+        "phone_required": "Le téléphone est requis",
+        "gender_required": "Le sexe est requis",
+        "type_required": "Le type est requis",
+        "flag_required": "Le drapeau est requis",
+        "nature_required": "La nature est requise",
+        "location_required": "L'emplacement est requis",
+        "country_required": "Le pays est requis",
+        "city_required": "La ville est requise",
+        "date_required": "La date est requise"
+      }
+    },
+    "details": {
+      "ref": "Référence",
+      "title": "Détails de la violence",
+      "date_occurred": "Date de l'incident",
+      "date_created": "Date de création",
+      "victim": "Victime",
+      "nature": "Nature",
+      "type": "Type",
+      "flag": "Drapeau",
+      "country": "Pays",
+      "city": "Ville",
+      "details": "Détails",
+      "location": "Emplacement",
+      "add_doc": "Ajouter de la documentation",
+      "place": "Lieu",
+      "added_by": "Ajouté par",
+      "agent": "Agent"
+    }
+  },
+
+  "investigations": {
+    "form": {
+      "title": "Nouvelle documentation",
+      "fields": {
+        "incident_date": "Date de l'enquête",
+        "victim": "Victime",
+        "nature": "Nature",
+        "type": "Type",
+        "flag": "Drapeau",
+        "country": "Pays",
+        "city": "Ville",
+        "details": "Détails",
+        "details_placeholder": "Décrivez ce qui s'est passé"
+      },
+      "submit_btn": "Enregistrer l'enquête",
+      "schema": {
+        "victim_is_required": "La victime est requise",
+        "first_name_required": "Le prénom est requis",
+        "phone_required": "Le téléphone est requis",
+        "gender_required": "Le sexe est requis",
+        "type_required": "Le type est requis",
+        "flag_required": "Le drapeau est requis",
+        "nature_required": "La nature est requise",
+        "location_required": "L'emplacement est requis",
+        "country_required": "Le pays est requis",
+        "city_required": "La ville est requise",
+        "date_required": "La date est requise"
+      }
+    }
+  },
+
+  "services": {
+    "form": {
+      "title": "Nouveau service",
+      "fields": {
+        "booking_date": "Date de la demande",
+        "victim": "Victime",
+        "type": "Type",
+        "country": "Pays",
+        "city": "Ville",
+        "details": "Détails",
+        "details_placeholder": "Décrivez vos besoins"
+      },
+      "submit_btn": "Soumettre",
+      "schema": {
+        "field_is_required": "Le champ est requis"
+      }
+    },
+    "details": {
+      "ref": "Référence",
+      "title": "Détails du service",
+      "booking_date": "Date de la demande",
+      "date_created": "Date de création",
+      "user": "Utilisateur",
+      "type": "Type",
+      "country": "Pays",
+      "city": "Ville",
+      "details": "Détails",
+      "location": "Emplacement",
+      "assign_to_me": "M'affecter",
+      "agent": "Agent"
+    }
+  },
+
+  "countries": {
+    "form": {
+      "title": "Ajouter un pays",
+      "fields": {
+        "choose_country": "Choisissez un pays"
+      },
+      "submit_btn": "Enregistrer le pays",
+      "schema": {
+        "name_is_required": "Le nom est requis",
+        "code_is_required": "Le code est requis"
+      }
+    }
+  },
+
+  "roles": {
+    "form": {
+      "title": "Nouveau rôle",
+      "fields": {
+        "name": "Nom",
+        "name_placeholder": "Nom"
+      },
+      "submit_btn": "Enregistrer le rôle",
+      "schema": {
+        "name_is_required": "Le nom est requis",
+        "code_is_required": "Le code est requis"
+      }
+    }
+  },
+
+  "organizations": {
+    "form": {
+      "title": "Nouvelle organisation",
+      "fields": {
+        "name": "Nom",
+        "name_placeholder": "Nom"
+      },
+      "submit_btn": "Enregistrer l'organisation",
+      "schema": {
+        "name_is_required": "Le nom est requis",
+        "code_is_required": "Le code est requis"
+      }
+    }
+  },
+
+  "users": {
+    "form": {
+      "title": "Nouvel utilisateur",
+      "fields": {
+        "firstname": "Prénom",
+        "lastname": "Nom de famille",
+        "username": "Nom d'utilisateur",
+        "phone": "Numéro de téléphone",
+        "email": "Courriel",
+        "type": "Super administrateur",
+        "role": "Rôle",
+        "country": "Pays",
+        "city": "Ville"
+      },
+      "submit_btn": "Enregistrer",
+      "schema": {
+        "invalid_email": "Courriel invalide",
+        "field_is_required": "Le champ est requis"
+      }
+    }
+  },
+
+  "victims": {
+    "form": {
+      "title": "Nouvelle victime",
+      "fields": {},
+      "submit_btn": "Enregistrer",
+      "schema": {}
+    }
   }
 }

@@ -38,6 +38,14 @@ export function useLanguages() {
         },
       },
       {
+        title: `FR - French`,
+        destructiveBtn: false,
+        cancelBtn: false,
+        callBackFn: () => {
+          handleChangeLanguage("fr-FR");
+        },
+      },
+      {
         title: `Cancel`,
         destructiveBtn: false,
         cancelBtn: true,

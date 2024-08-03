@@ -22,6 +22,23 @@ export function useServices() {
       },
     });
   };
+  
+  const useGetService = (id: number) => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_SERVICE, id],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: ResultServiceDto;
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getService,
+          url: apiUrls.dashboard.getService.url + `/${id}`
+        });
+
+        return result;
+      },
+    });
+  };
 
   const addService = useMutation({
     mutationKey: [Keys.Mutations.ADD_SERVICE],
@@ -83,6 +100,7 @@ export function useServices() {
 
   return {
     useGetServices,
+    useGetService,
     useGetServiceTypes,
     addService,
     assignService
