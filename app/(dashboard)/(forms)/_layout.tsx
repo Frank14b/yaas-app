@@ -1,4 +1,4 @@
-import { StackHeader } from "@/components/navigation/StackHeader";
+import { StackHeader } from "@/components";
 import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";

@@ -1,6 +1,8 @@
 import ThemedDrawer from "@/components/common/ThemedDrawer";
+import { StorageKeys } from "@/constants";
 import { TabNavigationWrapper } from "@/contexts";
 import { useUserStore } from "@/stores";
+import { storage } from "@/utils/expo-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
@@ -81,7 +83,8 @@ export default function NavigationLayout() {
   const { setUserConnected, setOnBoardingCompleted } = useUserStore();
   const theme = useColorScheme();
 
-  const proceedLogout = useCallback(() => {
+  const proceedLogout = useCallback(async () => {
+    await storage.deleteItem(StorageKeys.AUTH_TOKEN);
     setOnBoardingCompleted(true);
     setUserConnected(false);
     router.push("/");

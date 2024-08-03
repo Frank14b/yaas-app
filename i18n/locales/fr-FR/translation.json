@@ -4,7 +4,7 @@
   "signIn": {
     "title": "Connexion",
     "form": {
-      "email": "Courriel",
+      "email": "Email",
       "placeholder_email": "Entrez votre courriel",
       "placeholder_password": "Entrez votre mot de passe",
       "password": "Mot de passe",

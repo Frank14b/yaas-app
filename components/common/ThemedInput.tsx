@@ -126,17 +126,17 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   input: {
-    height: 35,
+    height: 45,
     width: "100%",
     borderWidth: 1,
-    borderRadius: 5,
-    padding: 8,
+    borderRadius: 10,
+    padding: 10,
     marginBottom: 15,
     textAlignVertical: "top",
   },
   passwordEye: {
     position: "absolute",
     right: 15,
-    top: 5,
+    top: 10,
   },
 });
