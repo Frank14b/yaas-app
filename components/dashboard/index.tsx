@@ -1,4 +1,5 @@
 export * from "./violences/ViolenceForm";
+export * from "./auth/SignInAdminForm";
 export * from "./auth/SignInForm";
 export * from "./violences/ViolenceListItem";
 export * from "./services/ServiceListItem";

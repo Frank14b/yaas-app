@@ -12,14 +12,14 @@ import {
 } from "react-native";
 
 import { BlurView } from "expo-blur";
-import { SignInForm } from "@/components/dashboard";
+import { SignInAdminForm } from "@/components/dashboard";
 import { useTranslation } from "react-i18next";
 import { Ionicons } from "@expo/vector-icons";
 import { useLanguages } from "@/hooks/useLanguages";
 import { Colors } from "@/constants";
 import { ScreenProps } from "./_layout";
 
-export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
+export default function SignInAdminScreen({ handleChangeScreen }: ScreenProps) {
   //
   const locale = useTranslation().i18n;
   const theme = useColorScheme();
@@ -45,7 +45,7 @@ export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
               <ThemedView
                 style={[styles.wrapperView, dynamicStyle.wrapperView]}
               >
-                <SignInForm />
+                <SignInAdminForm />
               </ThemedView>
               <ThemedView style={styles.localeContainer}>
                 <TouchableOpacity onPress={openLanguageMenu}>
@@ -65,9 +65,9 @@ export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
 
         <ThemedView style={styles.changeUserBtnWrapper}>
           <ThemedButton
-            onPress={() => handleChangeScreen("sign-in-admin")}
+            onPress={() => handleChangeScreen("sign-in")}
             style={{ backgroundColor: Colors.secondaryDark }}
-            title={"Sign In as Admin"} //{t("signIn.form.submit_btn")}
+            title={"Sign In as User"} //{t("signIn.form.submit_btn")}
           />
         </ThemedView>
       </AnimateFadeInView>

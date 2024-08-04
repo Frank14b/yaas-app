@@ -5,6 +5,7 @@ import { Environments } from "@/constants/Environment";
 import { storage } from "@/utils/expo-storage";
 import { StorageKeys } from "@/constants";
 import { router } from "expo-router";
+import { logger } from "@/utils/logger";
 
 //create axios api call instance
 const instance = axios.create({
@@ -68,6 +69,8 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     return ApiSuccessMessage<R>(response.data, response.status);
   } catch (error) {
+
+    logger.Error(error);
 
     if (axios.isCancel(error)) {
       console.log("Request cancelled");

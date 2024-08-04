@@ -20,6 +20,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthWrapper } from "@/contexts";
 import "@/i18n";
 import { logger } from "@/utils/logger";
+import { Environments } from "@/constants";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,7 +39,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      logger.init(); // init the logger
+      Environments.APP_ENV != "dev" && logger.init(); // init the logger
       SplashScreen.hideAsync();
     }
   }, [loaded]);

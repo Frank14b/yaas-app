@@ -14,6 +14,7 @@ export type ThemedButtonProps = PressableProps & {
   darkColor?: string;
   isLoading?: boolean;
   btnStyle?: any;
+  style?: any;
 };
 
 export function ThemedButton({
@@ -22,11 +23,12 @@ export function ThemedButton({
   darkColor,
   isLoading,
   btnStyle,
+  style,
   ...rest
 }: ThemedButtonProps) {
   return (
     <Pressable {...rest}>
-      <ThemedView style={[styles.wrapper]}>
+      <ThemedView style={[styles.wrapper, style]}>
         {isLoading ? (
           <ThemedView style={styles.indicatorWrapper}>
             <ActivityIndicator color={"#fff"} size={"small"} />

@@ -2,7 +2,7 @@
   "language": "Langue",
 
   "signIn": {
-    "title": "Connexion",
+    "title": "Connexion Admin",
     "form": {
       "email": "Email",
       "placeholder_email": "Entrez votre courriel",

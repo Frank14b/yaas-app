@@ -14,7 +14,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet } from "react-native";
 
-export function SignInForm() {
+export function SignInAdminForm() {
   //
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -51,8 +51,7 @@ export function SignInForm() {
     <>
       <ThemedFormView>
         <ThemedText style={styles.title} type="title">
-          {/* {t("signIn.title")} */}
-          Sign In User
+          {t("signIn.title")}
         </ThemedText>
 
         <ThemedInput

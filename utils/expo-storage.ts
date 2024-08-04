@@ -1,10 +1,12 @@
 import * as SecureStore from "expo-secure-store";
+import { logger } from "./logger";
 
 const setItem = async (key: string, value: string) => {
   try {
     await SecureStore.setItemAsync(key, value);
     return true;
   } catch (error) {
+    logger.Error(error);
     return false;
   }
 };
@@ -21,6 +23,7 @@ const getItem = async <T>(
 
     return storedData as T;
   } catch (error) {
+    logger.Error(error);
     return undefined;
   }
 };
@@ -30,6 +33,7 @@ const deleteItem = async (key: string) => {
     await SecureStore.deleteItemAsync(key);
     return true;
   } catch (error) {
+    logger.Error(error);
     return false;
   }
 };
