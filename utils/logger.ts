@@ -6,7 +6,7 @@ const init = () => {
   Sentry.init({
     dsn: Environments.SENTRY_DSN,
     debug: true, // For development
-    enableNative: true, // To capture native crashes
+    enableNative: false, // To capture native crashes
     tracesSampleRate: 1.0,
   });
   allSettled.shim();

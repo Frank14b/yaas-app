@@ -13,11 +13,13 @@ export type ThemedFormPickerSelectProps = Omit<
 > & {
   label: string;
   name: string;
+  placeHolder?: string;
 };
 
 export function ThemedFormPickerSelect({
   label,
   name,
+  placeHolder,
   items,
   ...rest
 }: ThemedFormPickerSelectProps) {
@@ -72,7 +74,7 @@ export function ThemedFormPickerSelect({
               {items.find((i) => i.value == value)?.label}
             </ThemedText>
           ) : (
-            <ThemedText>Choose an item</ThemedText>
+            <ThemedText>{placeHolder ?? "Choose an item"}</ThemedText>
           )}
         </ThemedView>
 
