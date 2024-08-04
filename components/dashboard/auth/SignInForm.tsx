@@ -28,7 +28,7 @@ export function SignInForm() {
     },
   });
 
-  const { isLoading, mutateAsync } = useSignIn();
+  const { isPending, mutateAsync } = useSignIn().userSignIn;
 
   const proceedSignIn = useCallback(
     async (data: AuthDto) => {
@@ -51,8 +51,7 @@ export function SignInForm() {
     <>
       <ThemedFormView>
         <ThemedText style={styles.title} type="title">
-          {/* {t("signIn.title")} */}
-          Sign In User
+          {t("signIn.user.title")}
         </ThemedText>
 
         <ThemedInput
@@ -72,8 +71,8 @@ export function SignInForm() {
         />
 
         <ThemedButton
-          isLoading={isLoading}
-          disabled={isLoading}
+          isLoading={isPending}
+          disabled={isPending}
           title={t("signIn.form.submit_btn")}
           onPress={handleSubmit(proceedSignIn)}
         />

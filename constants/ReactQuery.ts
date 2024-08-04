@@ -19,6 +19,7 @@ export const Keys = {
   },
   Mutations: {
     SIGNIN: "SIGNIN",
+    ADMIN_SIGNIN: "ADMIN_SIGNIN",
     ADD_VIOLENCE: "ADD_VIOLENCE",
     ADD_INVESTIGATION: "ADD_INVESTIGATION",
     ADD_SERVICE: "ADD_SERVICE",

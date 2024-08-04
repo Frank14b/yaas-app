@@ -28,7 +28,7 @@ export default function SignInAdminScreen({ handleChangeScreen }: ScreenProps) {
   const dynamicStyle = {
     wrapperView: {
       backgroundColor:
-        theme == "dark" ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.7)",
+        theme == "dark" ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.6)",
     },
   };
 
@@ -66,7 +66,9 @@ export default function SignInAdminScreen({ handleChangeScreen }: ScreenProps) {
         <ThemedView style={styles.changeUserBtnWrapper}>
           <ThemedButton
             onPress={() => handleChangeScreen("sign-in")}
-            style={{ backgroundColor: Colors.secondaryDark }}
+            style={{
+              backgroundColor: theme == "dark" ? Colors.secondaryDark : "#ddd",
+            }}
             title={"Sign In as User"} //{t("signIn.form.submit_btn")}
           />
         </ThemedView>

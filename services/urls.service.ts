@@ -172,3 +172,102 @@ export const apiUrls: {
     },
   },
 };
+
+
+export const userApiUrls: {
+  [key: string]: ApiUrlsDto;
+} = {
+  auth: {
+    login: {
+      url: `${apiVersion.v1}/signin`,
+      method: 'POST',
+      isSecure: false,
+    },
+    validateSession: {
+      url: `${apiVersion.v1}/validate-token`,
+      method: 'POST',
+      isSecure: true,
+    }
+  },
+  dashboard: {
+    getStats: {
+      url: `${apiVersion.v1}/dashboard/totals`,
+      method: 'GET',
+      isSecure: true,
+    },
+
+    getViolences: {
+      url: `${apiVersion.v1}/notices`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getViolence: {
+      url: `${apiVersion.v1}/notices`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addViolence: {
+      url: `${apiVersion.v1}/notices/add`,
+      method: 'POST',
+      isSecure: true,
+    },
+    getPollTypes: {
+      url: `${apiVersion.v1}/pollmethods`,
+      method: "GET",
+      isSecure: true,
+    },
+    getInvestigations: {
+      url: `${apiVersion.v1}/noticepolls`,
+      method: "GET",
+      isSecure: true,
+    },
+    getViolenceOptions: {
+      url: `${apiVersion.v1}/poll-options`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getViolenceTypes: {
+      url: `${apiVersion.v1}/noticetypes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getViolenceFlags: {
+      url: `${apiVersion.v1}/noticeflags`,
+      method: 'GET',
+      isSecure: true,
+    },
+
+    getServices: {
+      url: `${apiVersion.v1}/consultations`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getService: {
+      url: `${apiVersion.v1}/consultations`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addService: {
+      url: `${apiVersion.v1}/consultations`,
+      method: 'POST',
+      isSecure: true,
+    },
+    getServiceTypes: {
+      url: `${apiVersion.v1}/consultation-types`,
+      method: 'GET',
+      isSecure: true,
+    },
+
+    getCountries: {
+      url: `${apiVersion.v1}/countries`,
+      method: 'GET',
+      isSecure: true,
+    },
+
+    getOrganizations: {
+      url: `${apiVersion.v1}/organisations`,
+      method: 'GET',
+      isSecure: true,
+    }
+  },
+};

@@ -17,6 +17,10 @@
       "invalid_email": "Toa barua pepe halali",
       "email_is_required": "Anwani ya barua pepe inahitajika",
       "invalid_password": "Toa nenosiri halali"
+    },
+
+    "user": {
+      "title": "Ingia"
     }
   },
 

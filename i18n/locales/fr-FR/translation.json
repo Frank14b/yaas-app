@@ -17,6 +17,10 @@
       "invalid_email": "Veuillez fournir un courriel valide",
       "email_is_required": "Le courriel est requis",
       "invalid_password": "Veuillez fournir un mot de passe valide"
+    },
+
+    "user": {
+      "title": "Connexion"
     }
   },
 

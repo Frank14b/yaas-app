@@ -17,6 +17,10 @@
       "invalid_email": "Provide a valid email",
       "email_is_required": "Email address is required",
       "invalid_password": "Provide a valid password"
+    },
+
+    "user": {
+      "title": "User Sign In"
     }
   },
 

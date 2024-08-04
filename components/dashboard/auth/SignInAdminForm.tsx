@@ -28,7 +28,7 @@ export function SignInAdminForm() {
     },
   });
 
-  const { isLoading, mutateAsync } = useSignIn();
+  const { isPending, mutateAsync } = useSignIn().adminSignIn;
 
   const proceedSignIn = useCallback(
     async (data: AuthDto) => {
@@ -71,8 +71,8 @@ export function SignInAdminForm() {
         />
 
         <ThemedButton
-          isLoading={isLoading}
-          disabled={isLoading}
+          isLoading={isPending}
+          disabled={isPending}
           title={t("signIn.form.submit_btn")}
           onPress={handleSubmit(proceedSignIn)}
         />

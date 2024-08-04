@@ -28,7 +28,7 @@ export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
   const dynamicStyle = {
     wrapperView: {
       backgroundColor:
-        theme == "dark" ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.7)",
+        theme == "dark" ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.4)",
     },
   };
 
@@ -39,7 +39,7 @@ export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
           <ImageBackground
             resizeMode="cover"
             style={styles.bgImage}
-            source={require("@/assets/images/hand-solidarity.png")}
+            source={require("@/assets/images/solidarityy.jpg")}
           >
             <BlurView intensity={40} style={styles.blurContainer}>
               <ThemedView
@@ -66,7 +66,7 @@ export default function SignInScreen({ handleChangeScreen }: ScreenProps) {
         <ThemedView style={styles.changeUserBtnWrapper}>
           <ThemedButton
             onPress={() => handleChangeScreen("sign-in-admin")}
-            style={{ backgroundColor: Colors.secondaryDark }}
+            style={{ backgroundColor: theme == "dark" ? Colors.secondaryDark : "#ddd" }}
             title={"Sign In as Admin"} //{t("signIn.form.submit_btn")}
           />
         </ThemedView>
