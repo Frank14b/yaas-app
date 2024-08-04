@@ -103,31 +103,26 @@
 
   "investigations": {
     "form": {
-      "title": "Nouvelle documentation",
+      "title": "Nouvelle Documentation",
       "fields": {
-        "incident_date": "Date de l'enquête",
-        "victim": "Victime",
-        "nature": "Nature",
-        "type": "Type",
+        "document_date": "Date du document",
+        "source": "Source",
+        "author": "Auteur de l'incident",
+        "method": "Méthode",
         "flag": "Drapeau",
-        "country": "Pays",
-        "city": "Ville",
-        "details": "Détails",
-        "details_placeholder": "Décrivez ce qui s'est passé"
+        "details": "Ce qui a été fait",
+        "details_placeholder": "Ce qui a été fait",
+        "second_details": "Notes d'observation",
+        "second_details_placeholder": "Notes d'observation",
+        "refer_organization": "Organisation de référence",
+        "referal_organization": "Organisation référente"
       },
       "submit_btn": "Enregistrer l'enquête",
       "schema": {
-        "victim_is_required": "La victime est requise",
-        "first_name_required": "Le prénom est requis",
-        "phone_required": "Le téléphone est requis",
-        "gender_required": "Le sexe est requis",
-        "type_required": "Le type est requis",
-        "flag_required": "Le drapeau est requis",
-        "nature_required": "La nature est requise",
-        "location_required": "L'emplacement est requis",
-        "country_required": "Le pays est requis",
-        "city_required": "La ville est requise",
-        "date_required": "La date est requise"
+        "flag_required": "L'identifiant du drapeau est requis",
+        "source_required": "La source est requise",
+        "violenceAuthor_required": "L'auteur de la violence est requis",
+        "pollmethod_id_required": "La méthode est requise"
       }
     }
   },

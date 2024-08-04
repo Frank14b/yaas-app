@@ -50,6 +50,21 @@ export const apiUrls: {
       method: 'POST',
       isSecure: true,
     },
+    getPollTypes: {
+      url: `${apiVersion.v1}/admin/pollmethods`,
+      method: "GET",
+      isSecure: true,
+    },
+    getInvestigations: {
+      url: `${apiVersion.v1}/admin/noticepolls`,
+      method: "GET",
+      isSecure: true,
+    },
+    addInvestigation: {
+      url: `${apiVersion.v1}/admin/noticepolls/add`,
+      method: 'POST',
+      isSecure: true,
+    },
     getViolenceOptions: {
       url: `${apiVersion.v1}/admin/poll-options`,
       method: 'GET',

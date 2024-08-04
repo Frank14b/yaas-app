@@ -46,7 +46,7 @@ export function ThemedFormView({ style, children }: ThemedFormViewProps) {
         contentContainerStyle={[
           { ...styles.scrollViewContainer },
           style,
-          { paddingBottom: keyboardHeight },
+          keyboardHeight > 0 && { paddingBottom: keyboardHeight },
         ]}
       >
         {children}

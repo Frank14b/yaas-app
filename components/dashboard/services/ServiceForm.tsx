@@ -16,7 +16,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 
 export function ServiceForm() {
   //
@@ -38,19 +38,19 @@ export function ServiceForm() {
   const { addService, useGetServiceTypes } = useServices();
   const { useGetCountries } = useCountries();
   const getCountries = useGetCountries();
-    const getTypes = useGetServiceTypes();
+  const getTypes = useGetServiceTypes();
   const { cities } = useCities({ countryKeyName: "country" });
 
-    const types = useMemo(() => {
-      return (
-        getTypes.data?.data?.data.map((item) => {
-          return {
-            label: item.name,
-            value: `${item.id}`,
-          };
-        }) ?? []
-      );
-    }, [getTypes.data]);
+  const types = useMemo(() => {
+    return (
+      getTypes.data?.data?.data.map((item) => {
+        return {
+          label: item.name,
+          value: `${item.id}`,
+        };
+      }) ?? []
+    );
+  }, [getTypes.data]);
 
   const countries = useMemo(() => {
     return (
@@ -68,6 +68,8 @@ export function ServiceForm() {
     if (result.status) {
       queryClient.invalidateQueries({ queryKey: [Keys.Queries.GET_SERVICES] });
       router.back();
+    } else {
+      Alert.alert(`Error`, `${result.data?.message}`);
     }
   }, []);
 
@@ -110,14 +112,16 @@ export function ServiceForm() {
           multiline={true}
           numberOfLines={5}
         />
+      </ThemedFormView>
 
+      <ThemedView style={styles.submitButtonWrapper}>
         <ThemedButton
           title={t("services.form.submit_btn")}
           onPress={handleSubmit(proceedSave)}
           isLoading={addService.isPending}
           disabled={addService.isPending}
         />
-      </ThemedFormView>
+      </ThemedView>
     </>
   );
 }
@@ -144,5 +148,12 @@ const styles = StyleSheet.create({
   },
   userAddIcon: {
     marginTop: 45,
+  },
+  submitButtonWrapper: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 15,
   },
 });

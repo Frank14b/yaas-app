@@ -6,3 +6,4 @@ export * from "./users/UserForm";
 export * from "./services/ServiceForm";
 export * from "./violences/ViolenceDetails";
 export * from "./services/ServiceDetails";
+export * from "./violences/InvestigationForm";

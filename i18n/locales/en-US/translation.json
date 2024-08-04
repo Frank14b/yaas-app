@@ -105,29 +105,24 @@
     "form": {
       "title": "New Documentation",
       "fields": {
-        "incident_date": "Investigation Date",
-        "victim": "Victim",
-        "nature": "Nature",
-        "type": "Type",
+        "document_date": "Documentation Date",
+        "source": "Source",
+        "author": "Incident Author",
+        "method": "Method",
         "flag": "Flag",
-        "country": "Country",
-        "city": "City",
-        "details": "Details",
-        "details_placeholder": "Describe what happen"
+        "details": "What have been done",
+        "details_placeholder": "What have been done",
+        "second_details": "Observation notes",
+        "second_details_placeholder": "Observation notes",
+        "refer_organization": "Refer to Organization",
+        "referal_organization": "Referred from Organization"
       },
       "submit_btn": "Save Investigation",
       "schema": {
-        "victim_is_required": "Victim is required",
-        "first_name_required": "First name is required",
-        "phone_required": "Phone is required",
-        "gender_required": "Gender is required",
-        "type_required": "Type is required",
-        "flag_required": "Flag is required",
-        "nature_required": "Nature is required",
-        "location_required": "Location is required",
-        "country_required": "Country is required",
-        "city_required": "City is required",
-        "date_required": "Date is required"
+        "flag_required": "Flag id is required",
+        "source_required": "Source is required",
+        "violenceAuthor_required": "Violence author is required",
+        "pollmethod_id_required": "Method is required"
       }
     }
   },

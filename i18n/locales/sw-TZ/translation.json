@@ -103,31 +103,26 @@
 
   "investigations": {
     "form": {
-      "title": "Hati Mpya",
+      "title": "Uandishi Mpya wa Nyaraka",
       "fields": {
-        "incident_date": "Tarehe ya Uchunguzi",
-        "victim": "Mwathiriwa",
-        "nature": "Aina",
-        "type": "Aina",
-        "flag": "Bendi",
-        "country": "Nchi",
-        "city": "Mji",
-        "details": "Maelezo",
-        "details_placeholder": "Eleza kilichotokea"
+        "document_date": "Tarehe ya Nyaraka",
+        "source": "Chanzo",
+        "author": "Mwandishi wa Tukio",
+        "method": "Njia",
+        "flag": "Bendera",
+        "details": "Kilichofanyika",
+        "details_placeholder": "Kilichofanyika",
+        "second_details": "Maelezo ya Uchunguzi",
+        "second_details_placeholder": "Maelezo ya Uchunguzi",
+        "refer_organization": "Shirika Linaloelekezwa",
+        "referal_organization": "Shirika Lililoelekeza"
       },
       "submit_btn": "Hifadhi Uchunguzi",
       "schema": {
-        "victim_is_required": "Mwathiriwa anahitajika",
-        "first_name_required": "Jina la kwanza linahitajika",
-        "phone_required": "Simu inahitajika",
-        "gender_required": "Jinsia inahitajika",
-        "type_required": "Aina inahitajika",
-        "flag_required": "Bendi inahitajika",
-        "nature_required": "Aina inahitajika",
-        "location_required": "Mahali inahitajika",
-        "country_required": "Nchi inahitajika",
-        "city_required": "Mji unahitajika",
-        "date_required": "Tarehe inahitajika"
+        "flag_required": "Kitambulisho cha bendera kinahitajika",
+        "source_required": "Chanzo kinahitajika",
+        "violenceAuthor_required": "Mwandishi wa ukatili anahitajika",
+        "pollmethod_id_required": "Njia inahitajika"
       }
     }
   },

@@ -1,7 +1,10 @@
 import { Keys } from "@/constants";
 import { apiCall, apiUrls } from "@/services";
 import {
+  CreateInvestigationDto,
   CreateViolenceDto,
+  InvestigationMethodDto,
+  ResultInvestigationDto,
   ResultPaginate,
   ResultViolenceDto,
   ViolenceOptions,
@@ -34,7 +37,7 @@ export function useViolences() {
           message: string;
         }>({
           ...apiUrls.dashboard.getViolence,
-          url: apiUrls.dashboard.getViolence.url + `/${id}`
+          url: apiUrls.dashboard.getViolence.url + `/${id}`,
         });
 
         return result;
@@ -53,7 +56,7 @@ export function useViolences() {
           ...data,
           name: "-",
           area: "-",
-          date_occured: new Date(data.date_occured).getTime()
+          date_occured: new Date(data.date_occured).getTime(),
         },
         ...apiUrls.dashboard.addViolence,
       });
@@ -110,12 +113,50 @@ export function useViolences() {
     });
   };
 
+  const addInvestigation = useMutation({
+    mutationKey: [Keys.Mutations.ADD_INVESTIGATION],
+    mutationFn: async (data: CreateInvestigationDto) => {
+      const result = await apiCall<{
+        data: ResultInvestigationDto;
+        message: string;
+      }>({
+        data: {
+          ...data,
+          datepoll: new Date(data.datepoll).getTime(),
+          transition: "-",
+          etat_passing: "_",
+        },
+        ...apiUrls.dashboard.addInvestigation,
+      });
+
+      return result;
+    },
+  });
+
+  const getInvestigationTypes = () => {
+    return useQuery({
+      queryKey: [Keys.Queries.GET_INVESTIGATION_TYPES],
+      queryFn: async () => {
+        const result = await apiCall<{
+          data: InvestigationMethodDto[];
+          message: string;
+        }>({
+          ...apiUrls.dashboard.getPollTypes,
+        });
+
+        return result;
+      },
+    });
+  };
+
   return {
     getViolences,
     useGetViolence,
     getViolenceOptions,
     getViolenceTypes,
     getViolenceFlags,
+    getInvestigationTypes,
     addViolence,
+    addInvestigation,
   };
 }

@@ -39,26 +39,38 @@ export const AddViolenceSchema = () => {
       .shape({
         firstname: yup
           .string()
-          .test("firstName", t("violences.form.schema.first_name_required"), (_) => {
-            return isFirstNamValid;
-          }),
+          .test(
+            "firstName",
+            t("violences.form.schema.first_name_required"),
+            (_) => {
+              return isFirstNamValid;
+            }
+          ),
         lastname: yup.string().notRequired(),
         phone: yup
           .number()
           .positive()
           .integer()
-          .test("phoneNumber", t("violences.form.schema.phone_required"), (_) => {
-            return isFirstNamValid;
-          }),
+          .test(
+            "phoneNumber",
+            t("violences.form.schema.phone_required"),
+            (_) => {
+              return isFirstNamValid;
+            }
+          ),
         email: yup.string().email().notRequired(),
         profession: yup.string().notRequired(),
         age: yup.number().required(),
         address: yup.string().notRequired(),
-        gender: yup.string().test("gender", t("violences.form.schema.gender_required"), (_) => {
-          return isGenderValid;
-        }),
+        gender: yup
+          .string()
+          .test("gender", t("violences.form.schema.gender_required"), (_) => {
+            return isGenderValid;
+          }),
       }),
-    date_occured: yup.string().required(t("violences.form.schema.date_required")),
+    date_occured: yup
+      .string()
+      .required(t("violences.form.schema.date_required")),
     country: yup.string().required(t("violences.form.schema.country_required")),
     city: yup.string().required(t("violences.form.schema.city_required")),
     details: yup.string().min(10, "Min. 10 Char.").required(),
@@ -71,18 +83,17 @@ export const AddViolenceSchema = () => {
       .min(1, t("violences.form.schema.flag_required"))
       .required(t("violences.form.schema.flag_required")),
     nature: yup.string().required(t("violences.form.schema.nature_required")),
-    natureLocation: yup.string().required(t("violences.form.schema.location_required")),
+    natureLocation: yup
+      .string()
+      .required(t("violences.form.schema.location_required")),
   });
 };
 
-export const AddInvestigation = () => {
+export const AddInvestigationSchema = () => {
   const { t } = useTranslation();
 
   return yup.object({
-    notice_id: yup
-      .number()
-      .min(0, t("investigations.form.schema.victim_is_required"))
-      .required(t("investigations.form.schema.victim_is_required")),
+    notice_id: yup.number().min(0).required(),
     datepoll: yup.date().required(),
     details: yup.string().min(10, "Min. 10 Char.").required(),
     second_details: yup.string().min(10, "Min. 10 Char.").required(),
@@ -90,8 +101,12 @@ export const AddInvestigation = () => {
       .number()
       .min(1, t("investigations.form.schema.flag_required"))
       .required(t("investigations.form.schema.flag_required")),
-    source: yup.string().required(t("investigations.form.schema.source_required")),
-    violenceAuthor: yup.string().required(t("investigations.form.schema.violenceAuthor_required")),
+    source: yup
+      .string()
+      .required(t("investigations.form.schema.source_required")),
+    violenceAuthor: yup
+      .string()
+      .required(t("investigations.form.schema.violenceAuthor_required")),
     pollmethod_id: yup
       .number()
       .min(1, t("investigations.form.schema.pollmethod_id_required"))

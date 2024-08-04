@@ -89,7 +89,7 @@ export function ViolenceDetails({ item }: ViolenceDetailsProps) {
       <ThemedView style={styles.containerFooter}>
         <ThemedButton
           style={styles.addButtonContainer}
-          onPress={() => router.push("(forms)/user")}
+          onPress={() => router.push(`(forms)/investigation?noticeId=${item.id}`)}
           title={t("violences.details.add_doc")}
         />
       </ThemedView>

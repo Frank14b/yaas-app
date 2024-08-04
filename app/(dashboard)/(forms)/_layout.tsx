@@ -19,6 +19,16 @@ export default function FormsLayout() {
         }}
       />
       <Stack.Screen
+        name="investigation"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("investigations.form.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
+      <Stack.Screen
         name="service"
         options={{
           headerShown: true,

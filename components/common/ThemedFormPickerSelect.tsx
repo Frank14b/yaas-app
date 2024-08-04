@@ -74,7 +74,7 @@ export function ThemedFormPickerSelect({
               {items.find((i) => i.value == value)?.label}
             </ThemedText>
           ) : (
-            <ThemedText>{placeHolder ?? "Choose an item"}</ThemedText>
+            <ThemedText darkColor="#555">{placeHolder ?? "Choose an item"}</ThemedText>
           )}
         </ThemedView>
 

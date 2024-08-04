@@ -24,7 +24,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 
 export function ViolenceForm() {
   //
@@ -139,6 +139,8 @@ export function ViolenceForm() {
     if (result.status) {
       queryClient.invalidateQueries({ queryKey: [Keys.Queries.GET_VIOLENCES] });
       router.back();
+    } else {
+      Alert.alert(`Error`, `${result.data?.message}`);
     }
   }, []);
 
@@ -165,7 +167,7 @@ export function ViolenceForm() {
             color={"#aaa"}
             name="person-add"
             size={25}
-            onPress={() => router.push(`(forms)/victim`)}
+            onPress={() => router.push<string>("(forms)/victim")}
           />
         </ThemedView>
 
@@ -223,14 +225,16 @@ export function ViolenceForm() {
           multiline={true}
           numberOfLines={5}
         />
+      </ThemedFormView>
 
+      <ThemedView style={styles.submitButtonWrapper}>
         <ThemedButton
           title={t("violences.form.submit_btn")}
           onPress={handleSubmit(proceedSaveViolence)}
           isLoading={addViolence.isPending}
           disabled={addViolence.isPending}
         />
-      </ThemedFormView>
+      </ThemedView>
     </>
   );
 }
@@ -257,5 +261,12 @@ const styles = StyleSheet.create({
   },
   userAddIcon: {
     marginTop: 45,
+  },
+  submitButtonWrapper: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 15,
   },
 });
