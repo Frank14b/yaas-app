@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { useLanguages } from "@/hooks/useLanguages";
+import { useUserStore } from "@/stores";
 
 export type CardBox = {
   title: string;
@@ -80,6 +81,8 @@ export default function HomeScreen() {
   const { stats } = useDashboardStats();
   const { openLanguageMenu } = useLanguages();
 
+  const { isAdmin } = useUserStore();
+
   const goToPage = useCallback((path: string) => {
     router.push(path);
   }, []);
@@ -105,7 +108,11 @@ export default function HomeScreen() {
         headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
         headerImage={
           <Image
-            source={require("@/assets/images/on-boarding/Team-spirit-bro.png")}
+            source={
+              isAdmin
+                ? require("@/assets/images/on-boarding/Team-spirit-bro.png")
+                : require("@/assets/images/holding-hands-with-olive-leaves.png")
+            }
             style={styles.reactLogo}
           />
         }
@@ -114,7 +121,19 @@ export default function HomeScreen() {
           <ThemedText type="title">{t("homeScreen.welcome")}</ThemedText>
           <HelloWave />
         </ThemedView>
-        <ThemedView style={styles.boxContainer}>{statsComponent}</ThemedView>
+        <ThemedView style={styles.boxContainer}>
+          {isAdmin && statsComponent}
+          {!isAdmin && (
+            <>
+              <ThemedCardBox
+                onPress={() => goToPage("")}
+                name={"warning-sharp"}
+                title={""}
+                value={0}
+              ></ThemedCardBox>
+            </>
+          )}
+        </ThemedView>
       </ParallaxScrollView>
 
       <ThemedView style={styles.localeContainer}>
@@ -129,7 +148,6 @@ export default function HomeScreen() {
           </ThemedView>
         </TouchableOpacity>
       </ThemedView>
-
     </AnimateSlideInView>
   );
 }

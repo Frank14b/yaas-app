@@ -8,7 +8,7 @@ import {
 import { useAppForm, useSignIn } from "@/hooks";
 import { useUserStore } from "@/stores";
 import { AuthDto } from "@/types";
-import { SignInSchema } from "@/validators";
+import { SignInAdminSchema } from "@/validators";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +21,7 @@ export function SignInAdminForm() {
   const { user, setUserConnected, setUser } = useUserStore();
 
   const { handleSubmit } = useAppForm({
-    schema: SignInSchema(),
+    schema: SignInAdminSchema(),
     defaultValues: {
       email: user?.email ?? "",
       password: "",

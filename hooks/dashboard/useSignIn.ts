@@ -17,6 +17,7 @@ export function useSignIn() {
 
       if (result.status) {
         await storage.setItem(StorageKeys.AUTH_TOKEN, `${result.data?.token}`);
+        await storage.setItem(StorageKeys.IS_ADMIN_USER, `${true}`);
       }
 
       return result;
@@ -33,6 +34,7 @@ export function useSignIn() {
 
       if (result.status) {
         await storage.setItem(StorageKeys.AUTH_TOKEN, `${result.data?.token}`);
+        await storage.setItem(StorageKeys.IS_ADMIN_USER, `${false}`);
       }
 
       return result;

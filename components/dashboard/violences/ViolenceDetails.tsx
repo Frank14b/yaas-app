@@ -123,9 +123,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-  },
-  addButtonContainer: {
-    borderRadius: 0,
     padding: 20,
-  }
+  },
+  addButtonContainer: {}
 });

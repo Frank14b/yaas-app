@@ -9,6 +9,8 @@ export type StoreType = {
   loading: boolean;
   userConnected: boolean;
   onBoardingCompleted: boolean;
+  isAdmin: boolean;
+  setIsAdmin: (status: boolean) => void;
   setUser: (userData: ResultUserDto | null) => void;
   setLoading: (newLoading: boolean) => void;
   setUserConnected: (connectedStatus: boolean) => void;
@@ -22,6 +24,8 @@ export const useUserStore = create<StoreType>()(
       loading: true, // Tracks if user data is loading
       userConnected: get()?.userConnected ?? false, // initial user auth status
       onBoardingCompleted: get()?.onBoardingCompleted ?? false,
+      isAdmin: get()?.isAdmin ?? false,
+      setIsAdmin: (status: boolean) => set({isAdmin: status}),
       setUser: (newUser: any) => set({ user: newUser }), // Action to update user info
       setLoading: (newLoading: any) => set({ loading: newLoading }), // Action to update loading state
       setUserConnected: (connectedStatus: boolean) =>

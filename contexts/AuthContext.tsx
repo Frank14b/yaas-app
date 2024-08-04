@@ -13,9 +13,9 @@ export function AuthWrapper({ children }: { children: any }) {
   //
   const pathName = usePathname();
 
-  const { setUserConnected, setUser } = useUserStore();
+  const { setUserConnected, setUser, setIsAdmin } = useUserStore();
 
-  const { data, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: [Keys.Queries.VALIDATE_SESSION],
     queryFn: async () => {
       const result = await apiCall<{
@@ -38,6 +38,12 @@ export function AuthWrapper({ children }: { children: any }) {
           //
           setUserConnected(true);
           setUser(result.data.data as any);
+
+          if(result.data.data.is_admin == false) {
+            setIsAdmin(false)
+          }else{
+            setIsAdmin(true)
+          }
         }
       }
 

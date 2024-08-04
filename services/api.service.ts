@@ -57,6 +57,13 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     await applyRequestInterceptor({ isSecure }); // apply request interceptor
 
+    if(isSecure) {
+      const isAdmin = await storage.getItem<boolean>(StorageKeys.IS_ADMIN_USER) ?? false;
+      if(isAdmin) {
+        url = url.replace(`/admin/`, '/');
+      }
+    }
+
     const response = await instance({
       method,
       url,

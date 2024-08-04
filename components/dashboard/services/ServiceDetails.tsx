@@ -83,7 +83,7 @@ export function ServiceDetails({ item }: ServiceDetailsProps) {
         </ThemedView>
       </ThemedView>
 
-      {!item.agent.id && user?.id != item.user.id && (
+      {!item.agent?.id && user?.id != item.user.id && (
         <>
           <ThemedView style={styles.containerFooter}>
             <ThemedButton
@@ -122,9 +122,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
+    padding: 20
   },
-  addButtonContainer: {
-    borderRadius: 0,
-    padding: 20,
-  },
+  addButtonContainer: {},
 });

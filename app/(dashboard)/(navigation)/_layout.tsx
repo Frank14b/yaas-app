@@ -11,77 +11,81 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-const SCREENS = [
-  {
-    name: "(tabs)",
-    options: {
-      label: "navigation.home",
-      showHeader: false,
-      icon: "home",
-      drawerItemStyle: {},
+const getScreens = (isAdmin: boolean) => {
+  return [
+    {
+      name: "(tabs)",
+      options: {
+        label: "navigation.home",
+        showHeader: false,
+        icon: "home",
+        drawerItemStyle: isAdmin ? {} : {},
+      },
     },
-  },
-  {
-    name: "countries",
-    options: {
-      label: "navigation.countries",
-      showHeader: true,
-      icon: "globe",
-      drawerItemStyle: {},
+    {
+      name: "countries",
+      options: {
+        label: "navigation.countries",
+        showHeader: true,
+        icon: "globe",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-  {
-    name: "users",
-    options: {
-      label: "navigation.users",
-      showHeader: true,
-      icon: "people",
-      drawerItemStyle: {},
+    {
+      name: "users",
+      options: {
+        label: "navigation.users",
+        showHeader: true,
+        icon: "people",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-  {
-    name: "access",
-    options: {
-      label: "navigation.role_access",
-      showHeader: true,
-      icon: "lock-open",
-      drawerItemStyle: {},
+    {
+      name: "access",
+      options: {
+        label: "navigation.role_access",
+        showHeader: true,
+        icon: "lock-open",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-  {
-    name: "victims",
-    options: {
-      label: "navigation.victims",
-      showHeader: true,
-      icon: "person-add",
-      drawerItemStyle: {},
+    {
+      name: "victims",
+      options: {
+        label: "navigation.victims",
+        showHeader: true,
+        icon: "person-add",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-  {
-    name: "organizations",
-    options: {
-      label: "navigation.organizations",
-      showHeader: true,
-      icon: "home-outline",
-      drawerItemStyle: {},
+    {
+      name: "organizations",
+      options: {
+        label: "navigation.organizations",
+        showHeader: true,
+        icon: "home-outline",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-  {
-    name: "settings",
-    options: {
-      label: "navigation.settings",
-      showHeader: true,
-      icon: "settings",
-      drawerItemStyle: {},
+    {
+      name: "settings",
+      options: {
+        label: "navigation.settings",
+        showHeader: true,
+        icon: "settings",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
     },
-  },
-];
+  ];
+};
 
 export default function NavigationLayout() {
   //
   const { t } = useTranslation();
-  const { setUserConnected, setOnBoardingCompleted } = useUserStore();
+  const { isAdmin, setUserConnected, setOnBoardingCompleted } = useUserStore();
   const theme = useColorScheme();
+
+  const SCREENS = getScreens(isAdmin);
 
   const proceedLogout = useCallback(async () => {
     await storage.deleteItem(StorageKeys.AUTH_TOKEN);
