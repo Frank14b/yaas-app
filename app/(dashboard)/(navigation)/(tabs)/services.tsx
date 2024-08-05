@@ -1,6 +1,7 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
+  ThemedNoDataFound,
   ThemedText,
   ThemedView,
 } from "@/components";
@@ -9,7 +10,7 @@ import { ServiceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useServices } from "@/hooks";
 import { ResultServiceDto } from "@/types";
-import { router, useNavigation } from "expo-router";
+import { Href, router, useNavigation } from "expo-router";
 import { useCallback, useEffect, useMemo } from "react";
 import { Image, StyleSheet } from "react-native";
 
@@ -22,12 +23,12 @@ export default function ServicesScreen() {
   const { openActionSheet } = useAppActionSheet({});
 
   const handleOpenDetails = (item: ResultServiceDto) => {
-    router.push(`(details)/service?id=${item.id}`);
+    router.push(`(details)/service?id=${item.id}` as Href);
   };
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      router.push("(forms)/service");
+      router.push("(forms)/service" as Href);
     }
   }, []);
 
@@ -68,10 +69,11 @@ export default function ServicesScreen() {
 
   const services = useMemo(() => {
     if (getServices.isLoading) return <ThemedText>Loading...</ThemedText>;
-    if (!getServices.data?.status)
-      return <ThemedText>Service no found</ThemedText>;
+    
+    if (getServices.data?.data?.data.length == 0)
+      return <ThemedNoDataFound text="Services no found"></ThemedNoDataFound>;
 
-    return getServices.data.data?.data.map((item, index) => {
+    return getServices.data?.data?.data.map((item, index) => {
       return (
         <ServiceListItem
           press={handleOpenDetails}

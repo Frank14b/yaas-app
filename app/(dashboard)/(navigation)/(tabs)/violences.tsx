@@ -1,16 +1,17 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
+  ThemedNoDataFound,
   ThemedText,
   ThemedView,
 } from "@/components";
 
-import { Image, StyleSheet, } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import { useCallback, useEffect, useMemo } from "react";
 import { ViolenceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useViolences } from "@/hooks";
-import { useNavigation, useRouter } from "expo-router";
+import { Href, useNavigation, useRouter } from "expo-router";
 import { ResultViolenceDto } from "@/types";
 
 export default function ViolenceScreen() {
@@ -22,12 +23,12 @@ export default function ViolenceScreen() {
   const getViolences = useViolences().getViolences();
 
   const handleOpenDetails = (item: ResultViolenceDto) => {
-    router.push(`(details)/violence?id=${item.id}`);
+    router.push(`(details)/violence?id=${item.id}` as Href);
   };
 
   const handleHeaderIconPress = useCallback((action: string) => {
     if (action === "ADD") {
-      router.push("(forms)/violence");
+      router.push("(forms)/violence" as Href);
     }
   }, []);
 
@@ -68,10 +69,11 @@ export default function ViolenceScreen() {
 
   const violences = useMemo(() => {
     if (getViolences.isLoading) return <ThemedText>Loading...</ThemedText>;
-    if (!getViolences.data?.status)
-      return <ThemedText>Violence no found</ThemedText>;
 
-    return getViolences.data.data?.data.map((item, index) => {
+    if (getViolences.data?.data?.data.length == 0)
+      return <ThemedNoDataFound text="Violences no found"></ThemedNoDataFound>;
+
+    return getViolences.data?.data?.data.map((item, index) => {
       return (
         <ViolenceListItem
           press={handleOpenDetails}

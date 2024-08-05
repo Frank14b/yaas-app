@@ -114,7 +114,7 @@ export function ViolenceForm() {
 
   const countries = useMemo(() => {
     return (
-      getCountries.data?.data?.data.map((item) => {
+      getCountries.data?.data?.data?.map((item) => {
         return {
           label: item.name,
           value: `${item.name}`,

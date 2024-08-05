@@ -1,11 +1,15 @@
 import { ThemedView } from "@/components";
-import { ViolenceForm } from "@/components/dashboard";
+import { UserViolenceForm, ViolenceForm } from "@/components/dashboard";
+import { useUserStore } from "@/stores";
 import { StyleSheet } from "react-native";
 
 export default function ViolenceFormScreen() {
+  //
+  const { isAdmin } = useUserStore();
   return (
     <ThemedView style={styles.container}>
-      <ViolenceForm />
+      {isAdmin && <ViolenceForm />}
+      {!isAdmin && <UserViolenceForm />}
     </ThemedView>
   );
 }

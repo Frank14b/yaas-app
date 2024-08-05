@@ -5,6 +5,7 @@ import {
   ThemedFormPickerSelect,
   ThemedView,
 } from "@/components";
+
 import { Keys } from "@/constants";
 
 import {
@@ -70,7 +71,7 @@ export function UserForm({ isVictim = false }) {
 
   const countries = useMemo(() => {
     return (
-      getCountries.data?.data?.data.map((item) => {
+      getCountries.data?.data?.data?.map((item) => {
         return {
           label: item.name,
           value: `${item.name}`,

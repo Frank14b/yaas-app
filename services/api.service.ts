@@ -14,7 +14,6 @@ const instance = axios.create({
 
 // setup an interceptor for all requests
 const applyRequestInterceptor = async ({ isSecure }: { isSecure: boolean }) => {
-
   const authToken = await storage.getItem<string>(StorageKeys.AUTH_TOKEN);
 
   instance.interceptors.request.use(
@@ -57,10 +56,14 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     await applyRequestInterceptor({ isSecure }); // apply request interceptor
 
-    if(isSecure) {
-      const isAdmin = await storage.getItem<boolean>(StorageKeys.IS_ADMIN_USER) ?? false;
-      if(isAdmin) {
-        url = url.replace(`/admin/`, '/');
+    if (isSecure) {
+      const adminStatus =
+        (await storage.getItem<number>(StorageKeys.IS_ADMIN_USER)) ?? 0;
+
+      const isAdmin = adminStatus == 1 ? true : false;
+
+      if (!isAdmin) {
+        url = url.replace(`/admin/`, "/");
       }
     }
 
@@ -76,7 +79,6 @@ export const apiCall = async <R, T = unknown, P = unknown>({
 
     return ApiSuccessMessage<R>(response.data, response.status);
   } catch (error) {
-
     logger.Error(error);
 
     if (axios.isCancel(error)) {
@@ -89,8 +91,10 @@ export const apiCall = async <R, T = unknown, P = unknown>({
     if (finalError.response?.status == 401) {
       
       await storage.deleteItem(StorageKeys.AUTH_TOKEN);
+      await storage.deleteItem(StorageKeys.IS_ADMIN_USER);
+
       console.log("Unauthorized User");
-      router.push("/")
+      router.push("/");
     }
 
     return ApiErrorMessage<R>(finalError);

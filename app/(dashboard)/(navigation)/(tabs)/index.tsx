@@ -11,7 +11,7 @@ import {
 } from "@/components";
 
 import { useCallback, useMemo } from "react";
-import { router } from "expo-router";
+import { Href, router } from "expo-router";
 import { useTabNavigationContext } from "@/contexts";
 import { useDashboardStats } from "@/hooks";
 import { DashboardStatsDto } from "@/types";
@@ -84,7 +84,7 @@ export default function HomeScreen() {
   const { isAdmin } = useUserStore();
 
   const goToPage = useCallback((path: string) => {
-    router.push(path);
+    router.push(path as Href);
   }, []);
 
   const statsComponent = useMemo(() => {

@@ -113,3 +113,28 @@ export const AddInvestigationSchema = () => {
       .required(t("investigations.form.schema.pollmethod_id_required")),
   });
 };
+
+export const AddUserViolenceSchema = () => {
+  const { t } = useTranslation();
+
+  return yup.object({
+    date_occured: yup
+      .string()
+      .required(t("violences.form.schema.date_required")),
+    country: yup.string().required(t("violences.form.schema.country_required")),
+    city: yup.string().required(t("violences.form.schema.city_required")),
+    details: yup.string().min(10, "Min. 10 Char.").required(),
+    type_id: yup
+      .number()
+      .min(1, t("violences.form.schema.type_required"))
+      .required(t("violences.form.schema.type_required")),
+    flag_id: yup
+      .number()
+      .min(1, t("violences.form.schema.flag_required"))
+      .required(t("violences.form.schema.flag_required")),
+    nature: yup.string().required(t("violences.form.schema.nature_required")),
+    natureLocation: yup
+      .string()
+      .required(t("violences.form.schema.location_required")),
+  });
+};

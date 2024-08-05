@@ -88,7 +88,10 @@ export default function NavigationLayout() {
   const SCREENS = getScreens(isAdmin);
 
   const proceedLogout = useCallback(async () => {
+    //
     await storage.deleteItem(StorageKeys.AUTH_TOKEN);
+    await storage.deleteItem(StorageKeys.IS_ADMIN_USER);
+
     setOnBoardingCompleted(true);
     setUserConnected(false);
     router.push("/");

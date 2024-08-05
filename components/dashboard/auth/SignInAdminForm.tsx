@@ -18,7 +18,7 @@ export function SignInAdminForm() {
   //
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { user, setUserConnected, setUser } = useUserStore();
+  const { user, setUserConnected, setUser, setIsAdmin } = useUserStore();
 
   const { handleSubmit } = useAppForm({
     schema: SignInAdminSchema(),
@@ -36,6 +36,7 @@ export function SignInAdminForm() {
 
       if (result.status) {
         setUserConnected(true);
+        setIsAdmin(true);
         setUser(result.data?.data as any);
         queryClient.clear();
         return;
@@ -44,7 +45,7 @@ export function SignInAdminForm() {
       Alert.alert(t("signIn.auth_failed"), result.message);
       //
     },
-    [setUserConnected]
+    [setUserConnected, setIsAdmin, setUser]
   );
 
   return (
