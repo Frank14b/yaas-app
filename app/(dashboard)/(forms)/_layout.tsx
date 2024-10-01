@@ -88,6 +88,36 @@ export default function FormsLayout() {
             Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
         }}
       />
+      <Stack.Screen
+        name="note"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("notes.form.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
+      <Stack.Screen
+        name="note-flag"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("noteFlags.form.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
+      <Stack.Screen
+        name="note-type"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("noteTypes.form.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
     </Stack>
   );
 }

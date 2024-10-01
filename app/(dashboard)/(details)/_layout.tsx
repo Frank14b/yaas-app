@@ -28,6 +28,16 @@ export default function DetailsLayout() {
             Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
         }}
       />
+      <Stack.Screen
+        name="note"
+        options={{
+          headerShown: true,
+          header: () => <StackHeader title={t("notes.details.title")} />,
+          presentation: "modal",
+          animation:
+            Platform.OS == "ios" ? "slide_from_bottom" : "slide_from_left",
+        }}
+      />
     </Stack>
   );
 }

@@ -59,6 +59,20 @@ export function TabNavigationWrapper({ children }: { children: any }) {
       ),
     },
     {
+      name: "notes",
+      icon: {
+        default: "book-sharp",
+        focused: "bookmark-outline",
+      },
+      title: t("homeScreen.tabs.notes"),
+      header: (handleClick: (action: string) => void) => (
+        <TabBarHeader
+          title={t("homeScreen.tabs.notes")}
+          handleIconClick={handleClick}
+        />
+      ),
+    },
+    {
       name: "profile",
       icon: {
         default: "person-circle-sharp",

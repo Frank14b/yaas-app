@@ -6,7 +6,7 @@ import {
 } from "@/components";
 import { useAppActionSheet, useOrganizations } from "@/hooks";
 import { ResultOrganizationDto } from "@/types";
-import { router } from "expo-router";
+import { Href, router } from "expo-router";
 import { useCallback, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -93,7 +93,7 @@ export default function OrganizationScreen() {
       </ThemedView>
 
       <ThemeFAB
-        onPress={() => router.push("(forms)/organization")}
+        onPress={() => router.push("(forms)/organization" as Href)}
         name="add"
         position="bottom-right"
       />

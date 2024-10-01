@@ -50,6 +50,26 @@ export const apiUrls: {
       method: 'POST',
       isSecure: true,
     },
+    deleteViolence: {
+      url: `${apiVersion.v1}/admin/notices`,
+      method: 'DELETE',
+      isSecure: true,
+    },
+    editViolence: {
+      url: `${apiVersion.v1}/admin/notices`,
+      method: 'PUT',
+      isSecure: true,
+    },
+    assignViolence: {
+      url: `${apiVersion.v1}/admin/notices`,
+      method: 'PATCH',
+      isSecure: true,
+    },
+    reportViolence: {
+      url: `${apiVersion.v1}/admin/notices`,
+      method: 'PATCH',
+      isSecure: true,
+    },
     getPollTypes: {
       url: `${apiVersion.v1}/admin/pollmethods`,
       method: "GET",
@@ -99,6 +119,11 @@ export const apiUrls: {
     getServiceTypes: {
       url: `${apiVersion.v1}/admin/consultation-types`,
       method: 'GET',
+      isSecure: true,
+    },
+    deleteService: {
+      url: `${apiVersion.v1}/admin/consultations`,
+      method: 'DELETE',
       isSecure: true,
     },
 
@@ -170,9 +195,64 @@ export const apiUrls: {
       method: 'DELETE',
       isSecure: true,
     },
+
+    getNotes: {
+      url: `${apiVersion.v1}/admin/blocknotes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    getNote: {
+      url: `${apiVersion.v1}/admin/blocknotes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addNote: {
+      url: `${apiVersion.v1}/admin/blocknotes/add`,
+      method: 'POST',
+      isSecure: true,
+    },
+    deleteNote: {
+      url: `${apiVersion.v1}/admin/blocknotes`,
+      method: 'DELETE',
+      isSecure: true,
+    },
+    getNoteComments: {
+      url: `${apiVersion.v1}/admin/blocknotes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addNoteComment: {
+      url: `${apiVersion.v1}/admin/blocknotes/comments`,
+      method: 'POST',
+      isSecure: true,
+    },
+    deleteNoteComment: {
+      url: `${apiVersion.v1}/admin/blocknotes/comments`,
+      method: 'DELETE',
+      isSecure: true,
+    },
+    addNoteTypes: {
+      url: `${apiVersion.v1}/admin/typenotes`,
+      method: 'POST',
+      isSecure: true,
+    },
+    getNoteTypes: {
+      url: `${apiVersion.v1}/admin/typenotes`,
+      method: 'GET',
+      isSecure: true,
+    },
+    addNoteFlags: {
+      url: `${apiVersion.v1}/admin/flagnotes`,
+      method: 'POST',
+      isSecure: true,
+    },
+    getNoteFlags: {
+      url: `${apiVersion.v1}/admin/flagnotes`,
+      method: 'GET',
+      isSecure: true,
+    },
   },
 };
-
 
 export const userApiUrls: {
   [key: string]: ApiUrlsDto;

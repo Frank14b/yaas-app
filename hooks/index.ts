@@ -12,3 +12,4 @@ export * from "./dashboard/useCountries";
 export * from "./dashboard/useRoleAccess";
 export * from "./dashboard/useUsers";
 export * from "./dashboard/useOrganizations";
+export * from "./dashboard/useNotes";

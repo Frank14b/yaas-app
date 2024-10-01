@@ -7,3 +7,4 @@ export * from "./dashboard/services.type";
 export * from "./dashboard/countries.type";
 export * from "./dashboard/roles.type";
 export * from "./dashboard/organizations.type";
+export * from "./dashboard/notes.type";

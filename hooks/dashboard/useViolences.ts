@@ -7,6 +7,7 @@ import {
   ResultInvestigationDto,
   ResultPaginate,
   ResultViolenceDto,
+  UpdateViolenceDto,
   ViolenceOptions,
   ViolenceTypeDto,
   ViolencesFlagDto,
@@ -15,7 +16,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useViolences() {
   //
-  const getViolences = () => {
+  const useGetViolences = () => {
     return useQuery({
       queryKey: [Keys.Queries.GET_VIOLENCES],
       queryFn: async () => {
@@ -149,14 +150,83 @@ export function useViolences() {
     });
   };
 
+  const deleteViolence = useMutation({
+    mutationKey: [Keys.Mutations.DELETE_VIOLENCE],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultViolenceDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.deleteViolence,
+        url: apiUrls.dashboard.deleteViolence.url += `/${id}`
+      });
+
+      return result.data;
+    },
+  });
+
+  const editViolence = useMutation({
+    mutationKey: [Keys.Mutations.EDIT_VIOLENCE],
+    mutationFn: async (data: UpdateViolenceDto) => {
+      const result = await apiCall<{
+        data: ResultViolenceDto;
+        message: string;
+      }>({
+        data: {
+          ...data,
+          date_occured: new Date(data.date_occured).getTime(),
+        },
+        url: `${apiUrls.dashboard.editViolence.url}/${data.id}`,
+        method: apiUrls.dashboard.editViolence.method,
+        isSecure: true
+      });
+
+      return result;
+    },
+  });
+
+  const assignViolence = useMutation({
+    mutationKey: [Keys.Mutations.ASSIGN_VIOLENCE],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultViolenceDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.assignViolence,
+        url: apiUrls.dashboard.assignViolence.url += `/${id}/link`
+      });
+
+      return result.data;
+    },
+  });
+
+  const reportViolence = useMutation({
+    mutationKey: [Keys.Mutations.REPORT_VIOLENCE],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultViolenceDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.reportViolence,
+        url: apiUrls.dashboard.reportViolence.url += `/${id}/report-spam`
+      });
+
+      return result.data;
+    },
+  });
+
   return {
-    getViolences,
+    useGetViolences,
     useGetViolence,
     getViolenceOptions,
     getViolenceTypes,
     getViolenceFlags,
     getInvestigationTypes,
     addViolence,
+    editViolence,
     addInvestigation,
+    deleteViolence,
+    assignViolence,
+    reportViolence
   };
 }

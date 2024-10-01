@@ -1,20 +1,25 @@
 import { ThemedButton } from "@/components/common/ThemedButton";
 import { ThemedText } from "@/components/common/ThemedText";
 import { ThemedView } from "@/components/common/ThemedView";
-import { useUserStore } from "@/stores";
-import { ResultServiceDto } from "@/types";
+import { ResultServiceDto, ResultUserDto } from "@/types";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, useColorScheme } from "react-native";
 
 export type ServiceDetailsProps = {
   item: ResultServiceDto;
+  user: ResultUserDto | null;
+  proceedConfirm: () => void;
+  proceedCancel: () => void;
 };
 
-export function ServiceDetails({ item }: ServiceDetailsProps) {
+export function ServiceDetails({
+  item,
+  user,
+  proceedConfirm,
+}: ServiceDetailsProps) {
   //
   const { t } = useTranslation();
   const theme = useColorScheme();
-  const { user } = useUserStore();
 
   const dynamicStyles = {
     lineContainer: {
@@ -87,8 +92,9 @@ export function ServiceDetails({ item }: ServiceDetailsProps) {
         <>
           <ThemedView style={styles.containerFooter}>
             <ThemedButton
-              style={styles.addButtonContainer}
-              title={t("services.details.assign_to_me")}
+              onPress={proceedConfirm}
+              style={[styles.addButtonContainer]}
+              title={t("services.details.confirm")}
             />
           </ThemedView>
         </>
@@ -122,7 +128,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-    padding: 20
+    padding: 20,
   },
-  addButtonContainer: {},
+  addButtonContainer: {
+    backgroundColor: "green",
+  },
+  cancelButtonContainer: {
+    backgroundColor: "red",
+  },
 });

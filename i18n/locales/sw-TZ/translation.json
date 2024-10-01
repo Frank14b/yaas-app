@@ -35,7 +35,9 @@
     "preferences": "Mapendeleo",
     "dark_theme": "Mandhari Giza",
     "tell_a_friend": "Mwambie Rafiki",
-    "signOut": "Toka"
+    "signOut": "Toka",
+    "noteFlags": "Alama za kumbukumbu",
+    "noteTypes": "Aina za kumbukumbu"
   },
 
   "homeScreen": {
@@ -51,7 +53,8 @@
       "home": "Nyumbani",
       "violences": "Ukatili",
       "services": "Huduma",
-      "profile": "Profaili"
+      "profile": "Profaili",
+      "notes": "Notisi"
     }
   },
 
@@ -159,7 +162,7 @@
       "city": "Mji",
       "details": "Maelezo",
       "location": "Mahali",
-      "assign_to_me": "Nipega",
+      "confirm": "Nipega",
       "agent": "Mwakilishi"
     }
   },
@@ -237,5 +240,44 @@
       "submit_btn": "Hifadhi",
       "schema": {}
     }
+  },
+
+  "notes": {
+    "form": {
+      "title": "Kumbukumbu Mpya",
+      "fields": {
+        "flag": "Bendera",
+        "type": "Aina",
+        "details": "Maelezo",
+        "details_placeholder": "Eleza mahitaji yako",
+        "comment": "Maoni",
+        "name": "Jina"
+      },
+      "submit_btn": "Wasilisha",
+      "schema": {
+        "field_is_required": "Shamba ni la lazima"
+      }
+    },
+    "details": {
+      "ref": "Marejeo",
+      "title": "Maelezo ya Kumbukumbu",
+      "date_created": "Tarehe Iliyoundwa",
+      "user": "Mtumiaji",
+      "type": "Aina",
+      "flag": "Bendera",
+      "details": "Maelezo",
+      "comment": "Maoni"
+    }
+  },
+
+  "actionSheetMenu": {
+    "edit": "Hariri",
+    "cancel": "Funga",
+    "report": "Ripoti",
+    "assign-to-me": "Nisikie",
+    "delete": "Futa",
+    "en_english": "EN English",
+    "sw_swahili": "SW Swahili",
+    "fr_french": "FR French"
   }
 }

@@ -68,12 +68,30 @@ const getScreens = (isAdmin: boolean) => {
       },
     },
     {
+      name: "note-flags",
+      options: {
+        label: "navigation.noteFlags",
+        showHeader: true,
+        icon: "flag",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
+    },
+    {
+      name: "note-types",
+      options: {
+        label: "navigation.noteTypes",
+        showHeader: true,
+        icon: "settings",
+        drawerItemStyle: isAdmin ? {} : { display: "none" },
+      },
+    },
+    {
       name: "settings",
       options: {
         label: "navigation.settings",
         showHeader: true,
         icon: "settings",
-        drawerItemStyle: isAdmin ? {} : { display: "none" },
+        drawerItemStyle: isAdmin ? { display: "none" } : { display: "none" },
       },
     },
   ];

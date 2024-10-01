@@ -126,10 +126,19 @@ export default function HomeScreen() {
           {!isAdmin && (
             <>
               <ThemedCardBox
+                style={[styles.boxCard]}
                 onPress={() => goToPage("")}
                 name={"warning-sharp"}
-                title={""}
-                value={0}
+                title={t("homeScreen.reports")}
+                value={stats?.["incidents_count"] ?? 0}
+              ></ThemedCardBox>
+
+              <ThemedCardBox
+                style={[styles.boxCard]}
+                onPress={() => goToPage("")}
+                name={"settings"}
+                title={t("homeScreen.services")}
+                value={stats?.["consultations_count"] ?? 0}
               ></ThemedCardBox>
             </>
           )}

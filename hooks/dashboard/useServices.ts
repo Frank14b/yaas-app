@@ -63,8 +63,8 @@ export function useServices() {
     },
   });
 
-  const assignService = useMutation({
-    mutationKey: [Keys.Mutations.ADD_SERVICE],
+  const confirmService = useMutation({
+    mutationKey: [Keys.Mutations.CONFIRM_SERVICE],
     mutationFn: async (id: number) => {
       const result = await apiCall<{
         data: ResultServiceDto;
@@ -75,7 +75,8 @@ export function useServices() {
           confirm_time: "00:00",
         },
         ...apiUrls.dashboard.addService,
-        // url: apiUrls.dashboard. += `/${id}/confirm`
+        method: 'PATCH',
+        url: apiUrls.dashboard.addService.url += `/${id}/confirm`
       });
 
       return result;
@@ -98,11 +99,27 @@ export function useServices() {
     });
   };
 
+  const deleteService = useMutation({
+    mutationKey: [Keys.Mutations.DELETE_SERVICE],
+    mutationFn: async (id: number) => {
+      const result = await apiCall<{
+        data: ResultServiceDto;
+        message: string;
+      }>({
+        ...apiUrls.dashboard.deleteService,
+        url: apiUrls.dashboard.deleteService.url += `/${id}`
+      });
+
+      return result.data;
+    },
+  });
+
   return {
     useGetServices,
     useGetService,
     useGetServiceTypes,
     addService,
-    assignService
+    confirmService,
+    deleteService,
   };
 }

@@ -7,7 +7,7 @@ import {
 
 import { useAppActionSheet, useCountries } from "@/hooks";
 import { ResultCountriesDto } from "@/types";
-import { router } from "expo-router";
+import { Href, router } from "expo-router";
 import { useCallback, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -90,7 +90,7 @@ export default function CountriesScreen() {
       </ThemedView>
 
       <ThemeFAB
-        onPress={() => router.push("(forms)/country")}
+        onPress={() => router.push("(forms)/country" as Href)}
         name="add"
         position="bottom-right"
       />

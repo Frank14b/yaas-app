@@ -22,7 +22,7 @@ export function useLanguages() {
         callBackFn: () => {},
       },
       {
-        title: `EN - English`,
+        title: `EN_English`,
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {
@@ -30,7 +30,7 @@ export function useLanguages() {
         },
       },
       {
-        title: `SW - Swahili`,
+        title: `SW_Swahili`,
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {
@@ -38,7 +38,7 @@ export function useLanguages() {
         },
       },
       {
-        title: `FR - French`,
+        title: `FR_French`,
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {

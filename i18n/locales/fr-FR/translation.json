@@ -35,7 +35,9 @@
     "preferences": "Préférences",
     "dark_theme": "Thème sombre",
     "tell_a_friend": "Parlez-en à un ami",
-    "signOut": "Déconnexion"
+    "signOut": "Déconnexion",
+    "noteFlags": "Note Flags",
+    "noteTypes": "Note Types"
   },
 
   "homeScreen": {
@@ -51,7 +53,8 @@
       "home": "Accueil",
       "violences": "Violences",
       "services": "Services",
-      "profile": "Profil"
+      "profile": "Profil",
+      "notes": "Notes"
     }
   },
 
@@ -159,7 +162,7 @@
       "city": "Ville",
       "details": "Détails",
       "location": "Emplacement",
-      "assign_to_me": "M'affecter",
+      "confirm": "M'affecter",
       "agent": "Agent"
     }
   },
@@ -237,5 +240,44 @@
       "submit_btn": "Enregistrer",
       "schema": {}
     }
+  },
+
+  "notes": {
+    "form": {
+      "title": "New Note",
+      "fields": {
+        "flag": "Flag",
+        "type": "Type",
+        "details": "Details",
+        "details_placeholder": "Describe your needs",
+        "comment": "Comment",
+        "name": "Name"
+      },
+      "submit_btn": "Submit",
+      "schema": {
+        "field_is_required": "Field is required"
+      }
+    },
+    "details": {
+      "ref": "Reference",
+      "title": "Note Details",
+      "date_created": "Date Created",
+      "user": "User",
+      "type": "Type",
+      "flag": "Flag",
+      "details": "Details",
+      "comment": "Comment"
+    }
+  },
+
+  "actionSheetMenu": {
+    "edit": "Modifier",
+    "cancel": "Annule",
+    "report": "Reporter",
+    "assign-to-me": "M'assigner",
+    "delete": "Suprimer",
+    "en_english": "EN English",
+    "sw_swahili": "SW Swahili",
+    "fr_french": "FR French"
   }
 }

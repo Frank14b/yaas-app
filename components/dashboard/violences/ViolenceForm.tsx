@@ -17,21 +17,25 @@ import {
   useViolences,
 } from "@/hooks";
 
-import { CreateViolenceDto } from "@/types";
+import { CreateViolenceDto, ResultViolenceDto, UpdateViolenceDto } from "@/types";
 import { AddViolenceSchema } from "@/validators";
 import { Ionicons } from "@expo/vector-icons";
 import { useQueryClient } from "@tanstack/react-query";
-import { router } from "expo-router";
-import { useCallback, useMemo } from "react";
+import { Href, router } from "expo-router";
+import { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet } from "react-native";
 
-export function ViolenceForm() {
+export interface ViolenceFormProps {
+  violence?: ResultViolenceDto;
+}
+
+export function ViolenceForm({ violence }: ViolenceFormProps) {
   //
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   //
-  const { handleSubmit } = useAppForm({
+  const { handleSubmit, setValue } = useAppForm({
     schema: AddViolenceSchema(),
     defaultValues: {
       id: "",
@@ -62,6 +66,7 @@ export function ViolenceForm() {
   const getViolenceTypes = violenceHook.getViolenceTypes();
   const getViolenceOptions = violenceHook.getViolenceOptions();
   const addViolence = violenceHook.addViolence;
+  const editViolence = violenceHook.editViolence;
 
   const { useGetCountries } = useCountries();
   const getCountries = useGetCountries();
@@ -134,15 +139,37 @@ export function ViolenceForm() {
     );
   }, [getVictims.data]);
 
-  const proceedSaveViolence = useCallback(async (data: CreateViolenceDto) => {
-    const result = await addViolence.mutateAsync(data);
-    if (result.status) {
-      queryClient.invalidateQueries({ queryKey: [Keys.Queries.GET_VIOLENCES] });
-      router.back();
-    } else {
-      Alert.alert(`Error`, `${result.data?.message}`);
+  const proceedSaveViolence = useCallback(
+    async (data: UpdateViolenceDto | CreateViolenceDto) => {
+      const result = violence
+        ? await editViolence.mutateAsync(data)
+        : await addViolence.mutateAsync(data as CreateViolenceDto);
+      if (result.status) {
+        queryClient.invalidateQueries({
+          queryKey: [Keys.Queries.GET_VIOLENCES],
+        });
+        router.back();
+      } else {
+        Alert.alert(`Error`, `${result.data?.message}`);
+      }
+    },
+    [violence]
+  );
+
+  useEffect(() => {
+    if (violence) {
+      setValue("id", `${violence.id}`);
+      setValue("date_occured", `${new Date(`${violence.date_occured}`)}`);
+      setValue("country", `${violence.country}`);
+      setValue("city", `${violence.city}`);
+      setValue("details", `${violence.details}`);
+      setValue("nature", `${violence.nature}`);
+      setValue("flag_id", violence.flag_id);
+      setValue("type_id", violence.type_id);
+      setValue("natureLocation", violence.natureLocation);
+      setValue("user_id", violence.user_id);
     }
-  }, []);
+  }, [violence]);
 
   return (
     <>
@@ -167,7 +194,7 @@ export function ViolenceForm() {
             color={"#aaa"}
             name="person-add"
             size={25}
-            onPress={() => router.push<string>("(forms)/victim")}
+            onPress={() => router.push<string>("(forms)/victim" as Href)}
           />
         </ThemedView>
 

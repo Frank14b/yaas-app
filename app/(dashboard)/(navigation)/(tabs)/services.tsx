@@ -1,6 +1,7 @@
 import {
   AnimateSlideInView,
   ParallaxScrollView,
+  ThemedConfirmDialog,
   ThemedNoDataFound,
   ThemedText,
   ThemedView,
@@ -9,18 +10,32 @@ import {
 import { ServiceListItem } from "@/components/dashboard";
 import { useTabNavigationContext } from "@/contexts";
 import { useAppActionSheet, useServices } from "@/hooks";
+import { useUserStore } from "@/stores";
 import { ResultServiceDto } from "@/types";
 import { Href, router, useNavigation } from "expo-router";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
 export default function ServicesScreen() {
   //
   const navigation = useNavigation();
+  const { isAdmin } = useUserStore();
   const { slidePosition, TAB_SCREENS } = useTabNavigationContext();
-  const { useGetServices } = useServices();
+  const { useGetServices, deleteService } = useServices();
   const getServices = useGetServices();
   const { openActionSheet } = useAppActionSheet({});
+
+  const [showConfirmation, setShowConfirmation] = useState<{
+    status: boolean;
+    item?: ResultServiceDto;
+  }>({ status: false });
+  const handleCloseConfirmation = () => setShowConfirmation({ status: false });
+
+  const handleDelete = useCallback(async () => {
+    setShowConfirmation({ status: false });
+    await deleteService.mutateAsync(showConfirmation.item?.id ?? 0);
+    getServices.refetch();
+  }, [showConfirmation, setShowConfirmation]);
 
   const handleOpenDetails = (item: ResultServiceDto) => {
     router.push(`(details)/service?id=${item.id}` as Href);
@@ -41,22 +56,18 @@ export default function ServicesScreen() {
   const handleLongPress = useCallback((item: ResultServiceDto) => {
     openActionSheet([
       {
-        title: `${item.ref}`,
-        destructiveBtn: false,
-        cancelBtn: false,
-        callBackFn: () => {},
-      },
-      {
         title: `Edit`,
         destructiveBtn: false,
         cancelBtn: false,
         callBackFn: () => {},
+        isHidden: !isAdmin
       },
       {
         title: `Delete`,
         destructiveBtn: false,
         cancelBtn: false,
-        callBackFn: () => {},
+        callBackFn: () => setShowConfirmation({ status: true, item }),
+        isHidden: !isAdmin
       },
       {
         title: `Cancel`,
@@ -69,7 +80,7 @@ export default function ServicesScreen() {
 
   const services = useMemo(() => {
     if (getServices.isLoading) return <ThemedText>Loading...</ThemedText>;
-    
+
     if (getServices.data?.data?.data.length == 0)
       return <ThemedNoDataFound text="Services no found"></ThemedNoDataFound>;
 
@@ -77,7 +88,7 @@ export default function ServicesScreen() {
       return (
         <ServiceListItem
           press={handleOpenDetails}
-          longPress={handleLongPress}
+          longPress={() => {}}
           key={index}
           item={item}
         />
@@ -92,7 +103,7 @@ export default function ServicesScreen() {
           headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
           headerImage={
             <Image
-              source={require("@/assets/images/parallax/services.webp")}
+              // source={require("@/assets/images/parallax/services.webp")}
               style={styles.reactLogo}
             />
           }
@@ -103,6 +114,15 @@ export default function ServicesScreen() {
           </ThemedView>
         </ParallaxScrollView>
       </AnimateSlideInView>
+
+      {showConfirmation.status && (
+        <ThemedConfirmDialog
+          message={`Are you sure you want to delete ${showConfirmation.item?.ref}?`}
+          visible={showConfirmation.status}
+          cancelFn={handleCloseConfirmation}
+          confirmFn={handleDelete}
+        />
+      )}
     </>
   );
 }

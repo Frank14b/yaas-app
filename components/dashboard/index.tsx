@@ -9,3 +9,6 @@ export * from "./violences/ViolenceDetails";
 export * from "./services/ServiceDetails";
 export * from "./violences/InvestigationForm";
 export * from "./violences/UserViolenceForm";
+export * from "./notes/NoteDetails";
+export * from "./notes/NoteListItem";
+export * from "./notes/NoteForm";
